@@ -32,6 +32,7 @@
 
 
 # I/O-constraints for PWM
+NET "pwm" CLOCK_DEDICATED_ROUTE = FALSE;
 NET "pwm" LOC = "E8" | IOSTANDARD = LVTTL | PULLDOWN ;
 
 # I/O-constraints for hall sensors

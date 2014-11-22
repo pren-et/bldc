@@ -42,11 +42,22 @@ end commutate;
 
 architecture Behavioral of commutate is
 
+signal h_buffered : STD_ULOGIC_VECTOR (2 downto 0);
+
 begin
 
-comm : process (pwm, h )
+h_buffer : process (pwm, h)
 begin
-    case h is
+    if falling_edge(pwm) then
+        h_buffered <= h;
+    else
+        h_buffered <= h_buffered;
+    end if;
+end process;
+
+comm : process (pwm, h_buffered )
+begin
+    case h_buffered is
         when "000" => 
             u_l <= '0';
             u_h <= '0';
