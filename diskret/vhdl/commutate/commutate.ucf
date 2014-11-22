@@ -1,0 +1,48 @@
+# # period constraints for system clock
+# NET "clk" TNM_NET = clk;
+# TIMESPEC TS_clk = PERIOD "clk" 20 ns HIGH 50%;
+# 
+# # I/O-constraints for system clock and reset input
+# NET "clk" LOC = "C9"  |IOSTANDARD = LVCMOS33;
+# # NET "rst" LOC = "K17" |IOSTANDARD = LVTTL |PULLDOWN ; # = BTN_SOUTH
+# 
+# # I/O-constraints for ROT_CENTER
+# NET "ROT_C" LOC = "V16" | IOSTANDARD = LVTTL | PULLDOWN ;
+# 
+# # I/O-constraints for LEDs
+# NET "LED<7>" LOC = "F9" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8 ;
+# NET "LED<6>" LOC = "E9" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8 ;
+# NET "LED<5>" LOC = "D11" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8 ;
+# NET "LED<4>" LOC = "C11" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8 ;
+# NET "LED<3>" LOC = "F11" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8 ;
+# NET "LED<2>" LOC = "E11" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8 ;
+# NET "LED<1>" LOC = "E12" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8 ;
+# NET "LED<0>" LOC = "F12" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8 ;
+# 
+# # I/O-constraints for BTN EAST/WEST
+# NET "BTN_EAST" LOC = "H13" | IOSTANDARD = LVTTL | PULLDOWN ;
+# NET "BTN_WEST" LOC = "D18" | IOSTANDARD = LVTTL | PULLDOWN ;
+# NET "BTN_NORTH" LOC = "V4" | IOSTANDARD = LVTTL | PULLDOWN ;
+# 
+# # I/O-constraints for SW
+# NET "SW<0>" LOC = "L13" | IOSTANDARD = LVTTL |   PULLUP ;
+# NET "SW<1>" LOC = "L14" | IOSTANDARD = LVTTL |   PULLUP ;
+# NET "SW<2>" LOC = "H18" | IOSTANDARD = LVTTL |   PULLUP ;
+# NET "SW<3>" LOC = "N17" | IOSTANDARD = LVTTL |   PULLUP ;
+
+
+# I/O-constraints for PWM
+NET "pwm" LOC = "E8" | IOSTANDARD = LVTTL | PULLDOWN ;
+
+# I/O-constraints for hall sensors
+NET "h<0>" LOC = "D7" | IOSTANDARD = LVTTL | PULLUP ;
+NET "h<1>" LOC = "C7" | IOSTANDARD = LVTTL | PULLUP ;
+NET "h<2>" LOC = "F8" | IOSTANDARD = LVTTL | PULLUP ;
+
+# I/O-constraints for bridge
+NET "u_l" LOC = "B4" | IOSTANDARD = LVTTL | DRIVE = 8 ;
+NET "u_h" LOC = "A4" | IOSTANDARD = LVTTL | DRIVE = 8 ;
+NET "v_l" LOC = "D5" | IOSTANDARD = LVTTL | DRIVE = 8 ;
+NET "v_h" LOC = "C5" | IOSTANDARD = LVTTL | DRIVE = 8 ;
+NET "w_l" LOC = "A6" | IOSTANDARD = LVTTL | DRIVE = 8 ;
+NET "w_h" LOC = "B6" | IOSTANDARD = LVTTL | DRIVE = 8 ;
