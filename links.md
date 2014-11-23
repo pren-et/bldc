@@ -2,7 +2,7 @@
 
 ---
 
-[Back](README.md]
+[Back](README.md)
 
 * [Microchip AN 885 ](http://ww1.microchip.com/downloads/en/AppNotes/00885a.pdf)
 * [Freescale AN1916](http://cache.freescale.com/files/product/doc/AN1916.pdf)
