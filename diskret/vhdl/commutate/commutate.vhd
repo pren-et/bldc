@@ -37,7 +37,8 @@ entity commutate is
            v_l : out  STD_ULOGIC;
            v_h : out  STD_ULOGIC;
            w_l : out  STD_ULOGIC;
-           w_h : out  STD_ULOGIC);
+           w_h : out  STD_ULOGIC;
+           h_b : out  STD_ULOGIC);
 end commutate;
 
 architecture Behavioral of commutate is
@@ -54,6 +55,8 @@ begin
         h_buffered <= h_buffered;
     end if;
 end process;
+
+h_b <= h_buffered(0);
 
 comm : process (pwm, h_buffered )
 begin

@@ -47,3 +47,6 @@ NET "v_l" LOC = "D5" | IOSTANDARD = LVTTL | DRIVE = 8 ;
 NET "v_h" LOC = "C5" | IOSTANDARD = LVTTL | DRIVE = 8 ;
 NET "w_l" LOC = "A6" | IOSTANDARD = LVTTL | DRIVE = 8 ;
 NET "w_h" LOC = "B6" | IOSTANDARD = LVTTL | DRIVE = 8 ;
+
+# I/O-constraints for buffered hall sensor
+NET "h_b" LOC = "F7" | IOSTANDARD = LVTTL | DRIVE = 8 ;
