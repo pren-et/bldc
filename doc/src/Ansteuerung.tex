@@ -1,5 +1,6 @@
-\subsubsection{Brushless Motoransteuerung}
-\textbf{Theorie der Ansteuerung}:\\
+\subsection{Brushless Motoransteuerung}
+Dieses Kapitel wurde in Zusammenarbeit mit der Gruppe \DasAndereTeam erstellt. 
+\subsubsection{Theorie der Ansteuerung}
 \begin{wrapfigure}{r}{0.50\textwidth}
 	\includegraphics[scale=0.45]{\BrushlessPath/Bilder/ZeitlicheHallSensorAnsteuerung.jpg}
 	\caption[Zeitliche Darstellung der Ansteuerung mit Hall-Sensoren]{Zeitliche Darstellung der Ansteuerung mit Hall-Sensoren \cite{AppNote:BrushlessuC}}
@@ -9,7 +10,7 @@
 Brushless-Motoren sind Synchron-Drehstrom-Motoren. Das heisst, sie werden mittels eines kontinuierlichen Drehfeld in Bewegung gesetzt. Dabei ist darauf zu achten, dass der Läufer dem Drehfeld synchron folgen kann, daher der Name. Falls der Läufer dem Drehfeld aus irgend einem Grund nicht folgen kann, so wird keine Spannung vom Rotor in die Statorwicklungen induziert, die der Erregerspannung entgegenwirkt. Daraus Folgt, dass ein immenser Strom fliesst, der nur von der Wicklungsimpedanz des Motors begrenzt wird.\\
 Es gibt hauptsächlich zwei Methoden das Drehfeld zu regeln. Die eine und einfache Methode ist mittels drei Hallsensoren, die im Motor integriert sind. Dies macht den Motor aufwändiger und dementsprechend teurer. Die Regelung mit Hallsensoren ist verhältnismässig einfach, da je nach den Signalen die einzelnen Spulen direkt angesteuert werden kann. Der Zusammenhang zwischen der Ansteuerung und den Hall-Sensorsignalen ist in Abbildung \ref{abb:ZeitlicheAnsteuerungBrushlessMotor} ersichtlich. Dabei stehen $U$, $V$ und $W$ für die Phasenströme und $H_1$, $H_2$ und $H_3$ die entsprechenden Signale der Hallsensoren. Dieser Darstellung ist zu entnehmen, dass jedesmal wenn ein Hallsensor eine Änderung anzeigt, ein Nulldurchgang im entsprechenden Stromverlauf stattgefunden hat. Dies ist der Zeitpunkt, in dem die Kommutierung durchgeführt werden muss.
 \\
-\textbf{Aufbaubeschreibung}:
+\subsubsection{Aufbaubeschreibung}
 \begin{wrapfigure}{r}{0.55\textwidth}
 	\includegraphics[scale=0.4]{\BrushlessPath/Bilder/MotoransteuerungSchema.jpg}
 	\centering
