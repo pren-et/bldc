@@ -1,1 +1,4 @@
 *.swp
+doc/doc.bbl
+doc/doc.blg
+doc/doc.synctex.gz

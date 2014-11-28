@@ -8,6 +8,7 @@
 
 % Anpassungen für die Deutsche
     \usepackage[ngerman]{babel} % Neue deutsche Rechtschreibung
+    \usepackage[babel,german=quotes]{csquotes}  % Deutsche Gänsefüssechen
 
 % Seiteneinstellungen
     \usepackage{lscape}         % Einzelne Seiten im Querformat
@@ -41,6 +42,7 @@
     \usepackage{caption}        % Bildunterschrift
     \usepackage{subcaption}     % Bildunterschrift unter zusammen dargestellten Bildern
     \usepackage{tikz}           % TikZ - "TikZ ist kein Zeichenprogramm"
+    \usepackage{wrapfig} 
         \usetikzlibrary{tikzmark}   % References for hooking tikz graphics to
 
 % Mathematik
@@ -50,6 +52,11 @@
 % Verweise
     \usepackage{makeidx}        % Index
     \usepackage{hyperref}       % Verlinkte interne und externe Verweise
+
+% Zitieren
+\usepackage{cite}
+\usepackage{apacite}
+\bibliographystyle{apacite}
 
 % Source-Code Paket
     \usepackage{listings}
@@ -236,3 +243,50 @@
 
     %\fancyhead[R]{\includegraphics[scale=0.25]{../fig/hslu_logo2.PNG}}
 
+%Benötigt um in Tabellen die Zeilen zu nummerieren
+\makeatletter
+\providecommand{\rowno}[1][__empty__]
+{%
+  \ifthenelse{\isundefined{\c@rowno}}
+  {%
+    \newcounter{rowno}
+  }
+  {}%
+  	\ifthenelse{\equal{#1}{__empty__}}
+ 	 {%
+       \stepcounter{rowno}%
+     }
+     {%
+ 	   \setcounter{rowno}{#1}%
+     }%
+  \therowno%
+}
+\makeatother
+
+% Eigene Titelseite
+%%% Not working because \@title does not work in .sty file!
+%    \newcommand\prentitle{
+%        \begin{titlepage}
+%            \begin{center}
+%                \makeatletter
+%                \@title
+%                \makeatother
+%                Titel \\
+%                Team 27 \\
+%                Yannik Küng \\
+%                Andriu Maissen \\
+%                Daniel Mathis \\
+%                Simon Neidhart \\
+%                Peter Kounen \\
+%                Kevin Wespi \\
+%                Daniel Winz \\
+%                Hochschule Luzern \\
+%                Technik \& Architektur \\
+%                Produktentwicklung 1 \\
+%                Betreuender Dozent: \\
+%                Marco De Angelis \\
+%                Git revision: 
+%                \input{../../.git/ORIG_HEAD}
+%            \end{center}
+%        \end{titlepage}
+%    }

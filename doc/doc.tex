@@ -3,6 +3,7 @@
 \usepackage{layout}
 
 \title{Dokumentation BLDC}
+\newcommand{\BrushlessPath}{src}
 
 \begin{document}
 
@@ -11,6 +12,15 @@
 \tableofcontents
 \clearpage
 
-Some example content
+\input{src/Ansteuerung}
+\newpage
+\input{src/Testbericht}
+\newpage
+
+\begin{flushleft}
+    \renewcommand{\refname}{Literatur- und Quellenverzeichnis}
+%        \{\refname}{Quellenverzeichnis}
+    \bibliography{src/BLDC_Source}{} %!!! Kein Leerzeichen nach dem , !!!!
+\end{flushleft}
 
 \end{document}
