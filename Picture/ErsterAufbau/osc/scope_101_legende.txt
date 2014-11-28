@@ -1,0 +1,7 @@
+D0 .. D2    : Hall sensor emulation before filtering
+D3 .. D5    : Real hall sensors
+D6 .. D7    : unused
+D8 .. D13   : commutation output to control half bridges
+D14         : PWM
+D15         : Buffered hall sensor emulation for debugging purposes
+
