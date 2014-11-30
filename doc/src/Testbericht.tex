@@ -1,64 +1,65 @@
-  \subsubsection{Aufbaubeschreibung}
-        \begin{wrapfigure}{r}{0.55\textwidth}
-           	\includegraphics[scale=0.4]{\BrushlessPath/Bilder/MotoransteuerungSchema.jpg}
-           	\centering
-           	\caption{Schema des Brushless-Versuchsaufbaus}
-            \label{abb:MotoransteuerungSchema}
-        \end{wrapfigure}
-        Das Schema des gesamten Aufbaus des Tests ist in der Abbildung 
-        \ref{abb:MotoransteuerungSchema} abgebildet. Die 3-Phasen H-Brücke 
-        oben im grünen Rechteck wird direkt vom FPGA angesteuert. Die Hardware 
-        dieser Brücke ermöglicht eine voll galvanisch getrennte Ansteuerung 
-        mit 3.3V Logikpegeln. Diese Brücke wurde zur Verfügung gestellt und 
-        verwendet. Die Rekonstruktion der Hallsensoren-Signale findet im rot 
-        markierten Teil des Aufbaus statt. Dieser Part wurde auf einer 
-        Laborplatte aufgebaut und zusammen gelötet. Die so generierten Signale 
-        $U_{Hallsensor}$, $V_{Hallsensor}$, $W_{Hallsensor}$ werden einem FPGA 
-        geliefert. Anhand dieser Signale steuert das FPGA die 
-        H-Brücken-Transistoren mittels der Signale $U_h$, $U_l$, $V_h$, $V_l$, 
-        $W_h$, $W_l$. Die im FPGA enthaltene Konfiguration sind simple 
-        AND-Verknüpfungen, die die anliegenden Signale sehr schnell und 
-        effizient verarbeiten. Auf diese Weise ist es möglich, den Motor sehr 
-        schnell anzusteuern.\\
-        \\
-        In der Abbildung \ref{abb:MessplatzAufbau} ist der gesamte Aufbau 
-        abgebildet. Man beachte die markierten Felder. Am unteren linken Rand 
-        ist der Motor befestigt. In der Mitte des Bildes ist die Hardware, mit 
-        welcher die Hallsensoren Signale rekonstruiert werden. Die generierten 
-        Signale werden dem FPGA in der unteren linken Ecke zugeführt. Diese 
-        Signale werden logisch verknüpft und danach werden die sechs Signale 
-        generiert um die H-Brücke in der oberen rechten Hälfte anzusteuern. 
-        Diese wiederum treiben den Motor an.
-        \begin{figure}[h!]
-        %\vspace{-16pt}
-           	\includegraphics[scale=0.14]{\BrushlessPath/Bilder/MessplatzAufbau.jpg}
-           	\centering
-           	\caption{Testaufbau} 
-            \label{abb:MessplatzAufbau}
-        %\vspace{-10pt}
-        \end{figure}\\
-        Die im FPGA enthaltene Logik basiert auf der Wahrheitstabelle, die in 
-        Abbildung \ref{abb:WahrheitstabelleAnsteuerung} abgebildet ist.
-        
-    \subsubsection{Messmittel}
-        \begin{zebratabular}{lll}
-            \rowcolor{gray} Gerät &
-                Typ &
-                Nummer \\
-            Speisegerät & 
-                Rohde \& Schwarz NGSM 32/10 &
-                Inv. Nr. 009 \\
-            Oszilloskop &
-                Agilent MSO6052A &
-                Inz. Nr. 44 S/N: MY44001903 \\
-            Mainframe &
-                Hameg HM8001-2 &
-                SN: 059520046 \\
-            Speisegerät &
-                Hameg HM8040-3 &
-                SN: 015405014 \\
-            Pulsgenerator &
-                Hameg HM8035 &
-                Inv. Nr. 44 \\
-        \end{zebratabular}
+\subsubsection{Aufbaubeschreibung}
+    \BLDCcollab
+    \begin{wrapfigure}{r}{0.55\textwidth}
+       	\includegraphics[scale=0.4]{\BrushlessPath/Bilder/MotoransteuerungSchema.jpg}
+       	\centering
+       	\caption{Schema des Brushless-Versuchsaufbaus}
+        \label{abb:MotoransteuerungSchema}
+    \end{wrapfigure}
+    Das Schema des gesamten Aufbaus des Tests ist in der Abbildung 
+    \ref{abb:MotoransteuerungSchema} abgebildet. Die 3-Phasen H-Brücke 
+    oben im grünen Rechteck wird direkt vom FPGA angesteuert. Die Hardware 
+    dieser Brücke ermöglicht eine voll galvanisch getrennte Ansteuerung 
+    mit 3.3V Logikpegeln. Diese Brücke wurde zur Verfügung gestellt und 
+    verwendet. Die Rekonstruktion der Hallsensoren-Signale findet im rot 
+    markierten Teil des Aufbaus statt. Dieser Part wurde auf einer 
+    Laborplatte aufgebaut und zusammen gelötet. Die so generierten Signale 
+    $U_{Hallsensor}$, $V_{Hallsensor}$, $W_{Hallsensor}$ werden einem FPGA 
+    geliefert. Anhand dieser Signale steuert das FPGA die 
+    H-Brücken-Transistoren mittels der Signale $U_h$, $U_l$, $V_h$, $V_l$, 
+    $W_h$, $W_l$. Die im FPGA enthaltene Konfiguration sind simple 
+    AND-Verknüpfungen, die die anliegenden Signale sehr schnell und 
+    effizient verarbeiten. Auf diese Weise ist es möglich, den Motor sehr 
+    schnell anzusteuern.\\
+    \\
+    In der Abbildung \ref{abb:MessplatzAufbau} ist der gesamte Aufbau 
+    abgebildet. Man beachte die markierten Felder. Am unteren linken Rand 
+    ist der Motor befestigt. In der Mitte des Bildes ist die Hardware, mit 
+    welcher die Hallsensoren Signale rekonstruiert werden. Die generierten 
+    Signale werden dem FPGA in der unteren linken Ecke zugeführt. Diese 
+    Signale werden logisch verknüpft und danach werden die sechs Signale 
+    generiert um die H-Brücke in der oberen rechten Hälfte anzusteuern. 
+    Diese wiederum treiben den Motor an.
+    \begin{figure}[h!]
+    %\vspace{-16pt}
+       	\includegraphics[scale=0.14]{\BrushlessPath/Bilder/MessplatzAufbau.jpg}
+       	\centering
+       	\caption{Testaufbau} 
+        \label{abb:MessplatzAufbau}
+    %\vspace{-10pt}
+    \end{figure}\\
+    Die im FPGA enthaltene Logik basiert auf der Wahrheitstabelle, die in 
+    Abbildung \ref{abb:WahrheitstabelleAnsteuerung} abgebildet ist.
+    
+\subsubsection{Messmittel}
+    \begin{zebratabular}{lll}
+        \rowcolor{gray} Gerät &
+            Typ &
+            Nummer \\
+        Speisegerät & 
+            Rohde \& Schwarz NGSM 32/10 &
+            Inv. Nr. 009 \\
+        Oszilloskop &
+            Agilent MSO6052A &
+            Inz. Nr. 44 S/N: MY44001903 \\
+        Mainframe &
+            Hameg HM8001-2 &
+            SN: 059520046 \\
+        Speisegerät &
+            Hameg HM8040-3 &
+            SN: 015405014 \\
+        Pulsgenerator &
+            Hameg HM8035 &
+            Inv. Nr. 44 \\
+    \end{zebratabular}
 
