@@ -2,3 +2,11 @@
 doc/doc.bbl
 doc/doc.blg
 doc/doc.synctex.gz
+doc/EmbeddedDoc.bbl
+doc/EmbeddedDoc.blg
+doc/StandaloneDoc.bbl
+doc/EmbeddedDoc.synctex.gz
+doc/StandaloneDoc.lof
+doc/StandaloneDoc.lot
+doc/StandaloneDoc.synctex.gz
+doc/StandaloneDoc.blg
