@@ -1,7 +1,21 @@
+\ifSTANDALONE
+\section{Brushless Motoransteuerung}
+\fi
+\ifEMBED
 \subsection{Brushless Motoransteuerung}
+\fi
+
+\ifEMBED
     % Dieses Kapitel ist eine Zusammenarbeit der Gruppen \BLDCTeams. 
     \BLDCcollab
+\fi
+    \ifSTANDALONE
+    \subsection{Theorie der Ansteuerung}
+    \fi
+    \ifEMBED
     \subsubsection{Theorie der Ansteuerung}
+    \fi
+    \ifEMBED
         \begin{wrapfigure}{r}{0.50\textwidth}
            	\includegraphics[scale=0.45]{\BrushlessPath/Bilder/ZeitlicheHallSensorAnsteuerung.jpg}
            	\caption[Zeitliche Darstellung der Ansteuerung mit 
@@ -10,6 +24,7 @@
            	\centering
             \label{abb:ZeitlicheAnsteuerungBrushlessMotor}
         \end{wrapfigure}
+    \fi
         Brushless-Motoren sind Synchron-Drehstrom-Motoren. Das heisst, sie 
         werden mittels eines kontinuierlichen Drehfeldes in Bewegung gesetzt. 
         Dabei ist darauf zu achten, dass der Läufer dem Drehfeld synchron 
@@ -18,7 +33,18 @@
         Statorwicklungen induziert, die der Erregerspannung entgegenwirkt. 
         Daraus folgt, dass ein immenser Strom fliesst, der nur von der 
         Wicklungsimpedanz des Motors begrenzt wird.\\
-        \\
+        \ifSTANDALONE
+           \begin{figure}[h!]
+               \centering
+               \includegraphics[scale=0.45]{\BrushlessPath/Bilder/ZeitlicheHallSensorAnsteuerung.jpg}
+               \caption[Zeitliche Darstellung der Ansteuerung mit 
+                   Hall-Sensoren]{Zeitliche Darstellung der Ansteuerung mit 
+                   Hall-Sensoren \cite{AppNote:BrushlessuC}}
+              	\centering
+               \label{abb:ZeitlicheAnsteuerungBrushlessMotor}
+           \end{figure}
+      \fi
+       \\
         Es gibt hauptsächlich drei Methoden das Drehfeld zu generieren und zu 
         regeln. Die eine und einfache Methode ist die Zwangskommutierung. 
         Dabei wird ein Drehfeld erzeugt und dem Motor aufgezwungen. Der Läufer 
@@ -47,20 +73,36 @@
         bis zum durchschreiten des Sternpunktes gemessen werden. Diese Zeit 
         muss nochmal abgewartet werden bevor die Kommutierung durchgeführt 
         werden.
-    
+    \ifSTANDALONE
+    \subsection{Neuer Ansatz}
+    \fi
+    \ifEMBED
     \subsubsection{Neuer Ansatz}
+    \fi
+
+        \ifEMBED
         \begin{wrapfigure}{r}{0.40\textwidth}
-           	\includegraphics[scale=0.46]{\BrushlessPath/Bilder/PrinzipDerRekonstruktion.png}
-           	\centering
-           	\caption[Schema des Rekonstruktionsprinzip]{Schema des Rekonstruktionsprinzip \cite{HSLU:Pluess}}
+            \includegraphics[scale=0.46]{\BrushlessPath/Bilder/PrinzipDerRekonstruktion.png}
+            \centering
+            \caption[Schema des Rekonstruktionsprinzip]{Schema des Rekonstruktionsprinzip \cite{HSLU:Pluess}}
             \label{abb:PrinzipRekonstruktion}
-        \end{wrapfigure}
+            \end{wrapfigure}
+        \fi
         In einem modifizierten Ansatz wird versucht, ob die Hall-Sensorsignale 
         aus den Ansteuerungen des Motors gewonnen werden können. Hierzu wird 
-        eine Schaltung pro Phase benötigt, um die Nulldurchgänge beim 
+        eine Schaltung[h!] pro Phase benötigt, um die Nulldurchgänge beim 
         virtuellen Sternpunkt detektieren zu können. Die Abbildung 
         \ref{abb:PrinzipRekonstruktion} zeigt die Schaltung, mit der dies 
-        realisiert werden kann. Mit dem Flip-Flop kann die PWM aus dem 
+        realisiert werden kann. 
+        \ifSTANDALONE
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.46]{\BrushlessPath/Bilder/PrinzipDerRekonstruktion.png}
+           	\caption{Schema des Rekonstruktionsprinzip \protect\cite{HSLU:Pluess}}
+            \label{abb:PrinzipRekonstruktion}
+        \end{figure}
+        \fi
+        Mit dem Flip-Flop kann die PWM aus dem 
         Sensorsignal unterdrückt werden. Diese rekonstruierten 
         Hall-Sensor-Signale können direkt logischen verknüpft und genutzt 
         werden, um den Motor mittels einer Dreiphasen-H-Brücke anzusteuern 
@@ -91,7 +133,18 @@
         \ref{abb:WahrheitstabelleAnsteuerung} kann pro Signal zu folgenden 
         logischen Verknüpfung vereinfacht werden\\
         \\
+        \ifSTANDALONE
+        \begin{table}
+            \centering
+            \begin{tabular}{ccc}
+                $U_h = H_1 \wedge \bar{H_2}$ & $V_h = H_2 \wedge \bar{H_3}$ & $W_h = \bar{H_1} \wedge H_3$\\
+                $U_l = \bar{H_1} \wedge H_2$ & $V_l = \bar{H_2} \wedge H_3$ & $W_l = H_1 \wedge \bar{H_3}$
+            \end{tabular}
+        \end{table}
+        \fi
+        \ifEMBED
         \begin{tabular}{ccc}
             $U_h = H_1 \wedge \bar{H_2}$ & $V_h = H_2 \wedge \bar{H_3}$ & $W_h = \bar{H_1} \wedge H_3$\\
             $U_l = \bar{H_1} \wedge H_2$ & $V_l = \bar{H_2} \wedge H_3$ & $W_l = H_1 \wedge \bar{H_3}$
         \end{tabular}
+        \fi
