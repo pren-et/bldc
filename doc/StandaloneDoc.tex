@@ -1,0 +1,31 @@
+\documentclass[a4paper,10pt,fleqn]{article}
+
+\usepackage{layout}
+
+\input{src/booleans}
+
+\setboolean{STANDALONE}{true}
+
+\newcommand{\BrushlessPath}{src}
+\newcommand{\BIBLIOGRAPHY}{src/BLDC_Source}
+\newcommand{\DasAndereTeam}{T27}
+\newcommand{\BLDCTeams}{T27 und T32}
+\newcommand{\BLDCcollab}{Dieses Kapitel ist eine Zusammenarbeit der Gruppen \BLDCTeams. }
+
+\begin{document}
+	\input{src/title}
+	\tableofcontents
+	\newpage
+	\input{src/Hardwarezusammenarbeit}
+	\input{src/Ansteuerung}
+	\newpage
+	\input{src/Testbericht}
+	\newpage
+	\input{src/fallback}
+	\newpage
+	\input{src/encoder}
+	\clearpage
+	\input{src/quellen}
+	\listoffigures
+	\listoftables
+\end{document}

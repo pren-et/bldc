@@ -10,7 +10,6 @@ Steuerungen aus dem Modellbau erfolgen. Eine solche BLDC-Steuerung ist per
 PWM angesteuert, wobei die im Modellbau üblichen Signale gelten, wie in der
 Abbildung \ref{fig:rc-pwm} dargestellt.
 
-\ifSTANDALONE
 \begin{figure}[h!]
 	\centering
 	\begin{tikzpicture}
@@ -27,7 +26,6 @@ Abbildung \ref{fig:rc-pwm} dargestellt.
 	\caption{Signalverlauf eines typischen Modellbau-PWM Signals}
 	\label{fig:rc-pwm}
 \end{figure}
-\fi
 
 Der Einsatz von Modellbausteuerungen für BLDC-Motoren erfordert ein
 Feedback der Drehzahl, da diese lediglich eine Steuerung darstellen. Die
@@ -48,14 +46,12 @@ welche durch Magnete auf dem Rotationskörper gegeben sind. Aus solch einem
 Aufbau resultiert ein Feeback, welches mittels Impulsen einen Segmentdurchlauf
 des Rotationskörpers wiedergibt wie in der Abbildung \ref{fig:fallback-sketch}
 dargestellt.
-\ifSTANDALONE
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.8\textwidth]{../src/Bilder/fallback_sketch_1.pdf}
+	\includegraphics[width=0.8\textwidth]{\BrushlessPath/Bilder/fallback_sketch_1.pdf}
 	\caption{Erste Skizze des Fallback-Konzepts}
 	\label{fig:fallback-sketch}
 \end{figure}
-\fi
 Dieses Feedback wird mittels eines Mikrocontrollers ausgewertet und regelt
 damit den Input der Steuerung mittels des PWM-Signals bzw. der Impulsdauer.
 Das Einlesen einer Flanke, die Zeitmessung bis zur nächsten Flanke und die
