@@ -1,0 +1,176 @@
+% coding:utf-8
+               
+% Encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{courier}
+
+\usepackage{csquotes}
+
+\usepackage[toc,page]{appendix}
+
+% "Pre-Render" umlaut
+%\PrerenderUnicode{ä}
+%\PrerenderUnicode{ü}
+%\PrerenderUnicode{ö}
+
+\usepackage[table]{xcolor}
+
+% tables
+\usepackage{longtable}
+\usepackage{multirow}
+        % table coloring
+        \newenvironment{zebratabular}{\rowcolors{1}{lgray}{white}\tabular}{\endtabular}
+	\newenvironment{zebralongtable}{\rowcolors{1}{lgray}{white}\longtable}{\endlongtable}
+
+% language
+\usepackage[ngerman]{babel}
+
+% graphics
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning}
+\usepackage[european
+           ]{circuitikz}
+\usepackage{bchart}
+%\usepackage{pgf-pie}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{sidecap}
+%\usepackage{wrapfig}
+\usepackage{floatflt}
+\usepackage{wrapfig}
+
+\usepackage{acronym}
+
+\usepackage{pdflscape}
+
+\usepackage{ifthen}
+
+% colors
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{gray}{gray}{0.749}
+\definecolor{lgray}{gray}{0.85}
+\definecolor{red}{rgb}{1, 0, 0}
+\definecolor{green}{rgb}{0, 1, 0}
+\definecolor{blue}{rgb}{0, 0, 1}
+
+% math in tables (spreadsheet alike)
+\usepackage{spreadtab}
+
+% hyperlinks 
+\usepackage[hidelinks]{hyperref}
+
+% math
+\usepackage{amsmath}
+\usepackage[all]{xy}
+\usepackage{amssymb}
+
+% glossary
+\usepackage[xindy]{glossaries}
+\usepackage{makeidx}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+% PDF managment
+\usepackage{pdfpages}
+
+% source code
+\definecolor{darkgreen}{rgb}{0,0.6,0}		% color definition
+\usepackage{listings}
+\lstset{language=C}
+\lstloadlanguages{C}				% language options
+\lstset{basicstyle=\ttfamily,			% fontstyle
+        numbers=left,				% linenumber placemnt
+        numberstyle=\tiny,			% linenumber fontsize
+        numbersep=5pt,				% 
+        breaklines=true,			% print linebreaks
+        %texcsstyle=\color{black},		% code color
+        %backgroundcolor=\color{gray!10},	% background color
+        %commentstyle=\color{darkgreen},	% comment color
+        %keywordstyle=\color{red}\bfseries,	% keyword color
+        stringstyle=\color{blue}\bfseries,	% string color
+        frame=single,				% frame
+        tabsize=8,				% tabstop
+        %rulecolor=\color{black!30},		% 
+        title=\lstname,				% title is name of source file
+        escapeinside={\%*}{*)},			% 
+        %breakatwhitespace=true,		% 
+        framextopmargin=2pt,			% 
+        framexbottommargin=2pt,			% 
+        inputencoding=utf8,			% encoding = utf8
+        extendedchars=true,			% 
+        literate={Ö}{{\"O}}1			% umlaute in code
+                 {Ä}{{\"A}}1			% 
+                 {Ü}{{\"U}}1			% 
+                 {ü}{{\"u}}1			% 
+                 {ä}{{\"a}}1			% 
+                 {ö}{{\"o}}1 }
+
+% 
+\usepackage{printlen}
+
+% commenting
+\usepackage{verbatim}
+
+% lorem ipsum and friends
+\usepackage{lipsum}
+\usepackage{blindtext}
+
+% euro symbol
+\usepackage{eurosym}
+
+% Uhrzeit
+%\usepackage{uhrzeit}        % print the compile time
+
+% abbreviations
+\usepackage{acronym}
+
+% alphabetical lists/enumerations
+\usepackage{enumitem}
+
+% printing URLs
+\usepackage{url}
+
+% citation
+\usepackage{cite}
+\usepackage{apacite}
+
+% header, foote and page-layout
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\addtolength{\textwidth}{5cm}
+\addtolength{\evensidemargin}{-25mm}
+\addtolength{\oddsidemargin}{-25mm}
+
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+
+\addtolength{\headwidth}{5cm}
+\addtolength{\headheight}{1cm}
+\addtolength{\textheight}{2.5cm}
+\addtolength{\voffset}{-2.5cm}
+
+\renewcommand{\headrulewidth}{0.4pt}
+
+\fancyhead[L]{\textbf{PREN1}}
+\fancyhead[C]{Hochschule Luzern - Technik \& Architektur}
+\fancyhead[R]{PREN-ET}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{\today}
+\fancyfoot[R]{\thepage}
+
+\renewcommand{\footrulewidth}{0.4pt}
+
+% pagedesign
+\usepackage{multicol}
+
+\addto\captionsngerman{\let\appendixtocname\appendixname%
+\let\appendixpagename\appendixname}
