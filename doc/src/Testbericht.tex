@@ -1,11 +1,18 @@
+\ifSTANDALONE
+\section{Prinziptest}
+\fi
+\ifEMBED
 \subsubsection{Aufbaubeschreibung}
     \BLDCcollab
+\fi
+\ifEMBED
     \begin{wrapfigure}{r}{0.55\textwidth}
        	\includegraphics[scale=0.4]{\BrushlessPath/Bilder/MotoransteuerungSchema.jpg}
        	\centering
        	\caption{Schema des Brushless-Versuchsaufbaus}
         \label{abb:MotoransteuerungSchema}
     \end{wrapfigure}
+\fi
     Das Schema des gesamten Aufbaus des Tests ist in der Abbildung 
     \ref{abb:MotoransteuerungSchema} abgebildet. Die 3-Phasen H-Brücke 
     oben im grünen Rechteck wird direkt vom FPGA angesteuert. Die Hardware 
@@ -20,8 +27,15 @@
     $W_h$, $W_l$. Die im FPGA enthaltene Konfiguration sind simple 
     AND-Verknüpfungen, die die anliegenden Signale sehr schnell und 
     effizient verarbeiten. Auf diese Weise ist es möglich, den Motor sehr 
-    schnell anzusteuern.\\
-    \\
+    schnell anzusteuern.
+    \ifSTANDALONE
+    \begin{figure}[h!]
+    	\includegraphics[scale=0.4]{\BrushlessPath/Bilder/MotoransteuerungSchema.jpg}
+       	\centering
+       	\caption{Schema des Brushless-Versuchsaufbaus}
+        \label{abb:MotoransteuerungSchema}
+    \end{figure}
+    \fi
     In der Abbildung \ref{abb:MessplatzAufbau} ist der gesamte Aufbau 
     abgebildet. Man beachte die markierten Felder. Am unteren linken Rand 
     ist der Motor befestigt. In der Mitte des Bildes ist die Hardware, mit 
@@ -37,29 +51,38 @@
        	\caption{Testaufbau} 
         \label{abb:MessplatzAufbau}
     %\vspace{-10pt}
-    \end{figure}\\
+    \end{figure}
     Die im FPGA enthaltene Logik basiert auf der Wahrheitstabelle, die in 
     Abbildung \ref{abb:WahrheitstabelleAnsteuerung} abgebildet ist.
-    
-\subsubsection{Messmittel}
-    \begin{zebratabular}{lll}
-        \rowcolor{gray} Gerät &
-            Typ &
-            Nummer \\
-        Speisegerät & 
-            Rohde \& Schwarz NGSM 32/10 &
-            Inv. Nr. 009 \\
-        Oszilloskop &
-            Agilent MSO6052A &
-            Inz. Nr. 44 S/N: MY44001903 \\
-        Mainframe &
-            Hameg HM8001-2 &
-            SN: 059520046 \\
-        Speisegerät &
-            Hameg HM8040-3 &
-            SN: 015405014 \\
-        Pulsgenerator &
-            Hameg HM8035 &
-            Inv. Nr. 44 \\
-    \end{zebratabular}
 
+\ifSTANDALONE
+\subsection{Messmittel}
+\fi
+\ifEMBED
+\subsubsection{Messmittel}
+\fi
+    \begin{table}[h!]
+        \centering
+        \begin{zebratabular}{lll}
+            \rowcolor{gray}
+            Gerät &
+                Typ &
+                Nummer \\
+            Speisegerät & 
+                Rohde \& Schwarz NGSM 32/10 &
+                Inv. Nr. 009 \\
+            Oszilloskop &
+                Agilent MSO6052A &
+                Inz. Nr. 44 S/N: MY44001903 \\
+            Mainframe &
+                Hameg HM8001-2 &
+                SN: 059520046 \\
+            Speisegerät &
+                Hameg HM8040-3 &
+                SN: 015405014 \\
+            Pulsgenerator &
+                Hameg HM8035 &
+                Inv. Nr. 44 \\
+        \end{zebratabular}
+        \caption{Messmittel des Versuchsaufbaus}
+    \end{table}
