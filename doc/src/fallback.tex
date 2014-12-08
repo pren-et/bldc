@@ -7,7 +7,7 @@
 Ist der Einsatz des vorgesehenen BLDC-Treibers nicht möglich, so muss eine
 alternative Ansteuerung erfolgen. Eine solche kann mittels handelsüblicher
 Steuerungen aus dem Modellbau erfolgen. Eine solche BLDC-Steuerung ist per
-PWM angesteuert, wobei die im Modellbau üblichen Signale gelten wie in der
+PWM angesteuert, wobei die im Modellbau üblichen Signale gelten, wie in der
 Abbildung \ref{fig:rc-pwm} dargestellt.
 
 \ifSTANDALONE
@@ -61,6 +61,6 @@ damit den Input der Steuerung mittels des PWM-Signals bzw. der Impulsdauer.
 Das Einlesen einer Flanke, die Zeitmessung bis zur nächsten Flanke und die
 Stellung eines PWM-Signals sind Tasks, welche übliche Mikrocontroller direkt
 durch ihre Peripherie-Module ausführen können. Dies ermöglicht eine einfache
-adaption in ein bestehendes Modell, denn es werden lediglich zwei Timer-IO
+Adaption in ein bestehendes Modell, denn es werden lediglich zwei Timer-IO
 für dieses Fallback verwendet. Je nach Mikrocontroller ist ein Pegelwandler
 notwendig für die PWM-Signale.
