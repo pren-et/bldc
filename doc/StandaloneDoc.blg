@@ -1,9 +1,0 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: StandaloneDoc.aux
-The style file: apacite.bst
-Illegal, another \bibstyle command---line 68 of file StandaloneDoc.aux
- : \bibstyle
- :          {apacite}
-I'm skipping whatever remains of this command
-Database file #1: src/BLDC_Source.bib
-apacite.bst [2013/07/21 v6.03 APA bibliography style]
-(There was 1 error message)
