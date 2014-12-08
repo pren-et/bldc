@@ -1,6 +1,6 @@
 DOCUMENT = doc
 
-.PHONY: all doc bib clean
+.PHONY: all doc single bib clean
 
 all:	single bib doc clean
 
