@@ -22,3 +22,5 @@ clean:
 	rm *.log
 	rm *.out
 	rm *.toc
+	rm *.lot
+	rm *.lof
