@@ -31,6 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity commutate is
     Port ( pwm : in   STD_ULOGIC;
+           led : out  STD_ULOGIC_VECTOR (7 downto 0);
            h   : in   STD_ULOGIC_VECTOR (2 downto 0);
            u_l : out  STD_ULOGIC;
            u_h : out  STD_ULOGIC;
@@ -57,6 +58,14 @@ begin
 end process;
 
 h_b <= h_buffered(0);
+led(0) <= h(0);
+led(1) <= h(1);
+led(2) <= h(2);
+led(3) <= '0';
+led(4) <= '0';
+led(5) <= '0';
+led(6) <= '0';
+led(7) <= '0';
 
 comm : process (pwm, h_buffered )
 begin
