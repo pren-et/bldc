@@ -77,6 +77,13 @@ netgen/
 planAhead_run_1/
 planAhead_*.debug
 
+# PROM Flash
+*.cfi
+*.mcs
+*.prm
+*.sig
+output.txt
+
 # datasheets
 */datasheet/*.pdf
 
