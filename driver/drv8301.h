@@ -47,9 +47,20 @@ typedef enum {
 /*! \name status1
  * @{
  */
-#define DRV8301_REG_STATUS1_ADDR        0x00
-#define DRV8301_REG_STATUS1_RW          DRV8301_REG_RW_R
-#define DRV8301_REG_STATUS1_DEFAULT     0x0000
+#define DRV8301_REG_STATUS1_ADDR            0x00
+#define DRV8301_REG_STATUS1_RW              DRV8301_REG_RW_R
+#define DRV8301_REG_STATUS1_DEFAULT         0x0000
+#define DRV8301_REG_STATUS1_FETLC_OC_MASK   (1 <<  0)
+#define DRV8301_REG_STATUS1_FETHC_OC_MASK   (1 <<  1)
+#define DRV8301_REG_STATUS1_FETLB_OC_MASK   (1 <<  2)
+#define DRV8301_REG_STATUS1_FETHB_OC_MASK   (1 <<  3)
+#define DRV8301_REG_STATUS1_FETLA_OC_MASK   (1 <<  4)
+#define DRV8301_REG_STATUS1_FETHA_OC_MASK   (1 <<  5)
+#define DRV8301_REG_STATUS1_OTW_MASK        (1 <<  6)
+#define DRV8301_REG_STATUS1_OTSD_MASK       (1 <<  7)
+#define DRV8301_REG_STATUS1_PVDD_UV_MASK    (1 <<  8)
+#define DRV8301_REG_STATUS1_GVDD_UV_MASK    (1 <<  9)
+#define DRV8301_REG_STATUS1_FAULT_MASK      (1 << 10)
 /*! @} */
 /*! \typedef
  *  \brief Register STATUS1
@@ -91,9 +102,12 @@ typedef union {
 /*! \name status2
  * @{
  */
-#define DRV8301_REG_STATUS2_ADDR        0x01
-#define DRV8301_REG_STATUS2_RW          DRV8301_REG_RW_R
-#define DRV8301_REG_STATUS2_DEFAULT     0x0800
+#define DRV8301_REG_STATUS2_ADDR            0x01
+#define DRV8301_REG_STATUS2_RW              DRV8301_REG_RW_R
+#define DRV8301_REG_STATUS2_DEFAULT         0x0800
+#define DRV8301_REG_STATUS2_ID              0x00
+#define DRV8301_REG_STATUS2_ID_MASK         0x0F
+#define DRV8301_REG_STATUS2_GVDD_OV_MASK    (1 << 7)
 /*! @} */
 /*! \typedef
  *  \brief Register STATUS2
@@ -121,10 +135,117 @@ typedef union {
 /*! \name control1
  * @{
  */
-#define DRV8301_REG_CONTROL1_ADDR       0x02
-#define DRV8301_REG_CONTROL1_RW         DRV8301_REG_RW_W
-#define DRV8301_REG_CONTROL1_DEFAULT    0x1400
+#define DRV8301_REG_CONTROL1_ADDR           0x02
+#define DRV8301_REG_CONTROL1_RW             DRV8301_REG_RW_W
+#define DRV8301_REG_CONTROL1_DEFAULT        0x1400
 /*! @} */
+/*! \typedef
+ *  \brief Settings for gate current
+ */
+typedef enum {
+    DRV8301_GATE_CURRENT_1_7A,  /*!< gate current 1.7A */
+    DRV8301_GATE_CURRENT_0_7A,  /*!< gate current 0.7A */
+    DRV8301_GATE_CURRENT_0_25A  /*!< gate current 0.25A */
+} drv8301_gate_current_t;
+/*! \typedef
+ *  \brief Gate reset
+ */
+typedef enum {
+    DRV8301_GATE_RESET_NORMAL,  /*!< normal mode */
+    DRV8301_GATE_RESET_RESET    /*!< reset all latched faults on gate driver */
+} drv8301_gate_reset_t;
+/*! \typedef
+ *  \brief PWM mode
+ */
+typedef enum {
+    DRV8301_PWM_MODE_SIX,       /*!< six independent inputs */
+    DRV8301_PWM_MODE_THREE      /*!< three independent inputs */
+} drv8301_pwm_mode_t;
+/*! \typedef
+ *  \brief Overcurrent protection mode
+ */
+typedef enum {
+    DRV8301_OC_MODE_CURR_LIM,   /*!< Current limiting */
+    DRV8301_OC_MODE_SHUTDOWN,   /*!< shut down */
+    DRV8301_OC_MODE_REPORT,     /*!< only report overcurrent */
+    DRV8301_OC_MODE_DISABLE     /*!< disable overcurrent protection */
+} drv8301_oc_mode_t;
+/*! \typedef
+ *  \brief Overcurrent threshold
+ */
+typedef enum {
+    DRV8301_OC_ADJ_SET_0_060V,  /*!< Overcurrent threshold at 0.060V */
+    DRV8301_OC_ADJ_SET_0_068V,  /*!< Overcurrent threshold at 0.068V */
+    DRV8301_OC_ADJ_SET_0_076V,  /*!< Overcurrent threshold at 0.076V */
+    DRV8301_OC_ADJ_SET_0_086V,  /*!< Overcurrent threshold at 0.086V */
+    DRV8301_OC_ADJ_SET_0_097V,  /*!< Overcurrent threshold at 0.097V */
+    DRV8301_OC_ADJ_SET_0_109V,  /*!< Overcurrent threshold at 0.109V */
+    DRV8301_OC_ADJ_SET_0_123V,  /*!< Overcurrent threshold at 0.123V */
+    DRV8301_OC_ADJ_SET_0_138V,  /*!< Overcurrent threshold at 0.138V */
+    DRV8301_OC_ADJ_SET_0_155V,  /*!< Overcurrent threshold at 0.155V */
+    DRV8301_OC_ADJ_SET_0_175V,  /*!< Overcurrent threshold at 0.175V */
+    DRV8301_OC_ADJ_SET_0_197V,  /*!< Overcurrent threshold at 0.197V */
+    DRV8301_OC_ADJ_SET_0_222V,  /*!< Overcurrent threshold at 0.222V */
+    DRV8301_OC_ADJ_SET_0_250V,  /*!< Overcurrent threshold at 0.250V */
+    DRV8301_OC_ADJ_SET_0_282V,  /*!< Overcurrent threshold at 0.282V */
+    DRV8301_OC_ADJ_SET_0_317V,  /*!< Overcurrent threshold at 0.317V */
+    DRV8301_OC_ADJ_SET_0_358V,  /*!< Overcurrent threshold at 0.358V */
+    DRV8301_OC_ADJ_SET_0_403V,  /*!< Overcurrent threshold at 0.403V */
+    DRV8301_OC_ADJ_SET_0_454V,  /*!< Overcurrent threshold at 0.454V */
+    DRV8301_OC_ADJ_SET_0_511V,  /*!< Overcurrent threshold at 0.511V */
+    DRV8301_OC_ADJ_SET_0_576V,  /*!< Overcurrent threshold at 0.576V */
+    DRV8301_OC_ADJ_SET_0_648V,  /*!< Overcurrent threshold at 0.648V */
+    DRV8301_OC_ADJ_SET_0_730V,  /*!< Overcurrent threshold at 0.730V */
+    DRV8301_OC_ADJ_SET_0_822V,  /*!< Overcurrent threshold at 0.822V */
+    DRV8301_OC_ADJ_SET_0_926V,  /*!< Overcurrent threshold at 0.926V */
+    DRV8301_OC_ADJ_SET_1_046V,  /*!< Overcurrent threshold at 0.046V */
+    DRV8301_OC_ADJ_SET_1_175V,  /*!< Overcurrent threshold at 0.175V */
+    DRV8301_OC_ADJ_SET_1_324V,  /*!< Overcurrent threshold at 0.324V */
+    DRV8301_OC_ADJ_SET_1_491V,  /*!< Overcurrent threshold at 0.491V */
+    DRV8301_OC_ADJ_SET_1_679V,  /*!< Overcurrent threshold at 0.679V */
+    DRV8301_OC_ADJ_SET_1_892V,  /*!< Overcurrent threshold at 0.892V */
+    DRV8301_OC_ADJ_SET_1_131V,  /*!< Overcurrent threshold at 0.131V */
+    DRV8301_OC_ADJ_SET_2_400V   /*!< Overcurrent threshold at 0.400V */
+} drv8301_oc_adj_set_t;
+/*! \typedef
+ *  \brief Overcurrent / Overtemperature reports on OCTW pin
+ */
+typedef enum {
+    DRV8301_OCTW_SET_OT_OC,     /*!< Report Overtemperature and Overcurrent */
+    DRV8301_OCTW_SET_OT,        /*!< Report Overtemperature only */
+    DRV8301_OCTW_SET_OC,        /*!< Report Overcurrent only */
+    DRV8301_OCTW_SET_OC_2,      /*!< Report Overcurrent only */
+} drv8301_octw_set_t;
+/*! \typedef
+ *  \brief Shunt amplifier gain selection
+ */
+typedef enum {
+    DRV8301_GAIN_10,            /*!< Gain of shunt amplifier 10 */
+    DRV8301_GAIN_20,            /*!< Gain of shunt amplifier 20 */
+    DRV8301_GAIN_40,            /*!< Gain of shunt amplifier 40 */
+    DRV8301_GAIN_80             /*!< Gain of shunt amplifier 80 */
+} drv8301_gain_t;
+/*! \typedef
+ *  \brief Calibration of shunt amplifier 1
+ */
+typedef enum {
+    DRV8301_DC_CAL_CH1_OFF,     /*!< Normal operation of shunt amplifier 1 */
+    DRV8301_DC_CAL_CH1_ON       /*!< Calibration of shunt amplifier 1 */
+} drv8301_dc_cal_ch1_t;
+/*! \typedef
+ *  \brief Calibration of shunt amplifier 2
+ */
+typedef enum {
+    DRV8301_DC_CAL_CH2_OFF,     /*!< Normal operation of shunt amplifier 2 */
+    DRV8301_DC_CAL_CH2_ON       /*!< Calibration of shunt amplifier 2 */
+} drv8301_dc_cal_ch2_t;
+/*! \typedef
+ *  \brief Off time behaviour during overcurrent event
+ */
+typedef enum {
+    DRV8301_OC_TOFF_NORMAL,     /*!< Normal CBC operation */
+    DRV8301_OC_TOFF_OFF_TIME,   /*!< Off time control during overcurrent */
+} drv8301_oc_toff_t;
 /*! \typedef
  *  \brief Register CONTROL1
  */
