@@ -1,0 +1,208 @@
+/*!
+ *  ____  ____  _____ _   _       _____ _____ 
+ * |  _ \|  _ \| ____| \ | |     | ____|_   _|
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |  
+ * |  __/|  _ <| |___| |\  |_____| |___  | |  
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|  
+ *                                            
+ * \file drv8301.h
+ * \brief Driver for three phase pre-driver DRV8301 from Texas Instruments
+ * \author pren-et
+ * 
+ */
+
+#ifndef DRV8301_H
+#define DRV8301_H
+
+#include <stdint.h>
+
+/******************************************************************************
+Test compiler dependencies
+******************************************************************************/
+/*! \typedef
+ *  \brief Type for testing the implementation of bitfields in the current compiler
+ */
+typedef union test_bitfield_ {
+    struct {
+        uint8_t low     : 4;    /*!< Low nibble */
+        uint8_t high    : 4;    /*!< High nibble */
+    } bitfield;
+    uint8_t     byte;
+} test_bitfield_t;
+
+/******************************************************************************
+Registers
+******************************************************************************/
+
+#define DRV8301_REG_LEN     2   /*!< Register length */
+
+/*! \typedef
+ *  \brief Possible access levels for registers.
+ */
+typedef enum {
+    DRV8301_REG_RW_R,  /*!< readable only */
+    DRV8301_REG_RW_W   /*!< always writable */
+} l6480_reg_rw_t;
+
+/*! \name status1
+ * @{
+ */
+#define DRV8301_REG_STATUS1_ADDR        0x00
+#define DRV8301_REG_STATUS1_RW          DRV8301_REG_RW_R
+#define DRV8301_REG_STATUS1_DEFAULT     0x0000
+/*! @} */
+/*! \typedef
+ *  \brief Register STATUS1
+ */
+typedef union {
+    uint8_t array[DRV8301_REG_LEN]; /*!< array access */
+    struct {
+        uint16_t fetlc_oc       :  1;   /*!< overcurrent event on lower fet c */
+        uint16_t fethc_oc       :  1;   /*!< overcurrent event on higher fet c */
+        uint16_t fetlb_oc       :  1;   /*!< overcurrent event on lower fet b */
+        uint16_t fethb_oc       :  1;   /*!< overcurrent event on higher fet b */
+        uint16_t fetla_oc       :  1;   /*!< overcurrent event on lower fet a */
+        uint16_t fetha_oc       :  1;   /*!< overcurrent event on higher fet a */
+        uint16_t otw            :  1;   /*!< overtemperature warning */
+        uint16_t otsd           :  1;   /*!< overtemperature shutdown */
+        uint16_t pvdd_uv        :  1;   /*!< undervoltage event on power supply voltage */
+        uint16_t gvdd_uv        :  1;   /*!< undervoltage event on gate supply voltage */
+        uint16_t fault          :  1;   /*!< fault event */
+        uint16_t addr           :  4;   /*!< address */
+        uint16_t frame_err      :  1;   /*!< frame error */
+    } raw_read;                     /*!< raw data access for reading */
+    struct {
+        uint16_t fetlc_oc       :  1;   /*!< overcurrent event on lower fet c */
+        uint16_t fethc_oc       :  1;   /*!< overcurrent event on higher fet c */
+        uint16_t fetlb_oc       :  1;   /*!< overcurrent event on lower fet b */
+        uint16_t fethb_oc       :  1;   /*!< overcurrent event on higher fet b */
+        uint16_t fetla_oc       :  1;   /*!< overcurrent event on lower fet a */
+        uint16_t fetha_oc       :  1;   /*!< overcurrent event on higher fet a */
+        uint16_t otw            :  1;   /*!< overtemperature warning */
+        uint16_t otsd           :  1;   /*!< overtemperature shutdown */
+        uint16_t pvdd_uv        :  1;   /*!< undervoltage event on power supply voltage */
+        uint16_t gvdd_uv        :  1;   /*!< undervoltage event on gate supply voltage */
+        uint16_t fault          :  1;   /*!< fault event */
+        uint16_t addr           :  4;   /*!< address */
+        uint16_t rw             :  1;   /*!< read / write */
+    } raw_write;                    /*!< raw data access for writing */
+} l6480_reg_status1_t;
+
+/*! \name status2
+ * @{
+ */
+#define DRV8301_REG_STATUS2_ADDR        0x01
+#define DRV8301_REG_STATUS2_RW          DRV8301_REG_RW_R
+#define DRV8301_REG_STATUS2_DEFAULT     0x0800
+/*! @} */
+/*! \typedef
+ *  \brief Register STATUS2
+ */
+typedef union {
+    uint8_t array[DRV8301_REG_LEN]; /*!< array access */
+    struct {
+        uint16_t dev_id         :  4;   /*!< device id */
+        uint16_t unused1        :  3;   /*!< unused bits */
+        uint16_t gvdd_ov        :  1;   /*!< overvoltage event on gate power supply */
+        uint16_t unused2        :  3;   /*!< unused bits */
+        uint16_t addr           :  4;   /*!< address */
+        uint16_t frame_err      :  1;   /*!< frame error */
+    } raw_read;                     /*!< raw data access for reading */
+    struct {
+        uint16_t dev_id         :  4;   /*!< device id */
+        uint16_t unused1        :  3;   /*!< unused bits */
+        uint16_t gvdd_ov        :  1;   /*!< overvoltage event on gate power supply */
+        uint16_t unused2        :  3;   /*!< unused bits */
+        uint16_t addr           :  4;   /*!< address */
+        uint16_t rw             :  1;   /*!< read / write */
+    } raw_write;                    /*!< raw data access for writing */
+} l6480_reg_status2_t;
+
+/*! \name control1
+ * @{
+ */
+#define DRV8301_REG_CONTROL1_ADDR       0x02
+#define DRV8301_REG_CONTROL1_RW         DRV8301_REG_RW_W
+#define DRV8301_REG_CONTROL1_DEFAULT    0x1400
+/*! @} */
+/*! \typedef
+ *  \brief Register CONTROL1
+ */
+typedef union {
+    uint8_t array[DRV8301_REG_LEN]; /*!< array access */
+    struct {
+        uint16_t gate_current   :  2;   /*!< gate current */
+        uint16_t gate_reset     :  1;   /*!< gate reset */
+        uint16_t pwm_mode       :  1;   /*!< pwm mode */
+        uint16_t oc_mode        :  2;   /*!< overcurrent mode (gate driver) */
+        uint16_t oc_adj_set     :  5;   /*!< overcurrent trigger adjustment */
+        uint16_t addr           :  4;   /*!< address */
+        uint16_t frame_err      :  1;   /*!< frame error */
+    } raw_read;                     /*!< raw data access for reading */
+    struct {
+        uint16_t gate_current   :  2;   /*!< gate current */
+        uint16_t gate_reset     :  1;   /*!< gate reset */
+        uint16_t pwm_mode       :  1;   /*!< pwm mode */
+        uint16_t oc_mode        :  2;   /*!< overcurrent mode (gate driver) */
+        uint16_t oc_adj_set     :  5;   /*!< overcurrent trigger adjustment */
+        uint16_t addr           :  4;   /*!< address */
+        uint16_t rw             :  1;   /*!< read / write */
+    } raw_write;                    /*!< raw data access for writing */
+} l6480_reg_control1_t;
+
+/*! \name control2
+ * @{
+ */
+#define DRV8301_REG_CONTROL2_ADDR       0x03
+#define DRV8301_REG_CONTROL2_RW         DRV8301_REG_RW_W
+#define DRV8301_REG_CONTROL2_DEFAULT    0x1800
+/*! @} */
+/*! \typedef
+ *  \brief Register CONTROL2
+ */
+typedef union {
+    uint8_t array[DRV8301_REG_LEN]; /*!< array access */
+    struct {
+        uint16_t octw_set       :  2;   /*!< report behaviour on overtemperature and overcurrent events */
+        uint16_t gain           :  2;   /*!< shunt amplifier gain */
+        uint16_t dc_cal_ch1     :  1;   /*!< calibration of shunt amplifier 1 */
+        uint16_t dc_cal_ch2     :  1;   /*!< calibration of shunt amplifier 2 */
+        uint16_t oc_toff        :  1;   /*!<  */
+        uint16_t unused         :  4;   /*!< unused bits */
+        uint16_t addr           :  4;   /*!< address */
+        uint16_t frame_err      :  1;   /*!< frame error */
+    } raw_read;                     /*!< raw data access for reading */
+    struct {
+        uint16_t gain           :  2;   /*!< shunt amplifier gain */
+        uint16_t dc_cal_ch1     :  1;   /*!< calibration of shunt amplifier 1 */
+        uint16_t dc_cal_ch2     :  1;   /*!< calibration of shunt amplifier 2 */
+        uint16_t oc_toff        :  1;   /*!<  */
+        uint16_t unused         :  4;   /*!< unused bits */
+        uint16_t addr           :  4;   /*!< address */
+        uint16_t rw             :  1;   /*!< read / write */
+    } raw_write;                    /*!< raw data access for writing */
+} l6480_reg_control2_t;
+
+
+/******************************************************************************
+Functions
+******************************************************************************/
+/*! \fn
+ *  \brief Initialisation function for DRV8301
+ *  
+ *  \param  void
+ *  \return void
+ */
+void l6480_init(void);
+
+/*! \fn
+ *  \brief Send a command to the DRV8301
+ *  
+ *  \param  cmd   command to be sent
+ *  \param  read  flag to determine if data has to be read
+ *  \param  *data pointer to data to be read or sent
+ *  \return void
+ */
+void l6480_send_cmd(uint8_t cmd, uint8_t read, uint8_t *data);
+
+#endif /* DRV8301_H */
