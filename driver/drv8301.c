@@ -14,8 +14,7 @@
 #include "drv8301.h"
 
 /* Definition of necessary functions provided by a SPI module later */
-void spi_write(uint8_t *data) { return; }
-void spi_read(uint8_t *data) { return; }
+uint16_t spi_read_write(uint16_t data) { return 0; }
 
 void drv8301_init(void) {
     /*! test orientation of bitfields */
@@ -35,17 +34,28 @@ void drv8301_init(void) {
     return;
 }
 
-void drv8301_send_cmd(uint8_t cmd, uint8_t read, uint8_t *data) {
+drv8301_reg_t drv8301_read_register(drv8301_addr_t address) {
     /*! local variables */
-    uint8_t i;          /*!< variable to count number of sent bits */
-    spi_write(&cmd);    /*!< send command */
-    if (read) {         /*!< check if reading data is needed */
-        for (i = 0; i < (DRV8301_REG_LEN - 1); i++) {
-            spi_read(data++);   /*!< read data */
-        }
-    } else {
-        for (i = 0; i < (DRV8301_REG_LEN - 1); i++) {
-            spi_write(data++);  /*!< write data */
-        }
+    drv8301_reg_t reg;                      /*!< temporary register */
+    reg.data_write.data = 0x00;             /*!< empty dummy data */
+    reg.data_write.addr = address;          /*!< address of register */
+    reg.data_write.rw   = DRV8301_RW_R;     /*!< read register */
+
+    /*! read register */
+    reg.raw = spi_read_write(reg.raw);
+
+    /*! return register */
+    return reg;
+}
+
+void drv8301_write_register(drv8301_reg_t reg) {
+    if (reg.data_write.addr == DRV8301_ADDR_CONTROL1 || 
+        reg.data_write.addr == DRV8301_ADDR_CONTROL2) { /*!< check if register is writable */
+        reg.data_write.rw   = DRV8301_RW_W;                 /*!< write register */
+
+        /*! write register */
+        spi_read_write(reg.raw);
     }
+
+    return;
 }

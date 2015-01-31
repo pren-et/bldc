@@ -48,26 +48,26 @@ typedef enum {
  *  \brief register address
  */
 typedef enum {
-    DRV_8301_ADDR_STATUS1,  /*!< Status 1 */
-    DRV_8301_ADDR_STATUS2,  /*!< Status 2 */
-    DRV_8301_ADDR_CONTROL1, /*!< Control 1 */
-    DRV_8301_ADDR_CONTROL2, /*!< Control 2 */
+    DRV8301_ADDR_STATUS1,   /*!< Status 1 */
+    DRV8301_ADDR_STATUS2,   /*!< Status 2 */
+    DRV8301_ADDR_CONTROL1,  /*!< Control 1 */
+    DRV8301_ADDR_CONTROL2,  /*!< Control 2 */
 } drv8301_addr_t;
 
 /*! \typedef
  *  \brief register read / write
  */
 typedef enum {
-    DRV_8301_RW_W,          /*!< Write */
-    DRV_8301_RW_R           /*!< Read */
+    DRV8301_RW_W,           /*!< Write */
+    DRV8301_RW_R            /*!< Read */
 } drv8301_rw_t;
 
 /*! \typedef
  *  \brief register frame error
  */
 typedef enum {
-    DRV_8301_FRAME_ERR_NONE,/*!< No frame error */
-    DRV_8301_FRAME_ERR_ERR  /*!< Frame error in previous command */
+    DRV8301_FRAME_ERR_NONE, /*!< No frame error */
+    DRV8301_FRAME_ERR_ERR   /*!< Frame error in previous command */
 } drv8301_frame_err_t;
 
 /*! \name status1
@@ -92,7 +92,8 @@ typedef enum {
  *  \brief Register STATUS1
  */
 typedef union {
-    uint8_t array[DRV8301_REG_LEN]; /*!< array access */
+    uint16_t    raw;                        /*!< raw data access */
+    uint8_t     array[DRV8301_REG_LEN];     /*!< array access */
     struct {
         uint16_t                fetlc_oc        :  1;   /*!< overcurrent event on lower fet c */
         uint16_t                fethc_oc        :  1;   /*!< overcurrent event on higher fet c */
@@ -107,7 +108,7 @@ typedef union {
         uint16_t                fault           :  1;   /*!< fault event */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
-    } reg_read;                     /*!< raw data access for reading */
+    } reg_read;                             /*!< raw data access for reading */
     struct {
         uint16_t                fetlc_oc        :  1;   /*!< overcurrent event on lower fet c */
         uint16_t                fethc_oc        :  1;   /*!< overcurrent event on higher fet c */
@@ -122,7 +123,7 @@ typedef union {
         uint16_t                fault           :  1;   /*!< fault event */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_rw_t            rw              :  1;   /*!< read / write */
-    } reg_write;                    /*!< raw data access for writing */
+    } reg_write;                            /*!< raw data access for writing */
 } drv8301_reg_status1_t;
 
 /*! \name status2
@@ -139,7 +140,8 @@ typedef union {
  *  \brief Register STATUS2
  */
 typedef union {
-    uint8_t array[DRV8301_REG_LEN]; /*!< array access */
+    uint16_t    raw;                        /*!< raw data access */
+    uint8_t     array[DRV8301_REG_LEN];     /*!< array access */
     struct {
         uint16_t                dev_id          :  4;   /*!< device id */
         uint16_t                unused1         :  3;   /*!< unused bits */
@@ -147,7 +149,7 @@ typedef union {
         uint16_t                unused2         :  3;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
-    } reg_read;                     /*!< raw data access for reading */
+    } reg_read;                             /*!< raw data access for reading */
     struct {
         uint16_t                dev_id          :  4;   /*!< device id */
         uint16_t                unused1         :  3;   /*!< unused bits */
@@ -155,7 +157,7 @@ typedef union {
         uint16_t                unused2         :  3;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_rw_t            rw              :  1;   /*!< read / write */
-    } reg_write;                    /*!< raw data access for writing */
+    } reg_write;                            /*!< raw data access for writing */
 } drv8301_reg_status2_t;
 
 /*! \name control1
@@ -237,7 +239,8 @@ typedef enum {
  *  \brief Register CONTROL1
  */
 typedef union {
-    uint8_t array[DRV8301_REG_LEN]; /*!< array access */
+    uint16_t    raw;                        /*!< raw data access */
+    uint8_t     array[DRV8301_REG_LEN];     /*!< array access */
     struct {
         drv8301_gate_current_t  gate_current    :  2;   /*!< gate current */
         drv8301_gate_reset_t    gate_reset      :  1;   /*!< gate reset */
@@ -246,7 +249,7 @@ typedef union {
         drv8301_oc_adj_set_t    oc_adj_set      :  5;   /*!< overcurrent trigger adjustment */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
-    } reg_read;                     /*!< raw data access for reading */
+    } reg_read;                             /*!< raw data access for reading */
     struct {
         drv8301_gate_current_t  gate_current    :  2;   /*!< gate current */
         drv8301_gate_reset_t    gate_reset      :  1;   /*!< gate reset */
@@ -255,7 +258,7 @@ typedef union {
         drv8301_oc_adj_set_t    oc_adj_set      :  5;   /*!< overcurrent trigger adjustment */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_rw_t            rw              :  1;   /*!< read / write */
-    } reg_write;                    /*!< raw data access for writing */
+    } reg_write;                            /*!< raw data access for writing */
 } drv8301_reg_control1_t;
 
 /*! \name control2
@@ -308,7 +311,8 @@ typedef enum {
  *  \brief Register CONTROL2
  */
 typedef union {
-    uint8_t array[DRV8301_REG_LEN]; /*!< array access */
+    uint16_t    raw;                        /*!< raw data access */
+    uint8_t     array[DRV8301_REG_LEN];     /*!< array access */
     struct {
         drv8301_octw_set_t      octw_set        :  2;   /*!< report behaviour on overtemperature and overcurrent events */
         drv8301_gain_t          gain            :  2;   /*!< shunt amplifier gain */
@@ -318,7 +322,7 @@ typedef union {
         uint16_t                unused          :  4;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
-    } reg_read;                     /*!< raw data access for reading */
+    } reg_read;                             /*!< raw data access for reading */
     struct {
         drv8301_octw_set_t      octw_set        :  2;   /*!< report behaviour on overtemperature and overcurrent events */
         drv8301_gain_t          gain            :  2;   /*!< shunt amplifier gain */
@@ -328,14 +332,15 @@ typedef union {
         uint16_t                unused          :  4;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_rw_t            rw              :  1;   /*!< read / write */
-    } reg_write;                    /*!< raw data access for writing */
+    } reg_write;                            /*!< raw data access for writing */
 } drv8301_reg_control2_t;
 
 /*! \typedef
  *  \brief generic Datatype for all registers
  */
 typedef union {
-    uint8_t array[DRV8301_REG_LEN];         /*!< array access */
+    uint16_t    raw;                        /*!< raw data access */
+    uint8_t     array[DRV8301_REG_LEN];     /*!< array access */
     struct {
         uint16_t                data            : 11;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
@@ -364,13 +369,22 @@ Functions
 void drv8301_init(void);
 
 /*! \fn
- *  \brief Send a command to the DRV8301
+ *  \brief Read a register from the DRV8301
+ *  This function sends dummy data to read a register. 
  *  
- *  \param  cmd   command to be sent
- *  \param  read  flag to determine if data has to be read
- *  \param  *data pointer to data to be read or sent
+ *  \param  address     Address of register to be read
+ *  \return register
+ */
+drv8301_reg_t drv8301_read_register(drv8301_addr_t address);
+
+/*! \fn
+ *  \brief Read a register from the DRV8301
+ *  This function first checks if the chosen register is writable. 
+ *  Then if so, writes the register. 
+ *  
+ *  \param  reg         Register to be written
  *  \return void
  */
-void drv8301_send_cmd(uint8_t cmd, uint8_t read, uint8_t *data);
+void drv8301_write_register(drv8301_reg_t reg);
 
 #endif /* DRV8301_H */
