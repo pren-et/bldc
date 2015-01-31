@@ -107,7 +107,7 @@ typedef union {
         uint16_t                fault           :  1;   /*!< fault event */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
-    } raw_read;                     /*!< raw data access for reading */
+    } reg_read;                     /*!< raw data access for reading */
     struct {
         uint16_t                fetlc_oc        :  1;   /*!< overcurrent event on lower fet c */
         uint16_t                fethc_oc        :  1;   /*!< overcurrent event on higher fet c */
@@ -122,7 +122,7 @@ typedef union {
         uint16_t                fault           :  1;   /*!< fault event */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_rw_t            rw              :  1;   /*!< read / write */
-    } raw_write;                    /*!< raw data access for writing */
+    } reg_write;                    /*!< raw data access for writing */
 } drv8301_reg_status1_t;
 
 /*! \name status2
@@ -147,7 +147,7 @@ typedef union {
         uint16_t                unused2         :  3;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
-    } raw_read;                     /*!< raw data access for reading */
+    } reg_read;                     /*!< raw data access for reading */
     struct {
         uint16_t                dev_id          :  4;   /*!< device id */
         uint16_t                unused1         :  3;   /*!< unused bits */
@@ -155,7 +155,7 @@ typedef union {
         uint16_t                unused2         :  3;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_rw_t            rw              :  1;   /*!< read / write */
-    } raw_write;                    /*!< raw data access for writing */
+    } reg_write;                    /*!< raw data access for writing */
 } drv8301_reg_status2_t;
 
 /*! \name control1
@@ -246,7 +246,7 @@ typedef union {
         drv8301_oc_adj_set_t    oc_adj_set      :  5;   /*!< overcurrent trigger adjustment */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
-    } raw_read;                     /*!< raw data access for reading */
+    } reg_read;                     /*!< raw data access for reading */
     struct {
         drv8301_gate_current_t  gate_current    :  2;   /*!< gate current */
         drv8301_gate_reset_t    gate_reset      :  1;   /*!< gate reset */
@@ -255,7 +255,7 @@ typedef union {
         drv8301_oc_adj_set_t    oc_adj_set      :  5;   /*!< overcurrent trigger adjustment */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_rw_t            rw              :  1;   /*!< read / write */
-    } raw_write;                    /*!< raw data access for writing */
+    } reg_write;                    /*!< raw data access for writing */
 } drv8301_reg_control1_t;
 
 /*! \name control2
@@ -318,7 +318,7 @@ typedef union {
         uint16_t                unused          :  4;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
-    } raw_read;                     /*!< raw data access for reading */
+    } reg_read;                     /*!< raw data access for reading */
     struct {
         drv8301_octw_set_t      octw_set        :  2;   /*!< report behaviour on overtemperature and overcurrent events */
         drv8301_gain_t          gain            :  2;   /*!< shunt amplifier gain */
@@ -328,9 +328,29 @@ typedef union {
         uint16_t                unused          :  4;   /*!< unused bits */
         drv8301_addr_t          addr            :  4;   /*!< address */
         drv8301_rw_t            rw              :  1;   /*!< read / write */
-    } raw_write;                    /*!< raw data access for writing */
+    } reg_write;                    /*!< raw data access for writing */
 } drv8301_reg_control2_t;
 
+/*! \typedef
+ *  \brief generic Datatype for all registers
+ */
+typedef union {
+    uint8_t array[DRV8301_REG_LEN];         /*!< array access */
+    struct {
+        uint16_t                data            : 11;   /*!< unused bits */
+        drv8301_addr_t          addr            :  4;   /*!< address */
+        drv8301_frame_err_t     frame_err       :  1;   /*!< frame error */
+    } data_read;                            /*!< raw data access for reading */
+    struct {
+        uint16_t                data            : 11;   /*!< unused bits */
+        drv8301_addr_t          addr            :  4;   /*!< address */
+        drv8301_rw_t            rw              :  1;   /*!< read / write */
+    } data_write;                           /*!< raw data access for writing */
+    drv8301_reg_status1_t       status1;    /*!< register status1 */
+    drv8301_reg_status2_t       status2;    /*!< register status1 */
+    drv8301_reg_control1_t      control1;   /*!< register status1 */
+    drv8301_reg_control2_t      control2;   /*!< register status1 */
+} drv8301_reg_t;
 
 /******************************************************************************
 Functions
