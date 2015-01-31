@@ -226,14 +226,14 @@ typedef enum {
     DRV8301_OC_ADJ_SET_0_730V,  /*!< Overcurrent threshold at 0.730V */
     DRV8301_OC_ADJ_SET_0_822V,  /*!< Overcurrent threshold at 0.822V */
     DRV8301_OC_ADJ_SET_0_926V,  /*!< Overcurrent threshold at 0.926V */
-    DRV8301_OC_ADJ_SET_1_046V,  /*!< Overcurrent threshold at 0.046V */
-    DRV8301_OC_ADJ_SET_1_175V,  /*!< Overcurrent threshold at 0.175V */
-    DRV8301_OC_ADJ_SET_1_324V,  /*!< Overcurrent threshold at 0.324V */
-    DRV8301_OC_ADJ_SET_1_491V,  /*!< Overcurrent threshold at 0.491V */
-    DRV8301_OC_ADJ_SET_1_679V,  /*!< Overcurrent threshold at 0.679V */
-    DRV8301_OC_ADJ_SET_1_892V,  /*!< Overcurrent threshold at 0.892V */
-    DRV8301_OC_ADJ_SET_1_131V,  /*!< Overcurrent threshold at 0.131V */
-    DRV8301_OC_ADJ_SET_2_400V   /*!< Overcurrent threshold at 0.400V */
+    DRV8301_OC_ADJ_SET_1_046V,  /*!< Overcurrent threshold at 1.046V */
+    DRV8301_OC_ADJ_SET_1_175V,  /*!< Overcurrent threshold at 1.175V */
+    DRV8301_OC_ADJ_SET_1_324V,  /*!< Overcurrent threshold at 1.324V */
+    DRV8301_OC_ADJ_SET_1_491V,  /*!< Overcurrent threshold at 1.491V */
+    DRV8301_OC_ADJ_SET_1_679V,  /*!< Overcurrent threshold at 1.679V */
+    DRV8301_OC_ADJ_SET_1_892V,  /*!< Overcurrent threshold at 1.892V */
+    DRV8301_OC_ADJ_SET_2_131V,  /*!< Overcurrent threshold at 2.131V */
+    DRV8301_OC_ADJ_SET_2_400V   /*!< Overcurrent threshold at 2.400V */
 } drv8301_oc_adj_set_t;
 /*! \typedef
  *  \brief Register CONTROL1
@@ -386,5 +386,23 @@ drv8301_reg_t drv8301_read_register(drv8301_addr_t address);
  *  \return void
  */
 void drv8301_write_register(drv8301_reg_t reg);
+
+/*! \fn
+ *  \brief Set the gate current
+ *  
+ *  \param  current_mA  gate current in mA
+ *  \return void
+ */
+void drv8301_set_gate_current(uint16_t current_mA);
+
+/*! \fn
+ *  \brief Read a register from the DRV8301
+ *  This function first checks if the chosen register is writable. 
+ *  Then if so, writes the register. 
+ *  
+ *  \param  voltage_mV  Overcurrent threshold value in mV
+ *  \return void
+ */
+void drv8301_set_oc_adj_set(uint16_t voltage_mV);
 
 #endif /* DRV8301_H */
