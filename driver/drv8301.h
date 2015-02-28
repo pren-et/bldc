@@ -19,15 +19,15 @@
 /******************************************************************************
 Test compiler dependencies
 ******************************************************************************/
-/*! \typedef
+/*! \union test_bitfield_t
  *  \brief Type for testing the implementation of bitfields in the current compiler
  */
-typedef union test_bitfield_ {
+typedef union {
     struct {
         uint8_t low     : 4;    /*!< Low nibble */
         uint8_t high    : 4;    /*!< High nibble */
-    } bitfield;
-    uint8_t     byte;
+    } bitfield;             /*!< Nibbles */
+    uint8_t     byte;       /*!< Byte */
 } test_bitfield_t;
 
 /******************************************************************************
@@ -36,7 +36,7 @@ Registers
 
 #define DRV8301_REG_LEN     2   /*!< Register length */
 
-/*! \typedef
+/*! \enum drv8301_reg_rw_t
  *  \brief Possible access levels for registers.
  */
 typedef enum {
@@ -44,7 +44,7 @@ typedef enum {
     DRV8301_REG_RW_R   /*!< readable only */
 } drv8301_reg_rw_t;
 
-/*! \typedef
+/*! \enum drv8301_addr_t
  *  \brief register address
  */
 typedef enum {
@@ -54,7 +54,7 @@ typedef enum {
     DRV8301_ADDR_CONTROL2,  /*!< Control 2 */
 } drv8301_addr_t;
 
-/*! \typedef
+/*! \enum drv8301_rw_t
  *  \brief register read / write
  */
 typedef enum {
@@ -62,7 +62,7 @@ typedef enum {
     DRV8301_RW_R            /*!< Read */
 } drv8301_rw_t;
 
-/*! \typedef
+/*! \enum drv8301_frame_err_t
  *  \brief register frame error
  */
 typedef enum {
@@ -88,7 +88,7 @@ typedef enum {
 #define DRV8301_REG_STATUS1_GVDD_UV_MASK    (1 <<  9)
 #define DRV8301_REG_STATUS1_FAULT_MASK      (1 << 10)
 /*! @} */
-/*! \typedef
+/*! \union drv8301_reg_status1_t
  *  \brief Register STATUS1
  */
 typedef union {
@@ -136,7 +136,7 @@ typedef union {
 #define DRV8301_REG_STATUS2_ID_MASK         0x0F
 #define DRV8301_REG_STATUS2_GVDD_OV_MASK    (1 << 7)
 /*! @} */
-/*! \typedef
+/*! \union drv8301_reg_status2_t
  *  \brief Register STATUS2
  */
 typedef union {
@@ -167,7 +167,7 @@ typedef union {
 #define DRV8301_REG_CONTROL1_RW             DRV8301_REG_RW_W
 #define DRV8301_REG_CONTROL1_DEFAULT        0x1400
 /*! @} */
-/*! \typedef
+/*! \enum drv8301_gate_current_t
  *  \brief Settings for gate current
  */
 typedef enum {
@@ -175,21 +175,21 @@ typedef enum {
     DRV8301_GATE_CURRENT_0_7A,  /*!< gate current 0.7A */
     DRV8301_GATE_CURRENT_0_25A  /*!< gate current 0.25A */
 } drv8301_gate_current_t;
-/*! \typedef
+/*! \enum drv8301_gate_reset_t
  *  \brief Gate reset
  */
 typedef enum {
     DRV8301_GATE_RESET_NORMAL,  /*!< normal mode */
     DRV8301_GATE_RESET_RESET    /*!< reset all latched faults on gate driver */
 } drv8301_gate_reset_t;
-/*! \typedef
+/*! \enum drv8301_pwm_mode_t
  *  \brief PWM mode
  */
 typedef enum {
     DRV8301_PWM_MODE_SIX,       /*!< six independent inputs */
     DRV8301_PWM_MODE_THREE      /*!< three independent inputs */
 } drv8301_pwm_mode_t;
-/*! \typedef
+/*! \enum drv8301_oc_mode_t
  *  \brief Overcurrent protection mode
  */
 typedef enum {
@@ -198,7 +198,7 @@ typedef enum {
     DRV8301_OC_MODE_REPORT,     /*!< only report overcurrent */
     DRV8301_OC_MODE_DISABLE     /*!< disable overcurrent protection */
 } drv8301_oc_mode_t;
-/*! \typedef
+/*! \enum drv8301_oc_adj_set_t
  *  \brief Overcurrent threshold
  */
 typedef enum {
@@ -235,7 +235,7 @@ typedef enum {
     DRV8301_OC_ADJ_SET_2_131V,  /*!< Overcurrent threshold at 2.131V */
     DRV8301_OC_ADJ_SET_2_400V   /*!< Overcurrent threshold at 2.400V */
 } drv8301_oc_adj_set_t;
-/*! \typedef
+/*! \union drv8301_reg_control1_t
  *  \brief Register CONTROL1
  */
 typedef union {
@@ -268,7 +268,7 @@ typedef union {
 #define DRV8301_REG_CONTROL2_RW         DRV8301_REG_RW_W
 #define DRV8301_REG_CONTROL2_DEFAULT    0x1800
 /*! @} */
-/*! \typedef
+/*! \enum drv8301_octw_set_t
  *  \brief Overcurrent / Overtemperature reports on OCTW pin
  */
 typedef enum {
@@ -277,7 +277,7 @@ typedef enum {
     DRV8301_OCTW_SET_OC,        /*!< Report Overcurrent only */
     DRV8301_OCTW_SET_OC_2,      /*!< Report Overcurrent only */
 } drv8301_octw_set_t;
-/*! \typedef
+/*! \enum drv8301_gain_t
  *  \brief Shunt amplifier gain selection
  */
 typedef enum {
@@ -286,28 +286,28 @@ typedef enum {
     DRV8301_GAIN_40,            /*!< Gain of shunt amplifier 40 */
     DRV8301_GAIN_80             /*!< Gain of shunt amplifier 80 */
 } drv8301_gain_t;
-/*! \typedef
+/*! \enum drv8301_dc_cal_ch1_t
  *  \brief Calibration of shunt amplifier 1
  */
 typedef enum {
     DRV8301_DC_CAL_CH1_OFF,     /*!< Normal operation of shunt amplifier 1 */
     DRV8301_DC_CAL_CH1_ON       /*!< Calibration of shunt amplifier 1 */
 } drv8301_dc_cal_ch1_t;
-/*! \typedef
+/*! \enum drv8301_dc_cal_ch2_t
  *  \brief Calibration of shunt amplifier 2
  */
 typedef enum {
     DRV8301_DC_CAL_CH2_OFF,     /*!< Normal operation of shunt amplifier 2 */
     DRV8301_DC_CAL_CH2_ON       /*!< Calibration of shunt amplifier 2 */
 } drv8301_dc_cal_ch2_t;
-/*! \typedef
+/*! \enum drv8301_oc_toff_t
  *  \brief Off time behaviour during overcurrent event
  */
 typedef enum {
     DRV8301_OC_TOFF_NORMAL,     /*!< Normal CBC operation */
     DRV8301_OC_TOFF_OFF_TIME,   /*!< Off time control during overcurrent */
 } drv8301_oc_toff_t;
-/*! \typedef
+/*! \union drv8301_reg_control2_t
  *  \brief Register CONTROL2
  */
 typedef union {
@@ -335,7 +335,7 @@ typedef union {
     } reg_write;                            /*!< raw data access for writing */
 } drv8301_reg_control2_t;
 
-/*! \typedef
+/*! \union drv8301_reg_t
  *  \brief generic Datatype for all registers
  */
 typedef union {
@@ -360,15 +360,14 @@ typedef union {
 /******************************************************************************
 Functions
 ******************************************************************************/
-/*! \fn
+/*! \fn void drv8301_init(void)
  *  \brief Initialisation function for DRV8301
  *  
- *  \param  void
  *  \return void
  */
 void drv8301_init(void);
 
-/*! \fn
+/*! \fn drv8301_reg_t drv8301_read_register(drv8301_addr_t address)
  *  \brief Read a register from the DRV8301
  *  This function sends dummy data to read a register. 
  *  
@@ -377,7 +376,7 @@ void drv8301_init(void);
  */
 drv8301_reg_t drv8301_read_register(drv8301_addr_t address);
 
-/*! \fn
+/*! \fn void drv8301_write_register(drv8301_reg_t reg)
  *  \brief Read a register from the DRV8301
  *  This function first checks if the chosen register is writable. 
  *  Then if so, writes the register. 
@@ -387,7 +386,7 @@ drv8301_reg_t drv8301_read_register(drv8301_addr_t address);
  */
 void drv8301_write_register(drv8301_reg_t reg);
 
-/*! \fn
+/*! \fn void drv8301_set_gate_current(uint16_t current_mA)
  *  \brief Set the gate current
  *  
  *  \param  current_mA  gate current in mA
@@ -395,7 +394,7 @@ void drv8301_write_register(drv8301_reg_t reg);
  */
 void drv8301_set_gate_current(uint16_t current_mA);
 
-/*! \fn
+/*! \fn void drv8301_set_oc_adj_set(uint16_t voltage_mV)
  *  \brief Read a register from the DRV8301
  *  This function first checks if the chosen register is writable. 
  *  Then if so, writes the register. 
