@@ -1,3 +1,4 @@
 *.swp
 CAD/BLDC_Board/History
 CAD/BLDC_Board/__Previews/Schema.SchDocPreview
+CAD/BLDC_Board/*.PDF
