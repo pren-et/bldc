@@ -6,7 +6,7 @@
  * |_|   |_| \_\_____|_| \_|     |_____| |_|  
  *                                            
  * \file drv8301.c
- * \brief Driver for three phase pre-driver drv8301 from Texas Instruments
+ * \brief Driver for three phase pre-driver DRV8301 from Texas Instruments
  * \author pren-et
  * 
  */

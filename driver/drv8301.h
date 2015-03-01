@@ -395,9 +395,7 @@ void drv8301_write_register(drv8301_reg_t reg);
 void drv8301_set_gate_current(uint16_t current_mA);
 
 /*! \fn void drv8301_set_oc_adj_set(uint16_t voltage_mV)
- *  \brief Read a register from the DRV8301
- *  This function first checks if the chosen register is writable. 
- *  Then if so, writes the register. 
+ *  \brief Set the overcurrent adjustment register
  *  
  *  \param  voltage_mV  Overcurrent threshold value in mV
  *  \return void
