@@ -4,3 +4,5 @@ CAD/BLDC_Board/__Previews/Schema.SchDocPreview
 CAD/BLDC_Board/*.PDF
 CAD/BLDC_Board/Project Logs for BLDC_Board
 CAD/BLDC_BOARD/Project Outputs for BLDC_BOARD
+CAD/BLDC_BOARD/__Previews/*
+CAD/BLDC_Board/BLDC_Board.Dat
