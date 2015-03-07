@@ -121,10 +121,6 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=IHDVWODT
 
-[GeneratedDocument1]
-DocumentPath=Project Outputs for BLDC_Board\Schema.NET
-DItemRevisionGUID=
-
 [Configuration1]
 Name=Default Configuration
 ParameterCount=0
@@ -177,7 +173,7 @@ OutputDir=
 [OutputGroup1]
 Name=Netlist Outputs
 Description=
-TargetPrinter=HP Officejet Pro 8600
+TargetPrinter=HP Officejet Pro 8600 (Netzwerk)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintWhat=1
 OutputType1=Verilog
 OutputName1=Verilog File
@@ -428,7 +424,7 @@ OutputDefault10=0
 [OutputGroup6]
 Name=Report Outputs
 Description=
-TargetPrinter=HP Officejet Pro 8600
+TargetPrinter=HP Officejet Pro 8600 (Netzwerk)
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintWhat=1
 OutputType1=Script
 OutputName1=Script Output
