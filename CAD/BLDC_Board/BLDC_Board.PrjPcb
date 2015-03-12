@@ -121,23 +121,6 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=MHHLBNPA
 
-[Document6]
-DocumentPath=BLDC_Board_Layout_Alternative.PcbDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=IHDVWODT
-
 [GeneratedDocument1]
 DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.DRR
 DItemRevisionGUID=
