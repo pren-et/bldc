@@ -119,7 +119,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=IHDVWODT
+DocumentUniqueId=MHHLBNPA
 
 [Document6]
 DocumentPath=BLDC_Board_Layout_Alternative.PcbDoc
@@ -137,6 +137,58 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=IHDVWODT
+
+[GeneratedDocument1]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=Project Outputs for BLDC_Board\NC Drill\BLDC_Board_Layout_Alternative.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.GM1
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=Project Outputs for BLDC_Board\NC Drill\BLDC_Board_Layout_Alternative.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.REP
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument11]
+DocumentPath=Project Outputs for BLDC_Board\Gerber\BLDC_Board_Layout_Alternative.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=Project Outputs for BLDC_Board\NC Drill\BLDC_Board_Layout_Alternative.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=Project Outputs for BLDC_Board\Design Rule Check - BLDC_Board_Layout_Alternative.html
+DItemRevisionGUID=
 
 [Configuration1]
 Name=Default Configuration
@@ -190,7 +242,7 @@ OutputDir=
 [OutputGroup1]
 Name=Netlist Outputs
 Description=
-TargetPrinter=HP Officejet Pro 8600 (Netzwerk)
+TargetPrinter=HP Officejet Pro 8600
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintWhat=1
 OutputType1=Verilog
 OutputName1=Verilog File
@@ -441,7 +493,7 @@ OutputDefault10=0
 [OutputGroup6]
 Name=Report Outputs
 Description=
-TargetPrinter=HP Officejet Pro 8600 (Netzwerk)
+TargetPrinter=HP Officejet Pro 8600
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintWhat=1
 OutputType1=Script
 OutputName1=Script Output
