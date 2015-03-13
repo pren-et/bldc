@@ -1,0 +1,69 @@
+/**
+ *--------------------------------------------------------------------\n
+ *          HSLU T&A Hochschule Luzern Technik+Architektur            \n
+ *--------------------------------------------------------------------\n
+ *
+ * \brief         linker parameter file for the mc9s08jm60
+ * \file
+ * \author        Christian Jost, christian.jost@hslu.ch
+ * \date          04.10.2012
+ *
+ * \b Target:     MC Car \n
+ *
+ * $Id: platform.h 360 2011-12-09 07:00:20Z zajost $
+ *--------------------------------------------------------------------
+ */
+ 
+ 
+/* CodeWarrior will pass all the needed files to the linker by command line. But here you may add your own files too. */
+NAMES END 
+
+/* Here all RAM/ROM areas of the device are listed. Used in PLACEMENT below. */
+SEGMENTS 
+    Z_RAM                    =  READ_WRITE   0x00B0 TO 0x00FF;	//    80 Bytes
+    RAM                      =  READ_WRITE   0x0100 TO 0x10AF;	//  4016 Bytes
+    RAM1                     =  READ_WRITE   0x1860 TO 0x195F;  //  2656 Bytes
+    ROM                      =  READ_ONLY    0x1960 TO 0xFFAD;  // 58958 Bytes
+    ROM1                     =  READ_ONLY    0x10B0 TO 0x17FF;  //  1872 Bytes
+    ROM2                     =  READ_ONLY    0xFFC0 TO 0xFFC3;  //     4 Bytes
+ /* INTVECTS                 =  READ_ONLY    0xFFC4 TO 0xFFFF; Reserved for Interrupt Vectors */
+END
+
+/* Here all predefined and user segments are placed into the SEGMENTS defined above. */
+PLACEMENT 
+    DEFAULT_RAM							INTO  RAM,RAM1;
+    DEFAULT_ROM							INTO  ROM; 
+    _DATA_ZEROPAGE, MY_ZEROPAGE         INTO  Z_RAM;
+END
+
+STACKSIZE 0x200    // Stacksize 0x200 => 512 Bytes     
+
+VECTOR ADDRESS 0xFFC4 errISR_RTC        // RTC
+VECTOR ADDRESS 0xFFC6 errISR_IIC        // IIC
+VECTOR ADDRESS 0xFFC8 errISR_ACMP       // ACMP
+VECTOR ADDRESS 0xFFCA isr_ADC        // ADC Conversion
+VECTOR ADDRESS 0xFFCC errISR_KBI        // KBI Keyboard
+VECTOR ADDRESS 0xFFCE errISR_SCI2T      // SCI2 transmit
+VECTOR ADDRESS 0xFFD0 errISR_SCI2R      // SCI2 receive
+VECTOR ADDRESS 0xFFD2 errISR_SCI2E      // SCI2 error 
+VECTOR ADDRESS 0xFFD4 isr_SCI1T         // SCI1 transmit 
+VECTOR ADDRESS 0xFFD6 isr_SCI1R         // SCI1 receive 
+VECTOR ADDRESS 0xFFD8 errISR_SCI1E      // SCI1 error
+VECTOR ADDRESS 0xFFDA isr_TPM2O      // TPM2 overflow
+VECTOR ADDRESS 0xFFDC errISR_TPM2CH1    // TPM2 channel 1
+VECTOR ADDRESS 0xFFDE errISR_TPM2CH0    // TPM2 channel 0
+VECTOR ADDRESS 0xFFE0 errISR_TPM1O      // TPM1 overflow
+VECTOR ADDRESS 0xFFE2 errISR_TPM1CH5    // TPM1 channel 5
+VECTOR ADDRESS 0xFFE4 errISR_TPM1CH4    // TPM1 channel 4
+VECTOR ADDRESS 0xFFE6 errISR_TPM1CH3    // TPM1 channel 3
+VECTOR ADDRESS 0xFFE8 errISR_TPM1CH2    // TPM1 channel 2
+VECTOR ADDRESS 0xFFEA errISR_TPM1CH1    // TPM1 channel 1
+VECTOR ADDRESS 0xFFEC errISR_TPM1CH0    // TPM1 channel 0
+VECTOR ADDRESS 0xFFF0 errISR_USB        // USB
+VECTOR ADDRESS 0xFFF2 errISR_SPI2       // SPI2
+VECTOR ADDRESS 0xFFF4 errISR_SPI1       // SPI1
+VECTOR ADDRESS 0xFFF6 errISR_MCGLOL     // MCGLOL (Loss of Lock)
+VECTOR ADDRESS 0xFFF8 errISR_LowVoltage // Low voltage detect
+VECTOR ADDRESS 0xFFFA errISR_IRQ        // IRQ
+VECTOR ADDRESS 0xFFFC errISR_SWI        // SWI
+VECTOR ADDRESS 0xFFFE _Startup          // Reset vector: this is the default entry point for an application. 
