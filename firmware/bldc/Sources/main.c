@@ -1,20 +1,14 @@
-/**
- *--------------------------------------------------------------------\n
- *          HSLU T&A Hochschule Luzern Technik+Architektur            \n
- *--------------------------------------------------------------------\n
- *
- * \brief         C Template for the MC Car
- * \file
- * \author        Daniel Winz, Adrian Imboden
- * \date          06.03.2014
- *
- * \b Language:   Ansi-C \n\n
- * \b Target:     BLDC  \n
- *
- * \par Description:
- *
- * $Id: main.c 485 2014-06-03 21:17:55Z daniw $
- *--------------------------------------------------------------------
+/*!
+ *  ____  ____  _____ _   _       _____ _____ 
+ * |  _ \|  _ \| ____| \ | |     | ____|_   _|
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |  
+ * |  __/|  _ <| |___| |\  |_____| |___  | |  
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|  
+ *                                            
+ * \file   main.c
+ * \brief  Controller for BLDC Motors
+ * \author pren-et
+ * 
  */
 
 #include "platform.h"   /* include peripheral declarations */

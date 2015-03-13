@@ -1,8 +1,14 @@
-/*
- * hardware.c
- *
- *  Created on: Mar 7, 2014
- *      Author: daniw
+/*!
+ *  ____  ____  _____ _   _       _____ _____ 
+ * |  _ \|  _ \| ____| \ | |     | ____|_   _|
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |  
+ * |  __/|  _ <| |___| |\  |_____| |___  | |  
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|  
+ *                                            
+ * \file   hardware.c
+ * \brief  Lowlevel hardware declaration
+ * \author pren-et
+ * 
  */
 
 #include "platform.h"

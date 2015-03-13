@@ -1,10 +1,15 @@
-/*
- * interrupts.h
- *
- *  Created on: Mar 15, 2014
- *      Author: daniw
+/*!
+ *  ____  ____  _____ _   _       _____ _____ 
+ * |  _ \|  _ \| ____| \ | |     | ____|_   _|
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |  
+ * |  __/|  _ <| |___| |\  |_____| |___  | |  
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|  
+ *                                            
+ * \file  interrupts.h
+ * \brief Interrupt handling
+ * \author pren-et
+ * 
  */
-
 #ifndef INTERRUPTS_H_
 #define INTERRUPTS_H_
 
