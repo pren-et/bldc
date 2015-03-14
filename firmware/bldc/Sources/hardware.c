@@ -47,11 +47,11 @@ void hardware_lowlevel_init(void)
     MCGC2_LP = 1;
     // Interrupts can now be re-enabled
     /* EnableInterrupts */
-    // Divide external clock by 4
-    MCGC1_RDIV = 2;
-    // Prepare PLL  and set multiplier to 24 to achieve 48 MHz
+    // Divide external clock by 8
+    MCGC1_RDIV = 3;
+    // Prepare PLL  and set multiplier to 32 to achieve 48 MHz
     MCGC3_PLLS = 1;
-    MCGC3_VDIV = 6;
+    MCGC3_VDIV = 8;
     // Wait until PLLS has PLL as clock source
     while(!MCGSC_PLLST);
     //--- BLPE -> PBE ---

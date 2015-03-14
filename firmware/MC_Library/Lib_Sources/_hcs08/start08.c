@@ -372,12 +372,12 @@ void initClock(void)
     
     while((MCGSC & 0x0CU) != 0x08U) {}    /* Wait until external clock is selected as a bus clock reference */
     
-    /* MCGC2: BDIV=0,RANGE=1,HGO=1,LP=1,EREFS=1,ERCLKEN=1,EREFSTEN=0 */
-    MCGC2 = 0x3EU;               /* Set MCGC2 register */ 
-    /* MCGC1: CLKS=2,RDIV=2,IREFS=0,IRCLKEN=1,IREFSTEN=0 */
-    MCGC1 = 0x92U;               /* Set MCGC1 register */ 
-    /* MCGC3: LOLIE=0,PLLS=1,CME=0,??=0,VDIV=6 */
-    MCGC3 = 0x46U;               /* Set MCGC3 register */ 
+    /* MCGC2: BDIV=1,RANGE=1,HGO=1,LP=1,EREFS=1,ERCLKEN=1,EREFSTEN=0 */
+    MCGC2 = 0x7EU;               /* Set MCGC2 register */ 
+    /* MCGC1: CLKS=2,RDIV=3,IREFS=0,IRCLKEN=1,IREFSTEN=0 */
+    MCGC1 = 0x9AU;               /* Set MCGC1 register */ 
+    /* MCGC3: LOLIE=0,PLLS=1,CME=0,??=0,VDIV=8 */
+    MCGC3 = 0x48U;               /* Set MCGC3 register */ 
     /* MCGC2: LP=0 */
     MCGC2 &= (byte)(~(byte)(0x08U));            
     while(MCGSC_PLLST == 0U) {}           /* Wait until PLL is selected */
