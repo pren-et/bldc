@@ -71,7 +71,7 @@
 		<link>
 			<name>Lib_Sources</name>
 			<type>2</type>
-			<locationURI>copy_PARENT1/MC_Library/Lib_Sources</locationURI>
+			<locationURI>copy_PARENT/MC_Library/Lib_Sources</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
