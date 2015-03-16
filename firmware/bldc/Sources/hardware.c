@@ -117,6 +117,10 @@ void hardware_lowlevel_init(void)
     PTGSE = PTGSE_INIT;     // Init slew rate control register of portG
     PTGDS = PTGDS_INIT;     // Init output drive strength register of portG
 
+    //### RTC ###
+    RTCSC   = RTCSC_INIT;
+    RTCMOD  = RTCMOD_INIT;
+
     //### Timer 1 ###
     TPM1SC   = TPM1SC_INIT;
     TPM1MOD  = TPM1MOD_INIT;

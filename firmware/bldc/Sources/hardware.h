@@ -149,6 +149,13 @@ D: High drive strength enabled (PTxDS)
 #define PTGDS_INIT      (0)
 
 
+//### RTC ###
+// ERCLK as input clock, interrupt enable, Prescaler 8 -> 10^3
+#define RTCSC_INIT      (RTCSC_RTCLKS0_MASK | RTCSC_RTIE_MASK | RTCSC_RTCPS3_MASK)
+// Modulo value 15 -> 1 ms
+#define RTCMOD_INIT     (15)
+
+
 //### Timer 1 ###
 //--- Initialisation for generating the buzzer frequency directly from timer ---
 // bus rate clock, prescaler 4
