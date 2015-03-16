@@ -29,12 +29,14 @@ void init()
  */
 void main(void)
 {
+    uint16 task_cnt_led;
     init();
-    uint16_t task_cnt_led = TASK_LED_PERIOD;
+    rtc_init_flag();
+    task_cnt_led = TASK_LED_PERIOD;
 
     for(;;)
     {
-        if(rtc_get_clear_flag()) {
+        if(rtc_get_clear_flag() != RTC_NONE) {
             /* Task to toggle LED0 */
             if(task_cnt_led == 0) {
                 task_cnt_led = TASK_LED_PERIOD; /* Prepare scheduler for next period */

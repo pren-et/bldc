@@ -24,12 +24,19 @@ typedef enum {
     RTC_PENDING = 1,    /*!< Action pending */
 } rtc_flag_t;
 
+/*! \fn void rtc_init_flag(void)
+ *  \brief Function to initialize rtc flag.
+ *
+ *  \return void
+ */
+void rtc_init_flag(void);
+
 /*! \fn rtc_flag_t rtc_get_flag(void)
  *  \brief Function to read rtc flag status.
  *
  *  \return flag
  */
-void rtc_get_flag(void);
+rtc_flag_t rtc_get_flag(void);
 
 /*! \fn void rtc_set_flag(void)
  *  \brief Function to set rtc flag. 
@@ -38,11 +45,18 @@ void rtc_get_flag(void);
  */
 void rtc_set_flag(void);
 
-/*! \fn rtc_clear_flag(void)
+/*! \fn void rtc_clear_flag(void)
  *  \brief Function to clear rtc flag
  *
  *  \return void
  */
 void rtc_clear_flag(void);
+
+/*! \fn rtc_flag_t rtc_get_clear_flag(void)
+ *  \brief Function to read and clear rtc flag
+ *
+ *  \return flag
+ */
+rtc_flag_t rtc_get_clear_flag(void);
 
 #endif /* RTC_H_ */

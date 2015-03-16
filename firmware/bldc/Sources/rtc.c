@@ -12,9 +12,13 @@
  */
 #include "rtc.h"
 
-static rtc_flag_t flag = RTC_NONE;
+rtc_flag_t flag;
 
-rtc_get_flag(void) {
+void rtc_init_flag(void) {
+    flag = RTC_NONE;
+}
+
+rtc_flag_t rtc_get_flag(void) {
     return flag;
 }
 
@@ -27,8 +31,9 @@ void rtc_clear_flag(void) {
 }
 
 rtc_flag_t rtc_get_clear_flag(void) {
+    rtc_flag_t tempflag;
     DisableInterrupts;
-    rtc_flag_t tempflag = flag;
+    tempflag = flag;
     flag = RTC_NONE;
     EnableInterrupts;
     return tempflag;
