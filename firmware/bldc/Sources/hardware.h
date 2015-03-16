@@ -120,9 +120,9 @@ D: High drive strength enabled (PTxDS)
 
 //--- PortF ---
 #define PTF_0           BIT0    ///< |IR|   unused
-#define PTF_1           BIT1    ///< |IR|   unused
-#define PTF_2           BIT2    ///< |IR|   unused
-#define PTF_3           BIT3    ///< |IR|   unused
+#define HALL_W          BIT1    ///< |IR|   Hall feedback for phase W
+#define HALL_U          BIT2    ///< |IR|   Hall feedback for phase U
+#define HALL_V          BIT3    ///< |IR|   Hall feedback for phase V
 #define PWM             BIT4    ///< |OL|   PWM
 #define PWM_INV         BIT5    ///< |OL|   Inverted PWM
 #define PTF_6           BIT6    ///< |IR|   unused
@@ -130,21 +130,21 @@ D: High drive strength enabled (PTxDS)
 
 #define PTFDD_INIT      (PWM | PWM_INV)
 #define PTFD_INIT       (0)
-#define PTFPE_INIT      (PTF_0 | PTF_1 | PTF_2 | PTF_3 | PTF_6 | PTF_7)
+#define PTFPE_INIT      (PTF_0 | HALL_W | HALL_U | HALL_V | PTF_6 | PTF_7)
 #define PTFSE_INIT      (0)
 #define PTFDS_INIT      (0)
 
 //--- PortG ---
 #define IRQ             BIT0    ///< |OL|   Interrupt request
-#define HALL_U          BIT1    ///< |IR|   Hall feedback for phase U
-#define HALL_V          BIT2    ///< |IR|   Hall feedback for phase V
-#define HALL_W          BIT3    ///< |IR|   Hall feedback for phase W
+#define HALL_U_LEG      BIT1    ///< |IR|   Hall feedback for phase U (legacy pin, not supported on new PCB)
+#define HALL_V_LEG      BIT2    ///< |IR|   Hall feedback for phase V (legacy pin, not supported on new PCB)
+#define HALL_W_LEG      BIT3    ///< |IR|   Hall feedback for phase W (legacy pin, not supported on new PCB)
 #define PTG_4           BIT4    ///< |IR|   unused
 #define PTG_5           BIT5    ///< |IR|   unused
 
 #define PTGDD_INIT      (IRQ)
 #define PTGD_INIT       (0)
-#define PTGPE_INIT      (HALL_U | HALL_V | HALL_W | PTG_4 | PTG_5)
+#define PTGPE_INIT      (HALL_U_LEG | HALL_V_LEG | HALL_W_LEG | PTG_4 | PTG_5)
 #define PTGSE_INIT      (0)
 #define PTGDS_INIT      (0)
 
