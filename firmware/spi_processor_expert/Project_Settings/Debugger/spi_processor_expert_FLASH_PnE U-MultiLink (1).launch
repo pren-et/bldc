@@ -51,7 +51,7 @@
 <stringAttribute key="com.freescale.cdt.debug.cw.core.settings.DebuggerCommonData.Processor Attr Name" value="com.freescale.cdt.debug.cw.CW_SHADOWED_PREF.HC08 Debugger.processor"/>
 <stringAttribute key="com.freescale.cdt.debug.cw.core.settings.GdiConnection.Common.PhysicalConnectionAttributeBase" value="com.pemicro.mcu.debug.connections.pne.hcs08."/>
 <booleanAttribute key="com.freescale.cdt.debug.cw.core.settings.GdiConnection.Common.logData" value="false"/>
-<stringAttribute key="com.freescale.cdt.debug.cw.core.settings.rseSystemId" value="com.freescale.cdt.debug.cw.core.ui.rse.systemtype.bareboard.hardware.150320132310+0100"/>
+<stringAttribute key="com.freescale.cdt.debug.cw.core.settings.rseSystemId" value="com.freescale.cdt.debug.cw.core.ui.rse.systemtype.bareboard.hardware.150320162121+0100"/>
 <stringAttribute key="com.freescale.cdt.debug.cw.core.settings.wizardSystemNameHint" value="PnE U-MultiLink"/>
 <stringAttribute key="com.freescale.cdt.debug.cw.debuggerAddress" value="127.0.0.1"/>
 <booleanAttribute key="com.freescale.cdt.debug.cw.disableIO" value="false"/>
@@ -94,10 +94,10 @@
 <stringAttribute key="com.pemicro.mcu.debug.connections.pne.hcs08.STARTUP_interface_selection" value="1"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="com.freescale.cdt.debug.cw.hc08.HC08Debugger"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="FLASH/spi_processor_expert.abs"/>
-<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="bldc"/>
-<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="toolchain.config.hcs08.release.1368199769"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="spi_processor_expert"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="toolchain.config.hcs08.release.517579239"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/bldc"/>
+<listEntry value="/spi_processor_expert"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>

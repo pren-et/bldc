@@ -4,7 +4,7 @@
 **     Processor   : MC9S08JM60CLHE
 **     Version     : Driver 01.12
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2015-03-20, 13:23, # CodeGen: 0
+**     Date/Time   : 2015-03-20, 16:21, # CodeGen: 0
 **     Abstract    :
 **         Main module.
 **         This module contains user's application code.
@@ -31,6 +31,7 @@
 #include "Cpu.h"
 #include "Events.h"
 #include "SM1.h"
+#include "SS1.h"
 /* Include shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"

@@ -55,18 +55,18 @@ D: High drive strength enabled (PTxDS)
 #define PTADS_INIT      (0)
 
 //--- PortB ---
-#define SPI_INT_MISO    BIT0    ///< |IR|   MISO on internal SPI bus
-#define SPI_INT_MOSI    BIT1    ///< |IR|   MOSI on internal SPI bus
-#define SPI_INT_SCK     BIT2    ///< |IR|   SCK on internal SPI bus
-#define SPI_INT_CS      BIT3    ///< |OH|   CS on internal SPI bus
+#define SPI_DRV_MISO    BIT0    ///< |IR|   MISO on SPI bus to DRV8301
+#define SPI_DRV_MOSI    BIT1    ///< |IR|   MOSI on SPI bus to DRV8301
+#define SPI_DRV_SCK     BIT2    ///< |IR|   SCK on SPI bus to DRV8301
+#define SPI_DRV_CS      BIT3    ///< |OH|   CS on SPI bus to DRV8301
 #define FAULT           BIT4    ///< |I|    Fault report indicator
 #define OCTW            BIT5    ///< |I|    Overcurrent and/or overtemperature warning indicator
 #define EN_GATE         BIT6    ///< |OL|   Gate enable
 #define PTB_7           BIT7    ///< |IR|   unused
 
-#define PTBDD_INIT      (SPI_INT_CS | EN_GATE)
-#define PTBD_INIT       (SPI_INT_CS)
-#define PTBPE_INIT      (SPI_INT_MISO | SPI_INT_MOSI | SPI_INT_SCK | SPI_INT_CS | PTB_7)
+#define PTBDD_INIT      (SPI_DRV_CS | EN_GATE)
+#define PTBD_INIT       (SPI_DRV_CS)
+#define PTBPE_INIT      (SPI_DRV_MISO | SPI_DRV_MOSI | SPI_DRV_SCK | SPI_DRV_CS | PTB_7)
 #define PTBSE_INIT      (0)
 #define PTBDS_INIT      (0)
 

@@ -5,7 +5,7 @@
 **     Component   : Events
 **     Version     : Driver 01.02
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2015-03-20, 13:23, # CodeGen: 0
+**     Date/Time   : 2015-03-20, 16:21, # CodeGen: 0
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
@@ -35,7 +35,79 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "SM1.h"
+#include "SS1.h"
 
+
+void SS1_OnRxChar(void);
+/*
+** ===================================================================
+**     Event       :  SS1_OnRxChar (module Events)
+**
+**     Component   :  SS1 [SynchroSlave]
+**     Description :
+**         This event is called after a correct character is received.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**         
+**         [ Version specific information for Freescale HCS08 and RS08
+**         and HCS12 and HCS12X and ColdFireV1 derivatives ] 
+**         The <Bidirectional mode> property setting doesn't affect
+**         this event.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void SS1_OnTxChar(void);
+/*
+** ===================================================================
+**     Event       :  SS1_OnTxChar (module Events)
+**
+**     Component   :  SS1 [SynchroSlave]
+**     Description :
+**         This event is called after a character is transmitted.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void SS1_OnTxEmptyChar(void);
+/*
+** ===================================================================
+**     Event       :  SS1_OnTxEmptyChar (module Events)
+**
+**     Component   :  SS1 [SynchroSlave]
+**     Description :
+**         The event is called when an Empty character is sent
+**         automaticaly if no user data is in buffer (see <Empty
+**         character> property for details about empty character).
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**         [ Version specific information for Freescale HCS08 and
+**         ColdFireV1 derivatives ] 
+**         This event is also called after initialization and after
+**         calling Enable method.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void SS1_OnError(void);
+/*
+** ===================================================================
+**     Event       :  SS1_OnError (module Events)
+**
+**     Component   :  SS1 [SynchroSlave]
+**     Description :
+**         This event is called when a channel error (not the error
+**         returned by a given method) occurs. The errors can be read
+**         using <GetError> method.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
 
 void SM1_OnRxChar(void);
 /*
