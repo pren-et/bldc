@@ -91,16 +91,16 @@ D: High drive strength enabled (PTxDS)
 #define PTD_1           BIT1    ///< |IR|   unused
 #define PWRGD           BIT2    ///< |IR|   Power good
 #define PTD_3           BIT3    ///< |IR|   unused
-#define LED_0           BIT4    ///< |OH|   LED 0
-#define LED_1           BIT5    ///< |OH|   LED 1
-#define LED_2           BIT6    ///< |OH|   LED 2
+#define LED_R           BIT4    ///< |OH|   LED 0
+#define LED_Y           BIT5    ///< |OH|   LED 1
+#define LED_G           BIT6    ///< |OH|   LED 2
 #define PTD_7           BIT7    ///< |IR|   unused
 
-#define PTDDD_INIT      (LED_0 | LED_1 | LED_2)
-#define PTDD_INIT       (LED_0 | LED_1 | LED_2)
+#define PTDDD_INIT      (LED_R | LED_Y | LED_G)
+#define PTDD_INIT       (LED_R | LED_Y | LED_G)
 #define PTDPE_INIT      (PTD_0 | PTD_1 | PWRGD | PTD_3 | PTD_7)
 #define PTDSE_INIT      (0)
-#define PTDDS_INIT      (LED_0 | LED_1 | LED_2)
+#define PTDDS_INIT      (LED_R | LED_Y | LED_G)
 
 //--- PortE ---
 #define PTE_0           BIT0    ///< |IR|   unused

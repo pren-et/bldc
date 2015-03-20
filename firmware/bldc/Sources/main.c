@@ -20,7 +20,6 @@
 void init()
 {
 	hardware_lowlevel_init();
-    PTDD &= ~(LED_0);
     rtc_init_flag();
     EnableInterrupts;               // Interrupts aktivieren
 }
@@ -37,15 +36,17 @@ void main(void)
     for(;;)
     {
         if(rtc_get_clear_flag() != RTC_NONE) {
+            PTDD &= ~(LED_Y);  /* LED1 on */
             /* Task to toggle LED0 */
             if(task_cnt_led == 0) {
                 task_cnt_led = TASK_LED_PERIOD; /* Prepare scheduler for next period */
-                PTDD ^= LED_0;                  /* Toggle LED0 */
+                PTDD ^= LED_R;                  /* Toggle LED0 */
             }
             else {
                 task_cnt_led--;
             }
             /* Other tasks come here */
+            PTDD |= LED_Y;  /* LED1 off */
         }
         __RESET_WATCHDOG();  /* feeds the dog */
     }
