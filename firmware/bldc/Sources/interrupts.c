@@ -11,9 +11,12 @@
  * 
  */
 #include "interrupts.h"
+#include "rtc.h"
 
 interrupt void isr_RTC(void)        // RTC
 {
+    RTCSC_RTIF = 1;
+    rtc_set_flag();
     return;
 }
 

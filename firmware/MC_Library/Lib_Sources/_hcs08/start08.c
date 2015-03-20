@@ -385,7 +385,7 @@ void initClock(void)
     while(MCGSC_LOCK == 0U) {}            /* Wait until PLL is locked */
     
     /* MCGC1: CLKS=0,RDIV=2,IREFS=0,IRCLKEN=1,IREFSTEN=0 */
-    MCGC1 = 0x12U;               /* Set MCGC1 register */ 
+    MCGC1 = 0x1AU;               /* Set MCGC1 register */ 
     while((MCGSC & 0x0CU) != 0x0CU) {}    /* Wait until PLL clock is selected as a bus clock reference */
 }
 

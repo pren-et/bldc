@@ -21,6 +21,7 @@ void init()
 {
 	hardware_lowlevel_init();
     PTDD &= ~(LED_0);
+    rtc_init_flag();
     EnableInterrupts;               // Interrupts aktivieren
 }
 
@@ -31,7 +32,6 @@ void main(void)
 {
     uint16 task_cnt_led;
     init();
-    rtc_init_flag();
     task_cnt_led = TASK_LED_PERIOD;
 
     for(;;)

@@ -38,10 +38,10 @@ END
 
 STACKSIZE 0x200    // Stacksize 0x200 => 512 Bytes     
 
-VECTOR ADDRESS 0xFFC4 errISR_RTC        // RTC
+VECTOR ADDRESS 0xFFC4 isr_RTC           // RTC
 VECTOR ADDRESS 0xFFC6 errISR_IIC        // IIC
 VECTOR ADDRESS 0xFFC8 errISR_ACMP       // ACMP
-VECTOR ADDRESS 0xFFCA isr_ADC        // ADC Conversion
+VECTOR ADDRESS 0xFFCA isr_ADC           // ADC Conversion
 VECTOR ADDRESS 0xFFCC errISR_KBI        // KBI Keyboard
 VECTOR ADDRESS 0xFFCE errISR_SCI2T      // SCI2 transmit
 VECTOR ADDRESS 0xFFD0 errISR_SCI2R      // SCI2 receive
@@ -49,7 +49,7 @@ VECTOR ADDRESS 0xFFD2 errISR_SCI2E      // SCI2 error
 VECTOR ADDRESS 0xFFD4 isr_SCI1T         // SCI1 transmit 
 VECTOR ADDRESS 0xFFD6 isr_SCI1R         // SCI1 receive 
 VECTOR ADDRESS 0xFFD8 errISR_SCI1E      // SCI1 error
-VECTOR ADDRESS 0xFFDA isr_TPM2O      // TPM2 overflow
+VECTOR ADDRESS 0xFFDA isr_TPM2O         // TPM2 overflow
 VECTOR ADDRESS 0xFFDC errISR_TPM2CH1    // TPM2 channel 1
 VECTOR ADDRESS 0xFFDE errISR_TPM2CH0    // TPM2 channel 0
 VECTOR ADDRESS 0xFFE0 errISR_TPM1O      // TPM1 overflow
