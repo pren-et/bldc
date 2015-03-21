@@ -12,12 +12,13 @@
  */
 
 #include "drv8301.h"
+#include "spi_drv.h"
+
 
 /* Definition of necessary functions provided by a SPI module later */
 /*! \fn uint16_t spi_read_write(uint16_t data)
  *  \todo Define in SPI Module
  */
-uint16_t spi_read_write(uint16_t data) { return 0; }
 
 void drv8301_init(void) {
     /* test orientation of bitfields */
@@ -57,7 +58,7 @@ void drv8301_write_register(drv8301_reg_t reg) {
         reg.data_write.rw   = DRV8301_RW_W;                 /* write register */
 
         /* write register */
-        spi_read_write(reg.raw);
+        (void)spi_drv_read_write(reg.raw);
     }
 
     return;
@@ -86,7 +87,7 @@ void drv8301_set_gate_current(uint16_t current_mA) {
 
     /* write register back */
     reg.data_write.rw   = DRV8301_RW_W;             /* write register */
-    spi_read_write(reg.raw);
+    (void)spi_drv_read_write(reg.raw);
 
     return;
 }
@@ -99,7 +100,7 @@ void drv8301_set_oc_adj_set(uint16_t voltage_mV) {
     reg.data_write.rw   = DRV8301_RW_R;             /* read register */
 
     /* read register */
-    reg.raw = spi_read_write(reg.raw);
+    reg.raw = spi_drv_read_write(reg.raw);
 
     /* set overcurrent threshold value */
     if (voltage_mV <=   60) {       /* 0.060V */
@@ -201,7 +202,7 @@ void drv8301_set_oc_adj_set(uint16_t voltage_mV) {
 
     /* write register back */
     reg.data_write.rw   = DRV8301_RW_W;             /* write register */
-    spi_read_write(reg.raw);
+    (void)spi_drv_read_write(reg.raw);
 
     return;
 }

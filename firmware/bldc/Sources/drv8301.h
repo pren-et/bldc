@@ -14,7 +14,10 @@
 #ifndef DRV8301_H
 #define DRV8301_H
 
-#include <stdint.h>
+#include "platform.h"
+#include "hardware.h"
+typedef uint8 uint8_t;
+typedef uint16 uint16_t;
 
 /******************************************************************************
 Test compiler dependencies
@@ -24,7 +27,7 @@ Test compiler dependencies
  */
 typedef union {
     struct {
-        uint8_t low     : 4;    /*!< Low nibble */
+        uint8 low     : 4;    /*!< Low nibble */
         uint8_t high    : 4;    /*!< High nibble */
     } bitfield;             /*!< Nibbles */
     uint8_t     byte;       /*!< Byte */

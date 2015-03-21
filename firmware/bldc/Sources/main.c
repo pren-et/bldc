@@ -14,13 +14,17 @@
 #include "platform.h"   /* include peripheral declarations */
 #include "hardware.h"   /* include lowlevel hardware declarations */
 #include "rtc.h"        /* include rtc declarations */
+#include "spi_drv.h"        /* include spi declarations */
+#include "drv8301.h"
 
-#define TASK_LED_PERIOD     1000    /* Period for LED task (1s) */
+#define TASK_LED_PERIOD     700    /* Period for LED task (1s) */
 
 void init()
 {
 	hardware_lowlevel_init();
     rtc_init_flag();
+    Spi_drv_init();
+    drv8301_init();
     EnableInterrupts;               // Interrupts aktivieren
 }
 
