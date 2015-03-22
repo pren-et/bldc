@@ -7,7 +7,8 @@
 	 (void) SPI2S;
 	 SPI2D16 = data;                       /* Store char to transmitter register */
 	 EnableInterrupts;
-	 while(SPI2S_SPTEF == 0);
+	 while(SPI2S_SPTEF == 0);			   /* Warten bis gesendet wurde */
+	 while(SPI2S_SPRF == 0);			   /* Warten bis ein Byte empfangen wurde */
 	 (void) SPI2S;
 	 return SPI2D16;
  }
