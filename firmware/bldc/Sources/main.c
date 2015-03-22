@@ -17,13 +17,14 @@
 #include "spi_drv.h"        /* include spi declarations */
 #include "drv8301.h"
 
-#define TASK_LED_PERIOD     500    /* Period for LED task (1s) */
+#define TASK_PERIOD_LED     500     /* Period for LED task (1s) */
+#define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
 
 void init(void)
 {
 	hardware_lowlevel_init();
     rtc_init_flag();
-    Spi_drv_init();
+    spi_drv_init();
     drv8301_init();
     EnableInterrupts;               // Interrupts aktivieren
 }
@@ -34,32 +35,38 @@ void init(void)
 void main(void)
 {
     uint16 task_cnt_led;
-    uint16 tmpCount = 0;
+    uint16 task_cnt_drv;
     init();
-    task_cnt_led = TASK_LED_PERIOD;
+    task_cnt_led = TASK_PERIOD_LED;
+    task_cnt_drv = TASK_PERIOD_DRV;
 
     for(;;)
     {
         if(rtc_get_clear_flag() != RTC_NONE) {
+            /* Switch LED on to measure workload */
             PTDD &= ~(LED_Y);  /* LED1 on */
+
             /* Task to toggle LED0 */
-            
-            if( tmpCount == 4 )
-            {
-            	drv8301_reg_t test;
-            	drv8301_set_gate_current(1000);
-            	test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
-            	if(test.control1.reg_write.gate_current == DRV8301_GATE_CURRENT_1_7A)
-            		PTDD &= ~LED_G;
-            }
             if(task_cnt_led == 0) {
-                task_cnt_led = TASK_LED_PERIOD; /* Prepare scheduler for next period */
-                PTDD ^= LED_R;
-                /* Toggle LED0 */
-                tmpCount ++;
+                task_cnt_led = TASK_PERIOD_LED; /* Prepare scheduler for next period */
+                PTDD ^= LED_R; /* Toggle LED0 */
             }
             else {
                 task_cnt_led--;
+            }
+
+            /* Task to initialize DRV8301 */
+            if( task_cnt_drv == 0 ) {
+            	drv8301_reg_t test;
+            	drv8301_set_gate_current(1000);
+            	test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
+            	if(test.control1.reg_write.gate_current == DRV8301_GATE_CURRENT_1_7A) {
+            		PTDD &= ~LED_G;
+                }
+                task_cnt_drv = TASK_PERIOD_DRV; /* Prepare scheduler for next period */
+            }
+            else {
+                task_cnt_drv--;
             }
             /* Other tasks come here */
             PTDD |= LED_Y;  /* LED1 off */

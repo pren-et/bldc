@@ -1,16 +1,23 @@
-/*
- * SPI_DRV_H_.h
- *
- *  Created on: Mar 21, 2015
- *      Author: studer.yves
+/*!
+ *  ____  ____  _____ _   _       _____ _____ 
+ * |  _ \|  _ \| ____| \ | |     | ____|_   _|
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |  
+ * |  __/|  _ <| |___| |\  |_____| |___  | |  
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|  
+ *                                            
+ * \file spi_drv.h
+ * \brief SPI interface to DRV8301
+ * \author pren-et
+ * 
  */
 
 #ifndef SPI_DRV_H_
 #define SPI_DRV_H_
+
 #include "platform.h"
 #include "hardware.h"
 	  
-void Spi_drv_init(void);
-word spi_drv_read_write(word);
+void spi_drv_init(void);
+uint16 spi_drv_read_write(uint16);
 
 #endif /* SPI_DRV_H_ */

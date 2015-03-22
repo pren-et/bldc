@@ -10,6 +10,7 @@
  * \author pren-et
  * 
  */
+
 #include "rtc.h"
 
 rtc_flag_t flag;
