@@ -3,9 +3,12 @@
  
  word spi_drv_read_write(word data)
  {
+	 DisableInterrupts;
 	 (void) SPI2S;
 	 SPI2D16 = data;                       /* Store char to transmitter register */
-	 while((SPI2S_SPTEF)== 0);
+	 EnableInterrupts;
+	 while(SPI2S_SPTEF == 0);
+	 (void) SPI2S;
 	 return SPI2D16;
  }
  

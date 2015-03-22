@@ -27,7 +27,7 @@ Test compiler dependencies
  */
 typedef union {
     struct {
-        uint8 low     : 4;    /*!< Low nibble */
+        uint8_t low     : 4;    /*!< Low nibble */
         uint8_t high    : 4;    /*!< High nibble */
     } bitfield;             /*!< Nibbles */
     uint8_t     byte;       /*!< Byte */

@@ -16,7 +16,7 @@
 
 
 /* Definition of necessary functions provided by a SPI module later */
-/*! \fn uint16_t spi_read_write(uint16_t data)
+/*! \fn uint16_t spi_drv_read_write(uint16_t data)
  *  \todo Define in SPI Module
  */
 
@@ -46,7 +46,7 @@ drv8301_reg_t drv8301_read_register(drv8301_addr_t address) {
     reg.data_write.rw   = DRV8301_RW_R;     /* read register */
 
     /* read register */
-    reg.raw = spi_read_write(reg.raw);
+    reg.raw = spi_drv_read_write(reg.raw);
 
     /* return register */
     return reg;
@@ -72,7 +72,7 @@ void drv8301_set_gate_current(uint16_t current_mA) {
     reg.data_write.rw   = DRV8301_RW_R;             /* read register */
 
     /* read register */
-    reg.raw = spi_read_write(reg.raw);
+    reg.raw = spi_drv_read_write(reg.raw);
 
     /* set gate current */
     if (current_mA <= 250) {        /* 0.25A */

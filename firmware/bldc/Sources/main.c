@@ -17,9 +17,9 @@
 #include "spi_drv.h"        /* include spi declarations */
 #include "drv8301.h"
 
-#define TASK_LED_PERIOD     700    /* Period for LED task (1s) */
+#define TASK_LED_PERIOD     500    /* Period for LED task (1s) */
 
-void init()
+void init(void)
 {
 	hardware_lowlevel_init();
     rtc_init_flag();
@@ -34,6 +34,7 @@ void init()
 void main(void)
 {
     uint16 task_cnt_led;
+    uint16 tmpCount = 0;
     init();
     task_cnt_led = TASK_LED_PERIOD;
 
@@ -42,9 +43,20 @@ void main(void)
         if(rtc_get_clear_flag() != RTC_NONE) {
             PTDD &= ~(LED_Y);  /* LED1 on */
             /* Task to toggle LED0 */
+            
+            if( tmpCount == 4 )
+            {
+            	drv8301_reg_t test;
+            	drv8301_set_gate_current(1000);
+            	test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
+            	if(test.control1.reg_write.gate_current == DRV8301_GATE_CURRENT_1_7A)
+            		PTDD &= ~LED_G;
+            }
             if(task_cnt_led == 0) {
                 task_cnt_led = TASK_LED_PERIOD; /* Prepare scheduler for next period */
-                PTDD ^= LED_R;                  /* Toggle LED0 */
+                PTDD ^= LED_R;
+                /* Toggle LED0 */
+                tmpCount ++;
             }
             else {
                 task_cnt_led--;
