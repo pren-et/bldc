@@ -66,7 +66,7 @@ D: High drive strength enabled (PTxDS)
 
 #define PTBDD_INIT      (SPI_DRV_CS | EN_GATE)
 #define PTBD_INIT       (SPI_DRV_CS)
-#define PTBPE_INIT      (SPI_DRV_MISO | SPI_DRV_MOSI | SPI_DRV_SCK | SPI_DRV_CS | PTB_7)
+#define PTBPE_INIT      (SPI_DRV_MISO | SPI_DRV_MOSI | SPI_DRV_SCK | SPI_DRV_CS | FAULT | OCTW | PTB_7)
 #define PTBSE_INIT      (0)
 #define PTBDS_INIT      (0)
 
