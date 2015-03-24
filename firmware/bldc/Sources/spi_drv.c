@@ -29,10 +29,9 @@ void spi_drv_init(void) {
 word spi_drv_read_write(word data) {
     DisableInterrupts;
     (void) SPI2S;
-    SPI2D16 = data;                       /* Store char to transmitter register */
+    SPI2D16 = data;                      /* Store char to transmitter register */
+    while(!SPI2S_SPTEF);    			 /* Warten bis gesendet wurde */
+    while(!SPI2S_SPRF);		    	     /* Warten bis ein Byte empfangen wurde */
     EnableInterrupts;
-    while(SPI2S_SPTEF == 0);			   /* Warten bis gesendet wurde */
-    while(SPI2S_SPRF == 0);			   /* Warten bis ein Byte empfangen wurde */
-    (void) SPI2S;
     return SPI2D16;
 }
