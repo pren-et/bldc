@@ -61,8 +61,10 @@ void main(void)
             	//drv8301_reg_t test, test_2;
             	//test_2 = drv8301_set_gate_current(200);
             	//test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
-            	
+
             	drv8301_reg_t reg,test;
+            	volatile unsigned int castTest;
+            	DisableInterrupts;
                 reg.data_write.data = test.data_write.data = 0x00;
                 reg.data_write.addr = test.data_write.addr = DRV8301_ADDR_CONTROL1;
                 reg.data_write.rw   = DRV8301_RW_W;
@@ -71,10 +73,11 @@ void main(void)
                 
 
                 test.data_write.rw   = DRV8301_RW_R;
-                test.raw = spi_drv_read_write(test.raw);
+                castTest = spi_drv_read_write(test.raw);
                 
                 if(test.control1.reg_read.oc_adj_set == DRV8301_OC_ADJ_SET_0_097V)
                 	PTDD &= ~LED_G;
+                EnableInterrupts;
                 
             	//test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
             	//test.data_write.addr = DRV8301_ADDR_CONTROL1;
