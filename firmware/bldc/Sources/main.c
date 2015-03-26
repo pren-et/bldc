@@ -16,9 +16,11 @@
 #include "rtc.h"        /* include rtc declarations */
 #include "spi_drv.h"        /* include spi declarations */
 #include "drv8301.h"
+#include "commutate.h"  /* commutation functions */
 
 #define TASK_PERIOD_LED     500     /* Period for LED task (1s) */
 #define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
+#define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
 
             	int i;
 void init(void)
@@ -27,6 +29,7 @@ void init(void)
     rtc_init_flag();
     spi_drv_init();
     drv8301_init();
+    commutate_init();
     EnableInterrupts;               // Interrupts aktivieren
 }
 
@@ -37,9 +40,12 @@ void main(void)
 {
     uint16 task_cnt_led;
     uint16 task_cnt_drv;
+    uint16 task_cnt_comm;
     init();
-    task_cnt_led = TASK_PERIOD_LED;
-    task_cnt_drv = TASK_PERIOD_DRV;
+    task_cnt_led  = TASK_PERIOD_LED;
+    task_cnt_drv  = TASK_PERIOD_DRV;
+    task_cnt_comm = TASK_PERIOD_COMM;
+    commutate_state(COMM_STATE_0);
 
     for(;;)
     {
@@ -98,6 +104,16 @@ void main(void)
             else {
                 task_cnt_drv--;
             }
+
+            /* Task to commutate motor */
+            if(task_cnt_comm == 0) {
+                task_cnt_comm = TASK_PERIOD_COMM; /* Prepare scheduler for next period */
+                commutate_next();
+            }
+            else {
+                task_cnt_comm--;
+            }
+
             /* Other tasks come here */
             PTDD |= LED_Y;  /* LED1 off */
         }
