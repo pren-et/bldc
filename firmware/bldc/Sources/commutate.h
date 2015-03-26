@@ -30,12 +30,60 @@ typedef enum {
     COMM_STATE_5,           /*!< Commutation position 5 */
 } comm_state_t;
 
+/*! \name comm_out
+ * @{
+ */
+#define COMM_OUT_STATE_OFF      (0xFF)                              /*!< Bridge off */
+#define COMM_OUT_STATE_BRAKE    (~(FET_L_U | FET_L_V | FET_L_W))    /*!< U, V, W low */
+#define COMM_OUT_STATE_0        (~(FET_L_V | FET_H_U))              /*!< U high, V low , W open */
+#define COMM_OUT_STATE_1        (~(FET_L_W | FET_H_U))              /*!< U high, V open, W low  */
+#define COMM_OUT_STATE_2        (~(FET_L_W | FET_H_V))              /*!< U open, V high, W low  */
+#define COMM_OUT_STATE_3        (~(FET_L_U | FET_H_V))              /*!< U low , V high, W open */
+#define COMM_OUT_STATE_4        (~(FET_L_U | FET_H_W))              /*!< U low , V open, W high */
+#define COMM_OUT_STATE_5        (~(FET_L_V | FET_H_W))              /*!< U open, V low , W high */
+#define COMM_OUT_STATE_DEFAULT  (0xFF)                              /*!< Bridge off */
+/*! @} */
+
+/*! \name comm_next
+ * @{
+ */
+#define COMM_NEXT_STATE_OFF     COMM_STATE_OFF      /*!< COMM_STATE_OFF     -> COMM_STATE_OFF   */
+#define COMM_NEXT_STATE_BRAKE   COMM_STATE_BRAKE    /*!< COMM_STATE_BRAKE   -> COMM_STATE_BRAKE */
+#define COMM_NEXT_STATE_0       COMM_STATE_1        /*!< COMM_STATE_STATE_0 -> COMM_STATE_1     */
+#define COMM_NEXT_STATE_1       COMM_STATE_2        /*!< COMM_STATE_STATE_1 -> COMM_STATE_2     */
+#define COMM_NEXT_STATE_2       COMM_STATE_3        /*!< COMM_STATE_STATE_2 -> COMM_STATE_3     */
+#define COMM_NEXT_STATE_3       COMM_STATE_4        /*!< COMM_STATE_STATE_3 -> COMM_STATE_4     */
+#define COMM_NEXT_STATE_4       COMM_STATE_5        /*!< COMM_STATE_STATE_4 -> COMM_STATE_5     */
+#define COMM_NEXT_STATE_5       COMM_STATE_0        /*!< COMM_STATE_STATE_5 -> COMM_STATE_0     */
+#define COMM_NEXT_STATE_DEFAULT COMM_STATE_OFF      /*!< COMM_STATE_DEFAULT -> COMM_STATE_OFF   */
+/*! @} */
+
+/*! \fn void commutate_init(void)
+ *  \brief Initialisation of commutator
+ *
+ *  \return void
+ */
 void commutate_init(void);
 
+/*! \fn void commutate(void)
+ *  \brief Perform commutation
+ *
+ *  \return void
+ */
 void commutate(void);
 
+/*! \fn void commutate_init(void)
+ *  \brief Set commutator state
+ *
+ *  \return void
+ */
 void commutate_state(comm_state_t n_state);
 
+/*! \fn void commutate_init(void)
+ *  \brief set commutator state to next state and perform commutation
+ *
+ *  \return void
+ */
 void commutate_next(void);
 
 #endif /* COMMUTATE_H_ */
