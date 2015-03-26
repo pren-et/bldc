@@ -28,12 +28,12 @@ void spi_drv_init(void) {
 
 uint16 spi_drv_read_write(uint16 data) {
 	uint16 tmp;
-   // DisableInterrupts;
+    DisableInterrupts;
     (void) SPI2S;
     SPI2D16 = data;                      /* Store char to transmitter register */
     while(!SPI2S_SPTEF);    			 /* Warten bis gesendet wurde */
     while(!SPI2S_SPRF);		    	     /* Warten bis ein Byte empfangen wurde */
     tmp =  SPI2D16;
-   // EnableInterrupts;
+    EnableInterrupts;
     return tmp;
 }

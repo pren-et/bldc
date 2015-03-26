@@ -46,6 +46,7 @@ drv8301_reg_t drv8301_read_register(drv8301_addr_t address) {
     reg.data_write.rw   = DRV8301_RW_R;     /* read register */
 
     /* read register */
+    (void) spi_drv_read_write(reg.raw);
     reg.raw = spi_drv_read_write(reg.raw);
 
     /* return register */
@@ -72,6 +73,7 @@ void drv8301_set_gate_current(uint16_t current_mA) {
     reg.data_write.rw   = DRV8301_RW_R;             /* read register */
 
     /* read register */
+    (void) spi_drv_read_write(reg.raw);
     reg.raw = spi_drv_read_write(reg.raw);
 
     /* set gate current */
@@ -100,6 +102,7 @@ void drv8301_set_oc_adj_set(uint16_t voltage_mV) {
     reg.data_write.rw   = DRV8301_RW_R;             /* read register */
 
     /* read register */
+    (void)spi_drv_read_write(reg.raw);
     reg.raw = spi_drv_read_write(reg.raw);
 
     /* set overcurrent threshold value */
