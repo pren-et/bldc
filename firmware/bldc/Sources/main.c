@@ -18,7 +18,7 @@
 #include "drv8301.h"
 #include "commutate.h"  /* commutation functions */
 
-#define TASK_PERIOD_LED     500     /* Period for LED task (1s) */
+#define TASK_PERIOD_LED     100     /* Period for LED task (1s) */
 #define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
 #define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
 
@@ -30,6 +30,7 @@ void init(void)
 	hardware_lowlevel_init();
     rtc_init_flag();
     spi_drv_init();
+    //spi_ext_init();
     drv8301_init();
     commutate_init();
     EnableInterrupts;               // Interrupts aktivieren
@@ -43,12 +44,14 @@ void main(void)
     uint16 task_cnt_led;
     uint16 task_cnt_drv;
     uint16 task_cnt_comm;
+    uint16 task_period_comm;
     init();
     task_cnt_led  = TASK_PERIOD_LED;
     task_cnt_drv  = TASK_PERIOD_DRV;
     task_cnt_comm = TASK_PERIOD_COMM;
     force_interval = 2000;
     commutate_state(COMM_STATE_FORCED_0);
+    task_period_comm = TASK_PERIOD_COMM;
 
     for(;;)
     {
@@ -62,6 +65,9 @@ void main(void)
                 PTDD ^= LED_R; /* Toggle LED0 */
                 if (force_interval > 100) {
                     force_interval -= 10;
+                }
+                if (task_period_comm > 2) {
+                	task_period_comm--;
                 }
             }
             else {
@@ -113,7 +119,7 @@ void main(void)
 
             /* Task to commutate motor */
             if(task_cnt_comm == 0) {
-                task_cnt_comm = TASK_PERIOD_COMM; /* Prepare scheduler for next period */
+                task_cnt_comm = task_period_comm; /* Prepare scheduler for next period */
                 //commutate_next();
             }
             else {

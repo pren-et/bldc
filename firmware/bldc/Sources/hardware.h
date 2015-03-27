@@ -203,8 +203,8 @@ D: High drive strength enabled (PTxDS)
 #define TPM2C0SC_INIT   (TPM2C0SC_MS0B_MASK | TPM2C0SC_ELS0B_MASK)
 #define TPM2C1SC_INIT   (TPM2C1SC_MS1B_MASK | TPM2C1SC_ELS1B_MASK)
 // Stop motors at startup
-#define TPM2C0V_INIT    (51)
-#define TPM2C1V_INIT    (51)
+#define TPM2C0V_INIT    (512)
+#define TPM2C1V_INIT    (512)
 
 /** \fn void hardware_lowlevel_init(void)
  *  \brief Initialisation for low level hardware
