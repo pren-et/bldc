@@ -22,7 +22,9 @@
 #define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
 #define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
 
-            	int i;
+int i;
+extern uint16 force_interval;
+
 void init(void)
 {
 	hardware_lowlevel_init();
@@ -45,7 +47,8 @@ void main(void)
     task_cnt_led  = TASK_PERIOD_LED;
     task_cnt_drv  = TASK_PERIOD_DRV;
     task_cnt_comm = TASK_PERIOD_COMM;
-    commutate_state(COMM_STATE_0);
+    force_interval = 2000;
+    commutate_state(COMM_STATE_FORCED_0);
 
     for(;;)
     {
@@ -57,6 +60,9 @@ void main(void)
             if(task_cnt_led == 0) {
                 task_cnt_led = TASK_PERIOD_LED; /* Prepare scheduler for next period */
                 PTDD ^= LED_R; /* Toggle LED0 */
+                if (force_interval > 100) {
+                    force_interval -= 10;
+                }
             }
             else {
                 task_cnt_led--;
@@ -108,7 +114,7 @@ void main(void)
             /* Task to commutate motor */
             if(task_cnt_comm == 0) {
                 task_cnt_comm = TASK_PERIOD_COMM; /* Prepare scheduler for next period */
-                commutate_next();
+                //commutate_next();
             }
             else {
                 task_cnt_comm--;

@@ -158,9 +158,9 @@ D: High drive strength enabled (PTxDS)
 
 //### Timer 1 ###
 //--- Initialisation for generating the buzzer frequency directly from timer ---
-// bus rate clock, prescaler 4
-#define TPM1SC_INIT     (0)
-// Initial value for a frequency of 1 kHz on Buzzer
+// bus rate clock, prescaler 128
+#define TPM1SC_INIT     (TPM1SC_CLKSA_MASK | TPM1SC_PS2_MASK | TPM1SC_PS1_MASK | TPM1SC_PS0)
+// TPM1 free running
 #define TPM1MOD_INIT    (0)
 
 //--- Initialisation for driving the buzzer with PWM ---
@@ -168,18 +168,18 @@ D: High drive strength enabled (PTxDS)
 //#define TPM1SC_INIT     (TPM1SC_CLKSA_MASK)
 // Modulo for a sampling rate 48 kHz
 //#define TPM1MOD_INIT    (CLOCK/BUZZER_SAMPLE)
-// Not in use
-#define TPM1C0SC_INIT   (0)
-// Not in use
-#define TPM1C1SC_INIT   (0)
-// Not in use
-#define TPM1C2SC_INIT   (0)
-// Not in use
-#define TPM1C3SC_INIT   (0)
-// Not in use
-#define TPM1C4SC_INIT   (0)
-// Buzzer not yet configured
-#define TPM1C5SC_INIT   (0)
+// Pin not used for TPM1
+#define TPM1C0SC_INIT   (0x40)
+// Pin not used for TPM1
+#define TPM1C1SC_INIT   (0x40)
+// Pin not used for TPM1
+#define TPM1C2SC_INIT   (0x40)
+// Interrupt enable, input capture
+#define TPM1C3SC_INIT   (0x44)
+// Interrupt enable, input capture
+#define TPM1C4SC_INIT   (0x44)
+// Interrupt enable, input capture
+#define TPM1C5SC_INIT   (0x44)
 // Not in use
 #define TPM1C0V_INIT    (0)
 // Not in use

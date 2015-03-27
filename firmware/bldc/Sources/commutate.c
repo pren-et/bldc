@@ -27,23 +27,41 @@ void commutate(void) {
         case COMM_STATE_BRAKE:
             PTADD = COMM_OUT_STATE_BRAKE;
             break;
-        case COMM_STATE_0:
-            PTADD = COMM_OUT_STATE_0;
+        case COMM_STATE_FORCED_0:
+            PTADD = COMM_OUT_STATE_FORCED_0;
             break;
-        case COMM_STATE_1:
-            PTADD = COMM_OUT_STATE_1;
+        case COMM_STATE_FORCED_1:
+            PTADD = COMM_OUT_STATE_FORCED_1;
             break;
-        case COMM_STATE_2:
-            PTADD = COMM_OUT_STATE_2;
+        case COMM_STATE_FORCED_2:
+            PTADD = COMM_OUT_STATE_FORCED_2;
             break;
-        case COMM_STATE_3:
-            PTADD = COMM_OUT_STATE_3;
+        case COMM_STATE_FORCED_3:
+            PTADD = COMM_OUT_STATE_FORCED_3;
             break;
-        case COMM_STATE_4:
-            PTADD = COMM_OUT_STATE_4;
+        case COMM_STATE_FORCED_4:
+            PTADD = COMM_OUT_STATE_FORCED_4;
             break;
-        case COMM_STATE_5:
-            PTADD = COMM_OUT_STATE_5;
+        case COMM_STATE_FORCED_5:
+            PTADD = COMM_OUT_STATE_FORCED_5;
+            break;
+        case COMM_STATE_AUTO_0:
+            PTADD = COMM_OUT_STATE_AUTO_0;
+            break;
+        case COMM_STATE_AUTO_1:
+            PTADD = COMM_OUT_STATE_AUTO_1;
+            break;
+        case COMM_STATE_AUTO_2:
+            PTADD = COMM_OUT_STATE_AUTO_2;
+            break;
+        case COMM_STATE_AUTO_3:
+            PTADD = COMM_OUT_STATE_AUTO_3;
+            break;
+        case COMM_STATE_AUTO_4:
+            PTADD = COMM_OUT_STATE_AUTO_4;
+            break;
+        case COMM_STATE_AUTO_5:
+            PTADD = COMM_OUT_STATE_AUTO_5;
             break;
         default:
             PTADD = COMM_OUT_STATE_DEFAULT;
@@ -63,37 +81,60 @@ void commutate_next(void) {
             PTADD = COMM_OUT_STATE_OFF;
             break;
         case COMM_STATE_BRAKE:
-            state = COMM_NEXT_STATE_BRAKE;
+            PTADD = COMM_NEXT_STATE_BRAKE;
             PTADD = COMM_OUT_STATE_BRAKE;
             break;
-        case COMM_STATE_0:
-            state = COMM_NEXT_STATE_0;
-            PTADD = COMM_OUT_STATE_0;
+        case COMM_STATE_FORCED_0:
+            PTADD = COMM_NEXT_STATE_FORCED_0;
+            PTADD = COMM_OUT_STATE_FORCED_0;
             break;
-        case COMM_STATE_1:
-            state = COMM_NEXT_STATE_1;
-            PTADD = COMM_OUT_STATE_1;
+        case COMM_STATE_FORCED_1:
+            PTADD = COMM_NEXT_STATE_FORCED_1;
+            PTADD = COMM_OUT_STATE_FORCED_1;
             break;
-        case COMM_STATE_2:
-            state = COMM_NEXT_STATE_2;
-            PTADD = COMM_OUT_STATE_2;
+        case COMM_STATE_FORCED_2:
+            PTADD = COMM_NEXT_STATE_FORCED_2;
+            PTADD = COMM_OUT_STATE_FORCED_2;
             break;
-        case COMM_STATE_3:
-            state = COMM_NEXT_STATE_3;
-            PTADD = COMM_OUT_STATE_3;
+        case COMM_STATE_FORCED_3:
+            PTADD = COMM_NEXT_STATE_FORCED_3;
+            PTADD = COMM_OUT_STATE_FORCED_3;
             break;
-        case COMM_STATE_4:
-            state = COMM_NEXT_STATE_4;
-            PTADD = COMM_OUT_STATE_4;
+        case COMM_STATE_FORCED_4:
+            PTADD = COMM_NEXT_STATE_FORCED_4;
+            PTADD = COMM_OUT_STATE_FORCED_4;
             break;
-        case COMM_STATE_5:
-            state = COMM_NEXT_STATE_5;
-            PTADD = COMM_OUT_STATE_5;
+        case COMM_STATE_FORCED_5:
+            PTADD = COMM_NEXT_STATE_FORCED_5;
+            PTADD = COMM_OUT_STATE_FORCED_5;
+            break;
+        case COMM_STATE_AUTO_0:
+            PTADD = COMM_NEXT_STATE_AUTO_0;
+            PTADD = COMM_OUT_STATE_AUTO_0;
+            break;
+        case COMM_STATE_AUTO_1:
+            PTADD = COMM_NEXT_STATE_AUTO_1;
+            PTADD = COMM_OUT_STATE_AUTO_1;
+            break;
+        case COMM_STATE_AUTO_2:
+            PTADD = COMM_NEXT_STATE_AUTO_2;
+            PTADD = COMM_OUT_STATE_AUTO_2;
+            break;
+        case COMM_STATE_AUTO_3:
+            PTADD = COMM_NEXT_STATE_AUTO_3;
+            PTADD = COMM_OUT_STATE_AUTO_3;
+            break;
+        case COMM_STATE_AUTO_4:
+            PTADD = COMM_NEXT_STATE_AUTO_4;
+            PTADD = COMM_OUT_STATE_AUTO_4;
+            break;
+        case COMM_STATE_AUTO_5:
+            PTADD = COMM_NEXT_STATE_AUTO_5;
+            PTADD = COMM_OUT_STATE_AUTO_5;
             break;
         default:
-            state = COMM_NEXT_STATE_DEFAULT;
+            PTADD = COMM_NEXT_STATE_DEFAULT;
             PTADD = COMM_OUT_STATE_DEFAULT;
             break;
     }
-    commutate();
 }
