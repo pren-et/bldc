@@ -169,17 +169,17 @@ D: High drive strength enabled (PTxDS)
 // Modulo for a sampling rate 48 kHz
 //#define TPM1MOD_INIT    (CLOCK/BUZZER_SAMPLE)
 // Pin not used for TPM1
-#define TPM1C0SC_INIT   (0x40)
+#define TPM1C0SC_INIT   (TPM1C0SC_CH0IE_MASK | TPM1C0SC_MS0A_MASK)
 // Pin not used for TPM1
-#define TPM1C1SC_INIT   (0x40)
+#define TPM1C1SC_INIT   (TPM1C1SC_CH1IE_MASK | TPM1C1SC_MS1A_MASK)
 // Pin not used for TPM1
-#define TPM1C2SC_INIT   (0x40)
+#define TPM1C2SC_INIT   (TPM1C2SC_CH2IE_MASK | TPM1C2SC_MS2A_MASK)
 // Interrupt enable, input capture
-#define TPM1C3SC_INIT   (0x44)
+#define TPM1C3SC_INIT   (TPM1C3SC_CH3IE_MASK | TPM1C3SC_MS3A_MASK)
 // Interrupt enable, input capture
-#define TPM1C4SC_INIT   (0x44)
+#define TPM1C4SC_INIT   (TPM1C4SC_CH4IE_MASK | TPM1C4SC_MS4A_MASK)
 // Interrupt enable, input capture
-#define TPM1C5SC_INIT   (0x44)
+#define TPM1C5SC_INIT   (TPM1C5SC_CH5IE_MASK | TPM1C5SC_MS5A_MASK)
 // Not in use
 #define TPM1C0V_INIT    (0)
 // Not in use

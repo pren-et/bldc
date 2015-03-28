@@ -44,14 +44,12 @@ void main(void)
     uint16 task_cnt_led;
     uint16 task_cnt_drv;
     uint16 task_cnt_comm;
-    uint16 task_period_comm;
     init();
     task_cnt_led  = TASK_PERIOD_LED;
     task_cnt_drv  = TASK_PERIOD_DRV;
     task_cnt_comm = TASK_PERIOD_COMM;
-    force_interval = 2000;
+    force_interval = 5000;
     commutate_state(COMM_STATE_FORCED_0);
-    task_period_comm = TASK_PERIOD_COMM;
 
     for(;;)
     {
@@ -63,12 +61,6 @@ void main(void)
             if(task_cnt_led == 0) {
                 task_cnt_led = TASK_PERIOD_LED; /* Prepare scheduler for next period */
                 PTDD ^= LED_R; /* Toggle LED0 */
-                if (force_interval > 100) {
-                    force_interval -= 10;
-                }
-                if (task_period_comm > 2) {
-                	task_period_comm--;
-                }
             }
             else {
                 task_cnt_led--;
@@ -117,10 +109,46 @@ void main(void)
                 task_cnt_drv--;
             }
 
-            /* Task to commutate motor */
+            /* Task to control commutation frequency */
             if(task_cnt_comm == 0) {
-                task_cnt_comm = task_period_comm; /* Prepare scheduler for next period */
-                //commutate_next();
+                task_cnt_comm = TASK_PERIOD_COMM; /* Prepare scheduler for next period */
+                if (force_interval > 10000) {
+                    force_interval -= 500;
+                }
+                else if (force_interval > 5000) {
+                    force_interval -= 200;
+                }
+                else if (force_interval > 2000) {
+                    force_interval -= 100;
+                }
+                else if (force_interval > 1000) {
+                    force_interval -= 50;
+                }
+                else if (force_interval > 500) {
+                    if (force_interval == 600) {
+                        TPM2C0V = 767;
+                    }
+                    force_interval -= 20;
+                }
+                else if (force_interval > 300) {
+                    force_interval -= 10;
+                }
+                else if (force_interval > 200) {
+                    if (force_interval == 300) {
+                        TPM2C0V = 1023;
+                    }
+                    force_interval -= 5;
+                }
+                else if (force_interval > 187) {
+                    force_interval -= 2;
+                }
+                //else if (force_interval > 94) {
+                //    force_interval -= 1;
+                //}
+                else {
+                    /* Final speed reached */
+                    PTDD &= ~(LED_G);
+                }
             }
             else {
                 task_cnt_comm--;
