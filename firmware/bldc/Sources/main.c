@@ -23,7 +23,7 @@
 #define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
 
 int i;
-extern uint16 force_interval;
+extern uint16_t force_interval;
 
 void init(void)
 {
@@ -41,9 +41,9 @@ void init(void)
  */
 void main(void)
 {
-    uint16 task_cnt_led;
-    uint16 task_cnt_drv;
-    uint16 task_cnt_comm;
+    uint16_t task_cnt_led;
+    uint16_t task_cnt_drv;
+    uint16_t task_cnt_comm;
     init();
     task_cnt_led  = TASK_PERIOD_LED;
     task_cnt_drv  = TASK_PERIOD_DRV;

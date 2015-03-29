@@ -5,7 +5,7 @@
  * |  __/|  _ <| |___| |\  |_____| |___  | |  
  * |_|   |_| \_\_____|_| \_|     |_____| |_|  
  *                                            
- * \file  interrupts.c
+ * \file  commutate.c
  * \brief Motor commutation
  * \author pren-et
  * 

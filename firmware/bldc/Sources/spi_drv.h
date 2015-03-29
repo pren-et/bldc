@@ -18,6 +18,6 @@
 #include "hardware.h"
 	  
 void spi_drv_init(void);
-uint16 spi_drv_read_write(uint16);
+uint16_t spi_drv_read_write(uint16_t);
 
 #endif /* SPI_DRV_H_ */

@@ -261,7 +261,7 @@ void handleDrv(void)
 	}
 }
 
-uint16 drv8301_get_register(drv8301_addr_t address) 
+uint16_t drv8301_get_register(drv8301_addr_t address) 
 {
 	return shaddowReg[address].raw;
 }

@@ -16,8 +16,6 @@
 
 #include "platform.h"
 #include "hardware.h"
-typedef uint8 uint8_t;
-typedef uint16 uint16_t;
 
 /******************************************************************************
 Test compiler dependencies
@@ -421,7 +419,7 @@ void drv8301_set_oc_adj_set(uint16_t voltage_mV);
  */
 void handleDrv(void);
 
-/*! \fn uint16 drv8301_get_register(drv8301_addr_t address)
+/*! \fn uint16_t drv8301_get_register(drv8301_addr_t address)
  *  \brief Read a register from the DRV8301
  *  This function sends dummy data to read a register. 
  *  This function gives the value immediately.
@@ -429,7 +427,7 @@ void handleDrv(void);
  *  \param  address     Address of register to be read
  *  \return register
  */
-uint16 drv8301_get_register(drv8301_addr_t address);
+uint16_t drv8301_get_register(drv8301_addr_t address);
 
 /*! \fn void drv8301_set_config(drv8301_addr_t addr, uint16_t value)
  *  \brief This function is used to config the DRV by the host

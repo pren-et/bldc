@@ -18,6 +18,10 @@
 
 #define CLOCK           24000000    // Bus clock frequency in Hz
 
+typedef uint8  uint8_t;
+typedef uint16 uint16_t;
+typedef uint32 uint32_t;
+
 /*
 PINS:
 Comment-Abbreviations:
