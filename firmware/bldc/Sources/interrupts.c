@@ -15,6 +15,7 @@
 #include "rtc.h"
 #include "commutate.h"
 
+extern void (*spi_ext_irq) (void);
 uint16 force_interval;
 
 interrupt void isr_RTC(void)        // RTC
@@ -157,6 +158,7 @@ interrupt void isr_SPI2(void)       // SPI2
 
 interrupt void isr_SPI1(void)       // SPI1
 {
+	(*spi_ext_irq)();
     return;
 }
 

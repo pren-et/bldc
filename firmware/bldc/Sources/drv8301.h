@@ -405,4 +405,8 @@ void drv8301_set_gate_current(uint16_t current_mA);
  */
 void drv8301_set_oc_adj_set(uint16_t voltage_mV);
 
+
+void handleDrv(void);
+uint16 drv8301_get_register(drv8301_addr_t address);
+void drv8301_set_config(drv8301_addr_t addr, uint16_t value);
 #endif /* DRV8301_H */

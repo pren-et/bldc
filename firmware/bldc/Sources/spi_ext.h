@@ -16,9 +16,8 @@
 
 #include "platform.h"
 #include "hardware.h"
-	  
+
 void spi_ext_init(void);
-void spi_ext_irq(void);
 
 
 #endif /* SPI_EXT_H_ */

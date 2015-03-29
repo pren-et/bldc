@@ -53,6 +53,7 @@ void main(void)
 
     for(;;)
     {
+    	handleDrv();
         if(rtc_get_clear_flag() != RTC_NONE) {
             /* Switch LED on to measure workload */
             PTDD &= ~(LED_Y);  /* LED1 on */
