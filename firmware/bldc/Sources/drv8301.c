@@ -44,7 +44,13 @@ void drv8301_init(void) {
         }
     }
     action_necesary = READING_NECESSARY;
+    PTBD |= EN_GATE;
     return;
+}
+
+void drv8301_disable(void)
+{
+    PTBD &= ~EN_GATE;
 }
 
 drv8301_reg_t drv8301_read_register(drv8301_addr_t address) {

@@ -371,6 +371,13 @@ Functions
  */
 void drv8301_init(void);
 
+/*! \fn void drv8301_disable(void)
+ *  \brief Disable the DRV8301 and the SPI-Interface.
+ *  
+ *  \return void
+ */
+void drv8301_disable(void);
+
 /*! \fn drv8301_reg_t drv8301_read_register(drv8301_addr_t address)
  *  \brief Read a register from the DRV8301
  *  This function sends dummy data to read a register. 
@@ -406,8 +413,30 @@ void drv8301_set_gate_current(uint16_t current_mA);
  */
 void drv8301_set_oc_adj_set(uint16_t voltage_mV);
 
-
+/*! \fn void handleDrv(void)
+ *  \brief This function is for the internal use only. 
+ *  It has to be called periodical in main
+ *  
+ *  \return void
+ */
 void handleDrv(void);
+
+/*! \fn uint16 drv8301_get_register(drv8301_addr_t address)
+ *  \brief Read a register from the DRV8301
+ *  This function sends dummy data to read a register. 
+ *  This function gives the value immediately.
+ *  
+ *  \param  address     Address of register to be read
+ *  \return register
+ */
 uint16 drv8301_get_register(drv8301_addr_t address);
+
+/*! \fn void drv8301_set_config(drv8301_addr_t addr, uint16_t value)
+ *  \brief This function is used to config the DRV by the host
+ *  
+ *  \param  addr     Address of register to be write
+ *  \param  value    Register to be written
+ *  \return register
+ */
 void drv8301_set_config(drv8301_addr_t addr, uint16_t value);
 #endif /* DRV8301_H */
