@@ -38,6 +38,7 @@ Registers
 ******************************************************************************/
 
 #define DRV8301_REG_LEN     2   /*!< Register length */
+#define DRV8301_REG_COUNT   4   /*!< Number of Registers */
 
 /*! \enum drv8301_reg_rw_t
  *  \brief Possible access levels for registers.
