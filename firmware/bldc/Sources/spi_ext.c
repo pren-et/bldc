@@ -38,7 +38,8 @@ void spi_ext_init(void)
 
 void ReceiveCmd(void)
 {
-	switch (SPI2S & 0xFF00)
+	(void) SPI1S;
+	switch (SPI1D16 & 0xFF00)
 	{
 	case 0x1000:
 		/* Start byte received */
@@ -77,15 +78,15 @@ void receiveRpm(void)
 {
 	/* Set new speed */
 	spi_ext_irq = &ReceiveCmd;
-	(void) SPI2S;
-	//serRpm(SPI2S);
+	(void) SPI1S;
+	//serRpm(SPI1D16);
 }
 
 void sendRunningState(void)
 {
 	/* Dummy byte received, send running state */
 	spi_ext_irq = &sendRpm;
-	(void) SPI2S;
+	(void) SPI1S;
 	//SPI1D16 = getRunningState(); 
 }
 
@@ -93,14 +94,14 @@ void sendRpm(void)
 {
 	/* return current set speed */
 	spi_ext_irq = &ReceiveCmd;
-	(void) SPI2S;
+	(void) SPI1S;
 	//SPI1D16 = getSpeed();	
 }
 
 void getDrvConfig(void)
 {
 	static char tmpaddr = 0;
-	(void) SPI2S;
+	(void) SPI1S;
 	SPI1D16 = drv8301_get_register(tmpaddr);
 	tmpaddr++;
 	if( tmpaddr == 4)
@@ -113,7 +114,8 @@ void getDrvConfig(void)
 void setDrvConfig(void)
 {
 	static char tmpaddr = 2;
-	drv8301_set_config(tmpaddr, SPI2S);
+	(void) SPI1S;
+	drv8301_set_config(tmpaddr, SPI1D16);
 	tmpaddr++;
 	if( tmpaddr == 4)
 	{
