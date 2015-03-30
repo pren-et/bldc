@@ -22,6 +22,7 @@ void sendRunningState(void);
 void sendRpm(void);
 void getDrvConfig(void);
 void setDrvConfig(void);
+void iAmAlive(void);
 
 
 void spi_ext_init(void)
@@ -46,6 +47,10 @@ void ReceiveCmd(void)
 		break;
 	case 0x2000:
 		/* Stop byte received */
+		break;
+	case 0x3100:
+		/* Are you alive */
+		spi_ext_irq = &iAmAlive;
 		break;
 	case 0x4100:
 		/*Master sets the new speed */
@@ -121,5 +126,12 @@ void setDrvConfig(void)
 	{
 		tmpaddr = 2;
 		spi_ext_irq = &ReceiveCmd;		
-	}
+	}	
+}
+
+void iAmAlive(void)
+{
+	(void) SPI1S;
+	SPI1D16 = 0x5555; 
+	spi_ext_irq = &ReceiveCmd;	
 }
