@@ -1,14 +1,14 @@
 /*!
- *  ____  ____  _____ _   _       _____ _____ 
+ *  ____  ____  _____ _   _       _____ _____
  * |  _ \|  _ \| ____| \ | |     | ____|_   _|
- * | |_) | |_) |  _| |  \| |_____|  _|   | |  
- * |  __/|  _ <| |___| |\  |_____| |___  | |  
- * |_|   |_| \_\_____|_| \_|     |_____| |_|  
- *                                            
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |
+ * |  __/|  _ <| |___| |\  |_____| |___  | |
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|
+ *
  * \file  rtc.h
- * \brief 
+ * \brief
  * \author pren-et
- * 
+ *
  */
 
 #ifndef RTC_H_
@@ -18,7 +18,7 @@
 #include "hardware.h"
 
 /** \enum  rtc_flag_t
- *  \brief Flag being set in RTC ISR and read and cleared from main loop. 
+ *  \brief Flag being set in RTC ISR and read and cleared from main loop.
  */
 typedef enum {
     RTC_NONE = 0,       /*!< No action needed */
@@ -40,7 +40,7 @@ void rtc_init_flag(void);
 rtc_flag_t rtc_get_flag(void);
 
 /*! \fn void rtc_set_flag(void)
- *  \brief Function to set rtc flag. 
+ *  \brief Function to set rtc flag.
  *
  *  \return void
  */

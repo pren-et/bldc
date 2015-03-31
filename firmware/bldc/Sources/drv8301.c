@@ -1,21 +1,21 @@
 /*!
- *  ____  ____  _____ _   _       _____ _____ 
+ *  ____  ____  _____ _   _       _____ _____
  * |  _ \|  _ \| ____| \ | |     | ____|_   _|
- * | |_) | |_) |  _| |  \| |_____|  _|   | |  
- * |  __/|  _ <| |___| |\  |_____| |___  | |  
- * |_|   |_| \_\_____|_| \_|     |_____| |_|  
- *                                            
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |
+ * |  __/|  _ <| |___| |\  |_____| |___  | |
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|
+ *
  * \file drv8301.c
  * \brief Driver for three phase pre-driver DRV8301 from Texas Instruments
  * \author pren-et
- * 
+ *
  */
 
 #include "drv8301.h"
 #include "spi_drv.h"
 
 typedef enum {
-	NOTHING_NECESSARY,
+    NOTHING_NECESSARY,
     WRITING_NECESSARY,
     READING_NECESSARY
 } drv8301_action_necessary;
@@ -69,7 +69,7 @@ drv8301_reg_t drv8301_read_register(drv8301_addr_t address) {
 }
 
 void drv8301_write_register(drv8301_reg_t reg) {
-    if (reg.data_write.addr == DRV8301_ADDR_CONTROL1 || 
+    if (reg.data_write.addr == DRV8301_ADDR_CONTROL1 ||
         reg.data_write.addr == DRV8301_ADDR_CONTROL2) { /* check if register is writable */
         reg.data_write.rw   = DRV8301_RW_W;                 /* write register */
 
@@ -230,44 +230,44 @@ void drv8301_set_oc_adj_set(uint16_t voltage_mV) {
 
 void handleDrv(void)
 {
-	if( action_necesary == NOTHING_NECESSARY )       /* no action necessary */
-		return;
-	else
-	{	
-		uint8_t i;
-		drv8301_reg_t reg; 	
-		if( action_necesary == READING_NECESSARY )
-		{
-			for( i=0 ; i<DRV8301_REG_COUNT ; i++)
-			{
-				reg.data_write.data = 0x00;                  /* empty dummy data */
-				reg.data_write.addr = i;  /* address of register */
-				reg.data_write.rw   = DRV8301_RW_R;          /* read register */
-				(void) spi_drv_read_write(reg.raw);
-				shaddowReg[i].raw = spi_drv_read_write(reg.raw);	
-			}
-		}
-		else if( action_necesary == WRITING_NECESSARY )
-		{
-			for( i=2 ; i<DRV8301_REG_COUNT ; i++)
-			{
-				reg = shaddowReg[i];	
-				reg.data_write.addr = i;
-				reg.data_write.rw = DRV8301_RW_W;
-				(void) spi_drv_read_write(reg.raw);
-			}
-		}
-		action_necesary = NOTHING_NECESSARY;
-	}
+    if( action_necesary == NOTHING_NECESSARY )       /* no action necessary */
+        return;
+    else
+    {
+        uint8_t i;
+        drv8301_reg_t reg;
+        if( action_necesary == READING_NECESSARY )
+        {
+            for( i=0 ; i<DRV8301_REG_COUNT ; i++)
+            {
+                reg.data_write.data = 0x00;                  /* empty dummy data */
+                reg.data_write.addr = i;  /* address of register */
+                reg.data_write.rw   = DRV8301_RW_R;          /* read register */
+                (void) spi_drv_read_write(reg.raw);
+                shaddowReg[i].raw = spi_drv_read_write(reg.raw);
+            }
+        }
+        else if( action_necesary == WRITING_NECESSARY )
+        {
+            for( i=2 ; i<DRV8301_REG_COUNT ; i++)
+            {
+                reg = shaddowReg[i];
+                reg.data_write.addr = i;
+                reg.data_write.rw = DRV8301_RW_W;
+                (void) spi_drv_read_write(reg.raw);
+            }
+        }
+        action_necesary = NOTHING_NECESSARY;
+    }
 }
 
-uint16_t drv8301_get_register(drv8301_addr_t address) 
+uint16_t drv8301_get_register(drv8301_addr_t address)
 {
-	return shaddowReg[address].raw;
+    return shaddowReg[address].raw;
 }
 
 void drv8301_set_config(drv8301_addr_t addr, uint16_t value)
 {
-	shaddowReg[addr].raw = value;
-	action_necesary = WRITING_NECESSARY;
+    shaddowReg[addr].raw = value;
+    action_necesary = WRITING_NECESSARY;
 }

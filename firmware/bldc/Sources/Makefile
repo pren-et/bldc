@@ -2,7 +2,7 @@
 
 all: syntax doxygen
 
-syntax: 
+syntax:
 	gcc -Wall -Wparentheses -c drv8301.c -fsyntax-only
 
 doxygen:

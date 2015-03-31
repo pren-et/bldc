@@ -1,14 +1,14 @@
 /*!
- *  ____  ____  _____ _   _       _____ _____ 
+ *  ____  ____  _____ _   _       _____ _____
  * |  _ \|  _ \| ____| \ | |     | ____|_   _|
- * | |_) | |_) |  _| |  \| |_____|  _|   | |  
- * |  __/|  _ <| |___| |\  |_____| |___  | |  
- * |_|   |_| \_\_____|_| \_|     |_____| |_|  
- *                                            
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |
+ * |  __/|  _ <| |___| |\  |_____| |___  | |
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|
+ *
  * \file drv8301.h
  * \brief Driver for three phase pre-driver DRV8301 from Texas Instruments
  * \author pren-et
- * 
+ *
  */
 
 #ifndef DRV8301_H
@@ -364,22 +364,22 @@ Functions
 ******************************************************************************/
 /*! \fn void drv8301_init(void)
  *  \brief Initialisation function for DRV8301
- *  
+ *
  *  \return void
  */
 void drv8301_init(void);
 
 /*! \fn void drv8301_disable(void)
  *  \brief Disable the DRV8301 and the SPI-Interface.
- *  
+ *
  *  \return void
  */
 void drv8301_disable(void);
 
 /*! \fn drv8301_reg_t drv8301_read_register(drv8301_addr_t address)
  *  \brief Read a register from the DRV8301
- *  This function sends dummy data to read a register. 
- *  
+ *  This function sends dummy data to read a register.
+ *
  *  \param  address     Address of register to be read
  *  \return register
  */
@@ -387,9 +387,9 @@ drv8301_reg_t drv8301_read_register(drv8301_addr_t address);
 
 /*! \fn void drv8301_write_register(drv8301_reg_t reg)
  *  \brief Read a register from the DRV8301
- *  This function first checks if the chosen register is writable. 
- *  Then if so, writes the register. 
- *  
+ *  This function first checks if the chosen register is writable.
+ *  Then if so, writes the register.
+ *
  *  \param  reg         Register to be written
  *  \return void
  */
@@ -397,7 +397,7 @@ void drv8301_write_register(drv8301_reg_t reg);
 
 /*! \fn void drv8301_set_gate_current(uint16_t current_mA)
  *  \brief Set the gate current
- *  
+ *
  *  \param  current_mA  gate current in mA
  *  \return void
  */
@@ -405,25 +405,25 @@ void drv8301_set_gate_current(uint16_t current_mA);
 
 /*! \fn void drv8301_set_oc_adj_set(uint16_t voltage_mV)
  *  \brief Set the overcurrent adjustment register
- *  
+ *
  *  \param  voltage_mV  Overcurrent threshold value in mV
  *  \return void
  */
 void drv8301_set_oc_adj_set(uint16_t voltage_mV);
 
 /*! \fn void handleDrv(void)
- *  \brief This function is for the internal use only. 
+ *  \brief This function is for the internal use only.
  *  It has to be called periodical in main
- *  
+ *
  *  \return void
  */
 void handleDrv(void);
 
 /*! \fn uint16_t drv8301_get_register(drv8301_addr_t address)
  *  \brief Read a register from the DRV8301
- *  This function sends dummy data to read a register. 
+ *  This function sends dummy data to read a register.
  *  This function gives the value immediately.
- *  
+ *
  *  \param  address     Address of register to be read
  *  \return register
  */
@@ -431,7 +431,7 @@ uint16_t drv8301_get_register(drv8301_addr_t address);
 
 /*! \fn void drv8301_set_config(drv8301_addr_t addr, uint16_t value)
  *  \brief This function is used to config the DRV by the host
- *  
+ *
  *  \param  addr     Address of register to be write
  *  \param  value    Register to be written
  *  \return register

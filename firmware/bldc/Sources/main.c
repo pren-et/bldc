@@ -1,14 +1,14 @@
 /*!
- *  ____  ____  _____ _   _       _____ _____ 
+ *  ____  ____  _____ _   _       _____ _____
  * |  _ \|  _ \| ____| \ | |     | ____|_   _|
- * | |_) | |_) |  _| |  \| |_____|  _|   | |  
- * |  __/|  _ <| |___| |\  |_____| |___  | |  
- * |_|   |_| \_\_____|_| \_|     |_____| |_|  
- *                                            
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |
+ * |  __/|  _ <| |___| |\  |_____| |___  | |
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|
+ *
  * \file   main.c
  * \brief  Controller for BLDC Motors
  * \author pren-et
- * 
+ *
  */
 
 #include "platform.h"   /* include peripheral declarations */
@@ -17,6 +17,7 @@
 #include "spi_drv.h"        /* include spi declarations */
 #include "drv8301.h"
 #include "commutate.h"  /* commutation functions */
+#include "motor.h"      /* motor control */
 
 #define TASK_PERIOD_LED     100     /* Period for LED task (1s) */
 #define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
@@ -27,7 +28,7 @@ extern uint16_t force_interval;
 
 void init(void)
 {
-	hardware_lowlevel_init();
+    hardware_lowlevel_init();
     rtc_init_flag();
     spi_drv_init();
     //spi_ext_init();
@@ -53,7 +54,7 @@ void main(void)
 
     for(;;)
     {
-    	handleDrv();
+        handleDrv();
         if(rtc_get_clear_flag() != RTC_NONE) {
             /* Switch LED on to measure workload */
             PTDD &= ~(LED_Y);  /* LED1 on */
@@ -69,41 +70,36 @@ void main(void)
 
             /* Task to initialize DRV8301 */
             if( task_cnt_drv == 0 ) {
-            	//drv8301_reg_t test, test_2;
-            	//test_2 = drv8301_set_gate_current(200);
-            	//test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
+                //drv8301_reg_t test, test_2;
+                //test_2 = drv8301_set_gate_current(200);
+                //test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
 
-            	drv8301_reg_t reg,test;
-            	volatile unsigned int castTest;
-            	DisableInterrupts;
+                drv8301_reg_t reg,test;
+                volatile unsigned int castTest;
+                DisableInterrupts;
                 reg.data_write.data = test.data_write.data = 0x00;
                 reg.data_write.addr = test.data_write.addr = DRV8301_ADDR_CONTROL1;
                 reg.data_write.rw   = DRV8301_RW_W;
                 reg.control1.reg_write.oc_adj_set = DRV8301_OC_ADJ_SET_0_097V;
                 (void)spi_drv_read_write(reg.raw);
-                
+
 
                 test.data_write.rw   = DRV8301_RW_R;
                 castTest = spi_drv_read_write(test.raw);
-                
-                if(test.control1.reg_read.oc_adj_set == DRV8301_OC_ADJ_SET_0_097V)
-                	PTDD &= ~LED_G;
-                EnableInterrupts;
-                
-            	//test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
-            	//test.data_write.addr = DRV8301_ADDR_CONTROL1;
-            	//test.data_write.rw = DRV8301_REG_RW_R;
-            	//test.data_write.data = 0U;
-            	//test.raw = spi_drv_read_write(test.raw);
-            	//if(test_2.raw == test.raw) {
-            		//PTDD &= ~LED_G;
-                //}
-            	
 
-            	
-            	
-            	
-            	
+                if(test.control1.reg_read.oc_adj_set == DRV8301_OC_ADJ_SET_0_097V)
+                    PTDD &= ~LED_G;
+                EnableInterrupts;
+
+                //test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
+                //test.data_write.addr = DRV8301_ADDR_CONTROL1;
+                //test.data_write.rw = DRV8301_REG_RW_R;
+                //test.data_write.data = 0U;
+                //test.raw = spi_drv_read_write(test.raw);
+                //if(test_2.raw == test.raw) {
+                    //PTDD &= ~LED_G;
+                //}
+
                 task_cnt_drv = TASK_PERIOD_DRV; /* Prepare scheduler for next period */
             }
             else {
