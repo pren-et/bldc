@@ -17,3 +17,15 @@ wget -nc http://www.ti.com/lit/ds/symlink/drv8301.pdf
 wget -nc http://www.ti.com/lit/ds/symlink/drv8302.pdf
 # DRV8303
 wget -nc http://www.ti.com/lit/ds/symlink/drv8303.pdf
+
+
+### Flip Flop ###
+
+# 74HC175
+wget -nc http://www.nxp.com/documents/data_sheet/74HC_HCT175.pdf
+
+
+### Comparator ###
+
+# LM339
+wget -nc http://www.ti.com/lit/ds/symlink/lm339-n.pdf
