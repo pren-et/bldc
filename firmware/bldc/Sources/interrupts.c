@@ -17,6 +17,7 @@
 
 extern void (*spi_ext_irq) (void);
 uint16_t force_interval;
+uint8_t force_flag;
 
 interrupt void isr_RTC(void)        // RTC
 {
@@ -100,6 +101,18 @@ interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
     if (TPM1C5SC_CH5F) {                /* clear channel interrupt flag */
         TPM1C5SC_CH5F = 0;
     }
+    if (TPM1C5SC_ELS5A) {               /* rising edge on hall V */
+        TPM1C5SC_ELS5x = 0x02;              /* change trigger to falling edge */
+        if (!force_flag) {
+            commutate_state(COMM_STATE_AUTO_2);
+        }
+    }
+    else {                              /* falling edge on hall V */
+        TPM1C5SC_ELS5x = 0x01;              /* change trigger to rising edge */
+        if (!force_flag) {
+            commutate_state(COMM_STATE_AUTO_5);
+        }
+    }
     return;
 }
 
@@ -108,6 +121,18 @@ interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
     if (TPM1C4SC_CH4F) {                /* clear channel interrupt flag */
         TPM1C4SC_CH4F = 0;
     }
+    if (TPM1C4SC_ELS4A) {               /* rising edge on hall U */
+        TPM1C4SC_ELS4x = 0x02;              /* change trigger to falling edge */
+        if (!force_flag) {
+            commutate_state(COMM_STATE_AUTO_4);
+        }
+    }
+    else {                              /* falling edge on hall U */
+        TPM1C4SC_ELS4x = 0x01;              /* change trigger to rising edge */
+        if (!force_flag) {
+            commutate_state(COMM_STATE_AUTO_1);
+        }
+    }
     return;
 }
 
@@ -115,6 +140,18 @@ interrupt void isr_TPM1CH3(void)    // TPM1 channel 3
 {
     if (TPM1C3SC_CH3F) {                /* clear channel interrupt flag */
         TPM1C3SC_CH3F = 0;
+    }
+    if (TPM1C3SC_ELS3A) {               /* rising edge on hall W */
+        TPM1C3SC_ELS3x = 0x02;              /* change trigger to falling edge */
+        if (!force_flag) {
+            commutate_state(COMM_STATE_AUTO_0);
+        }
+    }
+    else {                              /* falling edge on hall W */
+        TPM1C3SC_ELS3x = 0x01;              /* change trigger to rising edge */
+        if (!force_flag) {
+            commutate_state(COMM_STATE_AUTO_3);
+        }
     }
     return;
 }
@@ -142,7 +179,9 @@ interrupt void isr_TPM1CH0(void)    // TPM1 channel 0
     }
     TPM1C0V += force_interval;          /* Prepare next interrupt */
     //PTDD ^= (LED_G);                    /* Toggle green LED */
-    commutate_next();                   /* Commutate */
+    if (force_flag){
+        commutate_next();                   /* Commutate */
+    }
     return;
 }
 

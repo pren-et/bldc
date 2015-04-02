@@ -25,6 +25,7 @@
 
 int i;
 extern uint16_t force_interval;
+extern uint8_t force_flag;
 
 void init(void)
 {
@@ -50,6 +51,7 @@ void main(void)
     task_cnt_drv  = TASK_PERIOD_DRV;
     task_cnt_comm = TASK_PERIOD_COMM;
     force_interval = 5000;
+    force_flag = 1;
     commutate_state(COMM_STATE_FORCED_0);
 
     for(;;)
@@ -127,24 +129,33 @@ void main(void)
                     }
                     force_interval -= 20;
                 }
-                else if (force_interval > 300) {
-                    force_interval -= 10;
-                }
-                else if (force_interval > 200) {
-                    if (force_interval == 300) {
-                        TPM2C0V = 1023;
-                    }
-                    force_interval -= 5;
-                }
-                else if (force_interval > 187) {
-                    force_interval -= 2;
-                }
-                //else if (force_interval > 94) {
-                //    force_interval -= 1;
+                //else if (force_interval > 300) {
+                //    force_interval -= 10;
                 //}
+                //else if (force_interval > 200) {
+                //    if (force_interval == 300) {
+                //        TPM2C0V = 1023;
+                //    }
+                //    force_interval -= 5;
+                //}
+                //else if (force_interval > 187) {
+                //    force_interval -= 2;
+                //}
+                // else if (force_interval > 94) {
+                //     force_interval -= 1;
+                // }
+                else if (force_interval > 300) {
+                    PTDD &= ~(LED_G);
+                    TPM2C0V = 767;
+                    force_flag = 0;
+                    force_interval = 300;
+                    task_cnt_comm = 1000;
+                }
                 else {
                     /* Final speed reached */
                     PTDD &= ~(LED_G);
+                    TPM2C0V = 850;
+                    force_flag = 0;
                 }
             }
             else {

@@ -172,18 +172,18 @@ D: High drive strength enabled (PTxDS)
 //#define TPM1SC_INIT     (TPM1SC_CLKSA_MASK)
 // Modulo for a sampling rate 48 kHz
 //#define TPM1MOD_INIT    (CLOCK/BUZZER_SAMPLE)
-// Pin not used for TPM1
+// Output compare
 #define TPM1C0SC_INIT   (TPM1C0SC_CH0IE_MASK | TPM1C0SC_MS0A_MASK)
-// Pin not used for TPM1
+// Output compare
 #define TPM1C1SC_INIT   (TPM1C1SC_CH1IE_MASK | TPM1C1SC_MS1A_MASK)
-// Pin not used for TPM1
+// Output compare
 #define TPM1C2SC_INIT   (TPM1C2SC_CH2IE_MASK | TPM1C2SC_MS2A_MASK)
-// Interrupt enable, input capture
-#define TPM1C3SC_INIT   (TPM1C3SC_CH3IE_MASK | TPM1C3SC_MS3A_MASK)
-// Interrupt enable, input capture
-#define TPM1C4SC_INIT   (TPM1C4SC_CH4IE_MASK | TPM1C4SC_MS4A_MASK)
-// Interrupt enable, input capture
-#define TPM1C5SC_INIT   (TPM1C5SC_CH5IE_MASK | TPM1C5SC_MS5A_MASK)
+// Interrupt enable, input capture on rising edge
+#define TPM1C3SC_INIT   (TPM1C3SC_CH3IE_MASK | TPM1C3SC_ELS3A_MASK)
+// Interrupt enable, input capture on rising edge
+#define TPM1C4SC_INIT   (TPM1C4SC_CH4IE_MASK | TPM1C4SC_ELS4A_MASK)
+// Interrupt enable, input capture on rising edge
+#define TPM1C5SC_INIT   (TPM1C5SC_CH5IE_MASK | TPM1C5SC_ELS5A_MASK)
 // Not in use
 #define TPM1C0V_INIT    (0)
 // Not in use
@@ -203,12 +203,14 @@ D: High drive strength enabled (PTxDS)
 #define TPM2SC_INIT     (TPM2SC_CLKSA_MASK)
 // Motor control with 10 bit resolution and a frequency of 23.4 kHz
 #define TPM2MOD_INIT    (1023)
-// Edge aligned PWM for both motors
+// Edge aligned PWM for control of motor power
 #define TPM2C0SC_INIT   (TPM2C0SC_MS0B_MASK | TPM2C0SC_ELS0B_MASK)
-#define TPM2C1SC_INIT   (TPM2C1SC_MS1B_MASK | TPM2C1SC_ELS1B_MASK)
+// Edge aligned PWM for reading motor status short after MOSFET Turn on
+#define TPM2C1SC_INIT   (TPM2C1SC_MS1B_MASK | TPM2C1SC_ELS1A_MASK)
 // Stop motors at startup
 #define TPM2C0V_INIT    (512)
-#define TPM2C1V_INIT    (512)
+// Delay MOSFET Turn on -> Read in of motor status = 1us
+#define TPM2C1V_INIT    (1023)
 
 /** \fn void hardware_lowlevel_init(void)
  *  \brief Initialisation for low level hardware
