@@ -144,18 +144,11 @@ void main(void)
                 //else if (force_interval > 94) {
                 //    force_interval -= 1;
                 //}
-                // else if (force_interval > 100) {
-                //     PTDD &= ~(LED_G);
-                //     TPM2C0V = 767;
-                //     force_flag = 0;
-                //     force_interval = 100;
-                //     task_cnt_comm = 1000;
-                // }
                 else {
-                    /* Final speed reached */
-                    PTDD &= ~(LED_G);
-                    TPM2C0V = 1023;
-                    force_flag = 0;
+                    /* Final speed for forced commutation reached */
+                    PTDD &= ~(LED_G);       /* turn green LED on */
+                    TPM2C0V = 1023;         /* set PWM to 100% */
+                    force_flag = 0;         /* disable forced commutation, enable autocommutation */
                 }
             }
             else {

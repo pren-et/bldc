@@ -101,22 +101,29 @@ interrupt void isr_TPM1O(void)      // TPM1 overflow
 
 interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
 {
+    /* variable for measuring time between commutations */
     static uint16_t capture_v = 0;
+
+    /* clear interrupt flag */
     if (TPM1C5SC_CH5F) {                /* clear channel interrupt flag */
         TPM1C5SC_CH5F = 0;
     }
+
+    /* prepare next commutation */
     if (TPM1C5SC_ELS5A) {               /* rising edge on hall V */
         TPM1C5SC_ELS5x = 0x02;              /* change trigger to falling edge */
-        if (!force_flag) {
+        if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_2);
         }
     }
     else {                              /* falling edge on hall V */
         TPM1C5SC_ELS5x = 0x01;              /* change trigger to rising edge */
-        if (!force_flag) {
+        if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_5);
         }
     }
+
+    /* measure time between commutations */
     speed_meas_v = TPM1C5V - capture_v;
     capture_v = TPM1C5V;
     return;
@@ -124,22 +131,29 @@ interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
 
 interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
 {
+    /* variable for measuring time between commutations */
     static uint16_t capture_u = 0;
+
+    /* clear interrupt flag */
     if (TPM1C4SC_CH4F) {                /* clear channel interrupt flag */
         TPM1C4SC_CH4F = 0;
     }
+
+    /* prepare next commutation */
     if (TPM1C4SC_ELS4A) {               /* rising edge on hall U */
         TPM1C4SC_ELS4x = 0x02;              /* change trigger to falling edge */
-        if (!force_flag) {
+        if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_0);
         }
     }
     else {                              /* falling edge on hall U */
         TPM1C4SC_ELS4x = 0x01;              /* change trigger to rising edge */
-        if (!force_flag) {
+        if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_3);
         }
     }
+
+    /* measure time between commutations */
     speed_meas_u = TPM1C4V - capture_u;
     capture_u = TPM1C4V;
     return;
@@ -147,22 +161,29 @@ interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
 
 interrupt void isr_TPM1CH3(void)    // TPM1 channel 3
 {
+    /* variable for measuring time between commutations */
     static uint16_t capture_w = 0;
+
+    /* clear interrupt flag */
     if (TPM1C3SC_CH3F) {                /* clear channel interrupt flag */
         TPM1C3SC_CH3F = 0;
     }
+
+    /* prepare next commutation */
     if (TPM1C3SC_ELS3A) {               /* rising edge on hall W */
         TPM1C3SC_ELS3x = 0x02;              /* change trigger to falling edge */
-        if (!force_flag) {
+        if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_4);
         }
     }
     else {                              /* falling edge on hall W */
         TPM1C3SC_ELS3x = 0x01;              /* change trigger to rising edge */
-        if (!force_flag) {
+        if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_1);
         }
     }
+
+    /* measure time between commutations */
     speed_meas_w = TPM1C3V - capture_w;
     capture_w = TPM1C3V;
     return;
@@ -190,8 +211,7 @@ interrupt void isr_TPM1CH0(void)    // TPM1 channel 0
         TPM1C0SC_CH0F = 0;
     }
     TPM1C0V += force_interval;          /* Prepare next interrupt */
-    //PTDD ^= (LED_G);                    /* Toggle green LED */
-    if (force_flag){
+    if (force_flag){                    /* check if forced commutation enabled */
         commutate_next();                   /* Commutate */
     }
     return;
