@@ -82,14 +82,14 @@ void main(void)
                 reg.data_write.data = test.data_write.data = 0x00;
                 reg.data_write.addr = test.data_write.addr = DRV8301_ADDR_CONTROL1;
                 reg.data_write.rw   = DRV8301_RW_W;
-                reg.control1.reg_write.oc_adj_set = DRV8301_OC_ADJ_SET_0_097V;
+                reg.control1.reg_write.oc_adj_set = DRV8301_OC_ADJ_SET_0_250V;
                 (void)spi_drv_read_write(reg.raw);
 
 
                 test.data_write.rw   = DRV8301_RW_R;
                 castTest = spi_drv_read_write(test.raw);
 
-                if(test.control1.reg_read.oc_adj_set == DRV8301_OC_ADJ_SET_0_097V)
+                if(test.control1.reg_read.oc_adj_set == DRV8301_OC_ADJ_SET_0_250V)
                     PTDD &= ~LED_G;
                 EnableInterrupts;
 
@@ -129,9 +129,9 @@ void main(void)
                     }
                     force_interval -= 20;
                 }
-                //else if (force_interval > 300) {
-                //    force_interval -= 10;
-                //}
+                else if (force_interval > 300) {
+                    force_interval -= 10;
+                }
                 //else if (force_interval > 200) {
                 //    if (force_interval == 300) {
                 //        TPM2C0V = 1023;
@@ -141,20 +141,20 @@ void main(void)
                 //else if (force_interval > 187) {
                 //    force_interval -= 2;
                 //}
-                // else if (force_interval > 94) {
-                //     force_interval -= 1;
+                //else if (force_interval > 94) {
+                //    force_interval -= 1;
+                //}
+                // else if (force_interval > 100) {
+                //     PTDD &= ~(LED_G);
+                //     TPM2C0V = 767;
+                //     force_flag = 0;
+                //     force_interval = 100;
+                //     task_cnt_comm = 1000;
                 // }
-                else if (force_interval > 300) {
-                    PTDD &= ~(LED_G);
-                    TPM2C0V = 767;
-                    force_flag = 0;
-                    force_interval = 300;
-                    task_cnt_comm = 1000;
-                }
                 else {
                     /* Final speed reached */
                     PTDD &= ~(LED_G);
-                    TPM2C0V = 850;
+                    TPM2C0V = 1023;
                     force_flag = 0;
                 }
             }
