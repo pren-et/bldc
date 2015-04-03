@@ -18,6 +18,7 @@
 #include "drv8301.h"
 #include "commutate.h"  /* commutation functions */
 #include "motor.h"      /* motor control */
+#include "led.h"        /* led control */
 
 #define TASK_PERIOD_LED     100     /* Period for LED task (1s) */
 #define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
@@ -59,12 +60,12 @@ void main(void)
         handleDrv();
         if(rtc_get_clear_flag() != RTC_NONE) {
             /* Switch LED on to measure workload */
-            PTDD &= ~(LED_Y);  /* LED1 on */
+            led_y_on();
 
             /* Task to toggle LED0 */
             if(task_cnt_led == 0) {
                 task_cnt_led = TASK_PERIOD_LED; /* Prepare scheduler for next period */
-                PTDD ^= LED_R; /* Toggle LED0 */
+                led_r_toggle();
             }
             else {
                 task_cnt_led--;
@@ -90,7 +91,7 @@ void main(void)
                 castTest = spi_drv_read_write(test.raw);
 
                 if(test.control1.reg_read.oc_adj_set == DRV8301_OC_ADJ_SET_0_250V)
-                    PTDD &= ~LED_G;
+                    led_g_on();
                 EnableInterrupts;
 
                 //test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
@@ -99,7 +100,7 @@ void main(void)
                 //test.data_write.data = 0U;
                 //test.raw = spi_drv_read_write(test.raw);
                 //if(test_2.raw == test.raw) {
-                    //PTDD &= ~LED_G;
+                    //led_g_on();
                 //}
 
                 task_cnt_drv = TASK_PERIOD_DRV; /* Prepare scheduler for next period */
@@ -146,7 +147,7 @@ void main(void)
                 //}
                 else {
                     /* Final speed for forced commutation reached */
-                    PTDD &= ~(LED_G);       /* turn green LED on */
+                    led_g_on();
                     TPM2C0V = 1023;         /* set PWM to 100% */
                     force_flag = 0;         /* disable forced commutation, enable autocommutation */
                 }
@@ -156,7 +157,7 @@ void main(void)
             }
 
             /* Other tasks come here */
-            PTDD |= LED_Y;  /* LED1 off */
+            led_y_off();
         }
         __RESET_WATCHDOG();  /* feeds the dog */
     }
