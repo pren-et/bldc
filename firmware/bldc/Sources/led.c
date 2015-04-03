@@ -13,6 +13,8 @@
 
 #include "led.h"
 
+uint8_t led_load_var = 0;
+
 void led_r_on(void) {
     PTDD &= ~(LED_R);   /* red LED on */
 }
@@ -49,3 +51,14 @@ void led_y_toggle(void) {
     PTDD ^= LED_Y;      /* yellow LED toggle */
 }
 
+void led_load_on(void) {
+    led_load_var++;
+    PTDD &= ~(LED_LOAD_MASK);   /* semaphore LED on */
+}
+
+void led_load_off(void) {
+    if (led_load_var <= 1) {
+        led_load_var--;
+        PTDD |= LED_LOAD_MASK;  /* semaphore LED off */
+    }
+}

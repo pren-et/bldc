@@ -17,6 +17,8 @@
 #include "platform.h"
 #include "hardware.h"
 
+#define LED_LOAD_MASK LED_Y
+
 /*! \fn void led_r_on(void)
  *  \brief turn red led on
  *
@@ -79,5 +81,19 @@ void led_y_off(void);
  *  \return void
  */
 void led_y_toggle(void);
+
+/*! \fn void led_load_on(void)
+ *  \brief increment semaphore and turn semaphore LED on
+ *
+ *  \return void
+ */
+void led_load_on(void);
+
+/*! \fn void led_load_off(void)
+ *  \brief decrement semaphore and turn semaphore LED off when semaphore reaches 0
+ *
+ *  \return void
+ */
+void led_load_off(void);
 
 #endif /* LED_H_ */

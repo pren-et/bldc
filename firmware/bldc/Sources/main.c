@@ -20,6 +20,9 @@
 #include "motor.h"      /* motor control */
 #include "led.h"        /* led control */
 
+/* LED for load display in main task loop (interrupts not included) */
+#define LED_LOAD (1)
+
 #define TASK_PERIOD_LED     100     /* Period for LED task (1s) */
 #define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
 #define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
@@ -60,7 +63,10 @@ void main(void)
         handleDrv();
         if(rtc_get_clear_flag() != RTC_NONE) {
             /* Switch LED on to measure workload */
-            led_y_on();
+            //led_y_on();
+            #if LED_LOAD
+                led_load_on();
+            #endif
 
             /* Task to toggle LED0 */
             if(task_cnt_led == 0) {
@@ -157,7 +163,10 @@ void main(void)
             }
 
             /* Other tasks come here */
-            led_y_off();
+            //led_y_off();
+            #if LED_LOAD
+                led_load_off();
+            #endif
         }
         __RESET_WATCHDOG();  /* feeds the dog */
     }
