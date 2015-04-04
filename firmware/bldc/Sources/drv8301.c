@@ -14,15 +14,9 @@
 #include "drv8301.h"
 #include "spi_drv.h"
 
-typedef enum {
-    NOTHING_NECESSARY,
-    WRITING_NECESSARY,
-    READING_NECESSARY
-} drv8301_action_necessary;
-
-drv8301_action_necessary action_necesary;
-drv8301_reg_t shaddowReg[DRV8301_REG_COUNT];
-
+static uint8_t voltage_host;
+static uint8_t current_host;
+static uint8_t error_host;
 
 /* Definition of necessary functions provided by a SPI module later */
 /*! \fn uint16_t spi_drv_read_write(uint16_t data)
@@ -43,7 +37,8 @@ void drv8301_init(void) {
             /* your compiler or in this library! */
         }
     }
-    action_necesary = READING_NECESSARY;
+    voltage_host = 0;
+    current_host = 0;
     PTBD |= EN_GATE;
     return;
 }
@@ -76,7 +71,6 @@ void drv8301_write_register(drv8301_reg_t reg) {
         /* write register */
         (void)spi_drv_read_write(reg.raw);
     }
-    action_necesary = READING_NECESSARY;
 
     return;
 }
@@ -107,7 +101,6 @@ void drv8301_set_gate_current(uint16_t current_mA) {
     reg.data_write.rw   = DRV8301_RW_W;             /* write register */
     (void)spi_drv_read_write(reg.raw);
 
-    action_necesary = READING_NECESSARY;
     return;
 }
 
@@ -224,50 +217,41 @@ void drv8301_set_oc_adj_set(uint16_t voltage_mV) {
     reg.data_write.rw   = DRV8301_RW_W;             /* write register */
     (void)spi_drv_read_write(reg.raw);
 
-    action_necesary = READING_NECESSARY;
     return;
+}
+
+void setVoltage_to_DRV(uint8_t voltage)
+{
+	voltage_host = voltage;
+}
+
+void setCurrent_to_DRV(uint8_t current)
+{
+	current_host = current;
+}
+
+uint8_t getErrors_form_DRV(void)
+{
+	return error_host;
+}
+
+void generate_Error_Byte(void)
+{
+	int tewt;
+	drv8301_reg_t reg; 
+	reg = drv8301_read_register(DRV8301_ADDR_STATUS1);
 }
 
 void handleDrv(void)
 {
-    if( action_necesary == NOTHING_NECESSARY )       /* no action necessary */
-        return;
-    else
-    {
-        uint8_t i;
-        drv8301_reg_t reg;
-        if( action_necesary == READING_NECESSARY )
-        {
-            for( i=0 ; i<DRV8301_REG_COUNT ; i++)
-            {
-                reg.data_write.data = 0x00;                  /* empty dummy data */
-                reg.data_write.addr = i;  /* address of register */
-                reg.data_write.rw   = DRV8301_RW_R;          /* read register */
-                (void) spi_drv_read_write(reg.raw);
-                shaddowReg[i].raw = spi_drv_read_write(reg.raw);
-            }
-        }
-        else if( action_necesary == WRITING_NECESSARY )
-        {
-            for( i=2 ; i<DRV8301_REG_COUNT ; i++)
-            {
-                reg = shaddowReg[i];
-                reg.data_write.addr = i;
-                reg.data_write.rw = DRV8301_RW_W;
-                (void) spi_drv_read_write(reg.raw);
-            }
-        }
-        action_necesary = NOTHING_NECESSARY;
-    }
-}
-
-uint16_t drv8301_get_register(drv8301_addr_t address)
-{
-    return shaddowReg[address].raw;
-}
-
-void drv8301_set_config(drv8301_addr_t addr, uint16_t value)
-{
-    shaddowReg[addr].raw = value;
-    action_necesary = WRITING_NECESSARY;
+	if( voltage_host != 0)
+	{
+		drv8301_set_oc_adj_set(voltage_host * 2);
+		voltage_host = 0;
+	}
+	if( current_host != 0)
+	{
+		drv8301_set_gate_current(current_host * 2);
+		current_host = 0;
+	}
 }

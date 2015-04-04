@@ -427,14 +427,7 @@ void handleDrv(void);
  *  \param  address     Address of register to be read
  *  \return register
  */
-uint16_t drv8301_get_register(drv8301_addr_t address);
-
-/*! \fn void drv8301_set_config(drv8301_addr_t addr, uint16_t value)
- *  \brief This function is used to config the DRV by the host
- *
- *  \param  addr     Address of register to be write
- *  \param  value    Register to be written
- *  \return register
- */
-void drv8301_set_config(drv8301_addr_t addr, uint16_t value);
+void setVoltage_to_DRV(uint8_t voltage);
+void setCurrent_to_DRV(uint8_t current);
+uint8_t getErrors_form_DRV(void);
 #endif /* DRV8301_H */
