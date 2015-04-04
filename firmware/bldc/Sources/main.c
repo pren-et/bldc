@@ -19,6 +19,7 @@
 #include "commutate.h"  /* commutation functions */
 #include "motor.h"      /* motor control */
 #include "led.h"        /* led control */
+#include "pwm.h"        /* pwm control */
 
 /* LED for load display in main task loop (interrupts not included) */
 #define LED_LOAD (1)
@@ -26,6 +27,8 @@
 #define TASK_PERIOD_LED     100     /* Period for LED task (1s) */
 #define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
 #define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
+#define TASK_INIT_PWM       10000   /* Init time for PWM task */
+#define TASK_PERIOD_PWM     2000    /* Period for PWM task */
 
 int i;
 extern uint16_t force_interval;
@@ -50,10 +53,12 @@ void main(void)
     uint16_t task_cnt_led;
     uint16_t task_cnt_drv;
     uint16_t task_cnt_comm;
+    uint16_t task_cnt_pwm;
     init();
     task_cnt_led  = TASK_PERIOD_LED;
     task_cnt_drv  = TASK_PERIOD_DRV;
     task_cnt_comm = TASK_PERIOD_COMM;
+    task_cnt_pwm  = TASK_INIT_PWM;
     force_interval = 5000;
     force_flag = 1;
     commutate_state(COMM_STATE_FORCED_0);
@@ -62,7 +67,7 @@ void main(void)
     {
         handleDrv();
         if(rtc_get_clear_flag() != RTC_NONE) {
-            /* Switch LED on to measure workload */
+            /* Switch load measurement LED on */
             //led_y_on();
             #if LED_LOAD
                 led_load_on();
@@ -132,29 +137,17 @@ void main(void)
                 }
                 else if (force_interval > 500) {
                     if (force_interval == 600) {
-                        TPM2C0V = 767;
+                        //pwm_set_100(77);
                     }
                     force_interval -= 20;
                 }
-                else if (force_interval > 300) {
-                    force_interval -= 10;
-                }
-                //else if (force_interval > 200) {
-                //    if (force_interval == 300) {
-                //        TPM2C0V = 1023;
-                //    }
-                //    force_interval -= 5;
-                //}
-                //else if (force_interval > 187) {
-                //    force_interval -= 2;
-                //}
-                //else if (force_interval > 94) {
-                //    force_interval -= 1;
+                //else if (force_interval > 300) {
+                //    force_interval -= 10;
                 //}
                 else {
                     /* Final speed for forced commutation reached */
                     led_g_on();
-                    TPM2C0V = 1023;         /* set PWM to 100% */
+                    //pwm_set_100(100);
                     force_flag = 0;         /* disable forced commutation, enable autocommutation */
                 }
             }
@@ -162,7 +155,23 @@ void main(void)
                 task_cnt_comm--;
             }
 
+            /* Task to toggle PWM */
+            if(task_cnt_pwm == 0) {
+                task_cnt_pwm = TASK_PERIOD_PWM; /* Prepare scheduler for next period */
+                if (pwm_get_100() >= 66) {
+                    pwm_set_100(50);
+                }
+                else {
+                    pwm_set_100(77);
+                }
+            }
+            else {
+                task_cnt_pwm--;
+            }
+
             /* Other tasks come here */
+
+            /* Switch load measurement led off */
             //led_y_off();
             #if LED_LOAD
                 led_load_off();
