@@ -12,11 +12,9 @@
  */
 
 #include "interrupts.h"
-#include "rtc.h"
-#include "commutate.h"
 
 /* LED for load display of interrupt service routines */
-#define LED_LOAD (0)
+#define LED_LOAD (1)
 
 extern void (*spi_ext_irq) (void);
 uint16_t force_interval;
@@ -194,11 +192,12 @@ interrupt void isr_TPM1O(void)      // TPM1 overflow
 
 interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
 {
+    /* variable for measuring time between commutations */
+    static uint16_t capture_v = 0;
+
     #if LED_LOAD
         led_load_on();
     #endif
-    /* variable for measuring time between commutations */
-    static uint16_t capture_v = 0;
 
     /* clear interrupt flag */
     if (TPM1C5SC_CH5F) {                /* clear channel interrupt flag */
@@ -230,11 +229,12 @@ interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
 
 interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
 {
+    /* variable for measuring time between commutations */
+    static uint16_t capture_u = 0;
+
     #if LED_LOAD
         led_load_on();
     #endif
-    /* variable for measuring time between commutations */
-    static uint16_t capture_u = 0;
 
     /* clear interrupt flag */
     if (TPM1C4SC_CH4F) {                /* clear channel interrupt flag */
@@ -266,11 +266,12 @@ interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
 
 interrupt void isr_TPM1CH3(void)    // TPM1 channel 3
 {
+    /* variable for measuring time between commutations */
+    static uint16_t capture_w = 0;
+
     #if LED_LOAD
         led_load_on();
     #endif
-    /* variable for measuring time between commutations */
-    static uint16_t capture_w = 0;
 
     /* clear interrupt flag */
     if (TPM1C3SC_CH3F) {                /* clear channel interrupt flag */

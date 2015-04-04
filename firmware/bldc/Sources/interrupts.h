@@ -15,6 +15,9 @@
 
 #include "platform.h"
 #include "hardware.h"
+#include "rtc.h"
+#include "commutate.h"
+#include "led.h"
 
 interrupt void isr_RTC(void);        // RTC
 interrupt void isr_IIC(void);        // IIC
