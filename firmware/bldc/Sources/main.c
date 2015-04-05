@@ -11,12 +11,12 @@
  *
  */
 
-#include "platform.h"   /* include peripheral declarations */
-#include "hardware.h"   /* include lowlevel hardware declarations */
-#include "rtc.h"        /* include rtc declarations */
-#include "spi_drv.h"    /* include spi declarations for the DRV communication */
-#include "spi_ext.h"    /* include spi declarations for the external communication */
-#include "drv8301.h"
+#include "platform.h"   /* peripheral declarations */
+#include "hardware.h"   /* lowlevel hardware declarations */
+#include "rtc.h"        /* rtc declarations */
+#include "spi_drv.h"    /* spi declarations for the DRV communication */
+#include "spi_ext.h"    /* spi declarations for the external communication */
+#include "drv8301.h"    /* interface to DRV8301 */
 #include "commutate.h"  /* commutation functions */
 #include "motor.h"      /* motor control */
 #include "led.h"        /* led control */
@@ -25,10 +25,12 @@
 /* LED for load display in main task loop (interrupts not included) */
 #define LED_LOAD (1)
 
-#define TASK_PERIOD_LED     100     /* Period for LED task (1s) */
+#define TASK_INIT_LED       1000    /* Init time for LED task (1s) */
+#define TASK_PERIOD_LED     1000    /* Period for LED task (1s) */
+#define TASK_INIT_COMM      100     /* Init time for Commutation task (100ms) */
 #define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
-#define TASK_INIT_PWM       10000   /* Init time for PWM task */
-#define TASK_PERIOD_PWM     2000    /* Period for PWM task */
+#define TASK_INIT_PWM       10000   /* Init time for PWM task (10s) */
+#define TASK_PERIOD_PWM     2000    /* Period for PWM task (2s) */
 
 int i;
 extern uint16_t force_interval;
@@ -43,7 +45,7 @@ void init(void)
     drv8301_init();
     motor_init();
     commutate_init();
-    EnableInterrupts;               // Interrupts aktivieren
+    EnableInterrupts;               // enable Interrupts
 }
 
 /**
@@ -55,8 +57,8 @@ void main(void)
     uint16_t task_cnt_comm;
     uint16_t task_cnt_pwm;
     init();
-    task_cnt_led  = TASK_PERIOD_LED;
-    task_cnt_comm = TASK_PERIOD_COMM;
+    task_cnt_led  = TASK_INIT_LED;
+    task_cnt_comm = TASK_INIT_COMM;
     task_cnt_pwm  = TASK_INIT_PWM;
     force_interval = 5000;
     force_flag = 1;
