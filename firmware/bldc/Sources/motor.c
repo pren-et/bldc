@@ -51,6 +51,7 @@ void motor_task(void) {
             if (prev_mode != MOTOR_MODE_RUN_FREE) {
                 /* initiate motor startup, if motor not previously running */
                 force_interval = 5000;
+                commutate_state(COMM_STATE_FORCED_0);
                 motor_status = MOTOR_STATUS_FORCED;
             }
             if (motor_status == MOTOR_STATUS_FORCED) {
