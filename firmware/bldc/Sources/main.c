@@ -26,7 +26,7 @@
 #define LED_LOAD (1)
 
 #define TASK_INIT_LED       1000    /* Init time for LED task (1s) */
-#define TASK_PERIOD_LED     1000    /* Period for LED task (1s) */
+#define TASK_PERIOD_LED     400    /* Period for LED task (1s) */
 #define TASK_INIT_COMM      100     /* Init time for Commutation task (100ms) */
 #define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
 #define TASK_INIT_PWM       10000   /* Init time for PWM task (10s) */
@@ -41,7 +41,7 @@ void init(void)
     hardware_lowlevel_init();
     rtc_init_flag();
     spi_drv_init();
-    spi_ext_init();
+    //spi_ext_init();
     drv8301_init();
     motor_init();
     commutate_init();
@@ -62,7 +62,7 @@ void main(void)
     task_cnt_pwm  = TASK_INIT_PWM;
     force_interval = 5000;
     force_flag = 1;
-    commutate_state(COMM_STATE_FORCED_0);
+    commutate_state(COMM_STATE_OFF);
 
     for(;;)
     {
@@ -111,7 +111,7 @@ void main(void)
                     /* Final speed for forced commutation reached */
                     led_g_on();
                     //pwm_set_100(100);
-                    force_flag = 0;         /* disable forced commutation, enable autocommutation */
+                    //force_flag = 0;         /* disable forced commutation, enable autocommutation */
                 }
             }
             else {
@@ -125,7 +125,7 @@ void main(void)
                     pwm_set_100(50);
                 }
                 else {
-                    pwm_set_100(100);
+                    pwm_set_100(50);
                 }
             }
             else {
