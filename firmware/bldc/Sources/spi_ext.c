@@ -51,7 +51,7 @@ void ReceiveCmd(void)
     {
     case 0x10:
         /* Start byte received */
-    	motor_set_mode(MOTOR_MODE_RUN_PID);
+    	motor_set_mode(MOTOR_MODE_RUN_FREE);
         break;
     case 0x20:
         /* Stop byte received */
