@@ -81,7 +81,7 @@ void motor_task(void) {
                     led_g_on();
                     //pwm_set_100(50);
                     force_flag = 0;         /* disable forced commutation, enable autocommutation */
-                    status = MOTOR_STATUS_AUTO;
+                    motor_status = MOTOR_STATUS_AUTO;
                 }
             }
             break;
