@@ -13,15 +13,15 @@
 
 #include "motor.h"
 
-motor_mode_t    mode    = MOTOR_MODE_OFF;
-motor_status_t  status  = MOTOR_STATUS_OFF;
+motor_mode_t    mode            = MOTOR_MODE_OFF;
+motor_status_t  motor_status    = MOTOR_STATUS_OFF;
 extern uint16_t force_interval;
 extern uint8_t  force_flag;
 
 void motor_init(void) {
-    mode    = MOTOR_MODE_OFF;
-    status  = MOTOR_STATUS_OFF;
-    force_flag = 1;
+    mode            = MOTOR_MODE_OFF;
+    motor_status    = MOTOR_STATUS_OFF;
+    force_flag      = 1;
 }
 
 motor_mode_t motor_get_mode(void) {
@@ -32,25 +32,28 @@ void motor_set_mode(motor_mode_t m) {
     mode = m;
 }
 
+motor_status_t motor_get_status(void) {
+    return motor_status;
+}
+
 void motor_task(void) {
     static motor_mode_t prev_mode = MOTOR_MODE_OFF;
     switch (mode) {
         case MOTOR_MODE_OFF:
             commutate_state(COMM_STATE_OFF);
-            status = MOTOR_STATUS_OFF;
+            motor_status = MOTOR_STATUS_OFF;
             break;
         case MOTOR_MODE_BRAKE:
             commutate_state(COMM_STATE_BRAKE);
-            status = MOTOR_STATUS_BRAKE;
+            motor_status = MOTOR_STATUS_BRAKE;
             break;
         case MOTOR_MODE_RUN_FREE:
-            /*  */
             if (prev_mode != MOTOR_MODE_RUN_FREE) {
                 /* initiate motor startup, if motor not previously running */
                 force_interval = 5000;
-                status = MOTOR_STATUS_FORCED;
+                motor_status = MOTOR_STATUS_FORCED;
             }
-            if (status == MOTOR_STATUS_FORCED) {
+            if (motor_status == MOTOR_STATUS_FORCED) {
                 if (force_interval > 10000) {
                     force_interval -= 500;
                 }

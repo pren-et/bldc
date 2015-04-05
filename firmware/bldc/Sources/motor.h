@@ -62,6 +62,13 @@ motor_mode_t motor_get_mode(void);
  */
 void motor_set_mode(motor_mode_t m);
 
+/*! \fn motor_status_t motor_get_status(void)
+ *  \brief Get motor status
+ *
+ *  \return Motor status
+ */
+motor_status_t motor_get_status(void);
+
 /*! \fn void motor_task(void)
  *  \brief task for motor control
  *
