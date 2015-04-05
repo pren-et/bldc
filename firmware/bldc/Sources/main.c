@@ -14,7 +14,8 @@
 #include "platform.h"   /* include peripheral declarations */
 #include "hardware.h"   /* include lowlevel hardware declarations */
 #include "rtc.h"        /* include rtc declarations */
-#include "spi_drv.h"        /* include spi declarations */
+#include "spi_drv.h"    /* include spi declarations for the DRV communication */
+#include "spi_ext.h"    /* include spi declarations for the external communication */
 #include "drv8301.h"
 #include "commutate.h"  /* commutation functions */
 #include "motor.h"      /* motor control */
@@ -25,7 +26,6 @@
 #define LED_LOAD (1)
 
 #define TASK_PERIOD_LED     100     /* Period for LED task (1s) */
-#define TASK_PERIOD_DRV     1000    /* Period for LED task (1s) */
 #define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
 #define TASK_INIT_PWM       10000   /* Init time for PWM task */
 #define TASK_PERIOD_PWM     2000    /* Period for PWM task */
@@ -39,8 +39,9 @@ void init(void)
     hardware_lowlevel_init();
     rtc_init_flag();
     spi_drv_init();
-    //spi_ext_init();
+    spi_ext_init();
     drv8301_init();
+    motor_init();
     commutate_init();
     EnableInterrupts;               // Interrupts aktivieren
 }
@@ -51,12 +52,10 @@ void init(void)
 void main(void)
 {
     uint16_t task_cnt_led;
-    uint16_t task_cnt_drv;
     uint16_t task_cnt_comm;
     uint16_t task_cnt_pwm;
     init();
     task_cnt_led  = TASK_PERIOD_LED;
-    task_cnt_drv  = TASK_PERIOD_DRV;
     task_cnt_comm = TASK_PERIOD_COMM;
     task_cnt_pwm  = TASK_INIT_PWM;
     force_interval = 5000;
@@ -80,44 +79,6 @@ void main(void)
             }
             else {
                 task_cnt_led--;
-            }
-
-            /* Task to initialize DRV8301 */
-            if( task_cnt_drv == 0 ) {
-                //drv8301_reg_t test, test_2;
-                //test_2 = drv8301_set_gate_current(200);
-                //test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
-
-                drv8301_reg_t reg,test;
-                volatile unsigned int castTest;
-                DisableInterrupts;
-                reg.data_write.data = test.data_write.data = 0x00;
-                reg.data_write.addr = test.data_write.addr = DRV8301_ADDR_CONTROL1;
-                reg.data_write.rw   = DRV8301_RW_W;
-                reg.control1.reg_write.oc_adj_set = DRV8301_OC_ADJ_SET_0_250V;
-                (void)spi_drv_read_write(reg.raw);
-
-
-                test.data_write.rw   = DRV8301_RW_R;
-                castTest = spi_drv_read_write(test.raw);
-
-                if(test.control1.reg_read.oc_adj_set == DRV8301_OC_ADJ_SET_0_250V)
-                    led_g_on();
-                EnableInterrupts;
-
-                //test = drv8301_read_register(DRV8301_ADDR_CONTROL1);
-                //test.data_write.addr = DRV8301_ADDR_CONTROL1;
-                //test.data_write.rw = DRV8301_REG_RW_R;
-                //test.data_write.data = 0U;
-                //test.raw = spi_drv_read_write(test.raw);
-                //if(test_2.raw == test.raw) {
-                    //led_g_on();
-                //}
-
-                task_cnt_drv = TASK_PERIOD_DRV; /* Prepare scheduler for next period */
-            }
-            else {
-                task_cnt_drv--;
             }
 
             /* Task to control commutation frequency */

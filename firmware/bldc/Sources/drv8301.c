@@ -39,6 +39,7 @@ void drv8301_init(void) {
     }
     voltage_host = 0;
     current_host = 0;
+    error_host = 0;
     PTBD |= EN_GATE;
     return;
 }

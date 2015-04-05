@@ -25,7 +25,8 @@ void setVoltage(void);
 void setCurrent(void);
 void sendRunningState(void);
 void sendErrorCode(void);
-void sendRpm(void);
+void sendRpmHigh(void);
+void sendRpmLow(void);
 void getVoltage(void);
 void getCurrent(void);
 void sendIamAlive(void);
@@ -67,7 +68,7 @@ void ReceiveCmd(void)
         break;
     case 0x51:
         /* set current */
-    	spi_ext_irq = &setCurrent;
+    	spi_ext_irq = &sendRpmHigh;
         break;
     case 0x64:
         /* return status */
@@ -131,12 +132,20 @@ void sendRunningState(void)
 void sendErrorCode(void)
 {
     /* Dummy byte received, send running state */
-    spi_ext_irq = &sendRpm;
+    spi_ext_irq = &sendRpmHigh;
     (void) SPI1S;
     SPI1DL = getErrors_form_DRV();
 }
 
-void sendRpm(void)
+void sendRpmHigh(void)
+{
+    /* return current set speed */
+    spi_ext_irq = &sendRpmLow;
+    (void) SPI1S;
+    //SPI1DL = getSpeed();
+}
+
+void sendRpmLow(void)
 {
     /* return current set speed */
     spi_ext_irq = &ReceiveCmd;
