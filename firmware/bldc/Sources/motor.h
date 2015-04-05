@@ -15,9 +15,10 @@
 
 #include "platform.h"
 #include "hardware.h"
+#include "led.h"
 #include "commutate.h"
 
-/*! \enum comm_mode_t
+/*! \enum motor_mode_t
  *  \brief Type for controlling the motor operation mode
  */
 typedef enum {
@@ -27,6 +28,17 @@ typedef enum {
     MOTOR_MODE_RUN_PID,         /*!< Motor running with pid controller */
     MOTOR_MODE_SOUND,           /*!< Motor playing sound */
 } motor_mode_t;
+
+/*! \enum motor_status_t
+ *  \brief Type for controlling the motor status
+ */
+typedef enum {
+    MOTOR_STATUS_OFF,           /*!< Motor off */
+    MOTOR_STATUS_BRAKE,         /*!< Motor braked */
+    MOTOR_STATUS_FORCED,        /*!< Motor running with forced commutation */
+    MOTOR_STATUS_AUTO,          /*!< Motor running with auto commutation */
+    MOTOR_STATUS_SOUND,         /*!< Motor playing sound */
+} motor_status_t;
 
 /*! \fn void motor_init(void)
  *  \brief Initialize motor
@@ -49,5 +61,12 @@ motor_mode_t motor_get_mode(void);
  *  \return void
  */
 void motor_set_mode(motor_mode_t m);
+
+/*! \fn void motor_task(void)
+ *  \brief task for motor control
+ *
+ *  \return void
+ */
+void motor_task(void);
 
 #endif /* MOTOR_H_ */

@@ -27,12 +27,11 @@
 
 #define TASK_INIT_LED       1000    /* Init time for LED task (1s) */
 #define TASK_PERIOD_LED     400    /* Period for LED task (1s) */
-#define TASK_INIT_COMM      100     /* Init time for Commutation task (100ms) */
-#define TASK_PERIOD_COMM    100     /* Period for Commutation task (100ms) */
+#define TASK_INIT_MOTOR     100     /* Init time for motor task (100ms) */
+#define TASK_PERIOD_MOTOR   100     /* Period for motor task (100ms) */
 #define TASK_INIT_PWM       10000   /* Init time for PWM task (10s) */
 #define TASK_PERIOD_PWM     2000    /* Period for PWM task (2s) */
 
-int i;
 extern uint16_t force_interval;
 extern uint8_t force_flag;
 
@@ -54,15 +53,13 @@ void init(void)
 void main(void)
 {
     uint16_t task_cnt_led;
-    uint16_t task_cnt_comm;
+    uint16_t task_cnt_motor;
     uint16_t task_cnt_pwm;
     init();
-    task_cnt_led  = TASK_INIT_LED;
-    task_cnt_comm = TASK_INIT_COMM;
-    task_cnt_pwm  = TASK_INIT_PWM;
-    force_interval = 5000;
-    force_flag = 1;
-    commutate_state(COMM_STATE_OFF);
+    task_cnt_led    = TASK_INIT_LED;
+    task_cnt_motor  = TASK_INIT_MOTOR;
+    task_cnt_pwm    = TASK_INIT_PWM;
+    force_interval  = 5000;
 
     for(;;)
     {
@@ -84,38 +81,12 @@ void main(void)
             }
 
             /* Task to control commutation frequency */
-            if(task_cnt_comm == 0) {
-                task_cnt_comm = TASK_PERIOD_COMM; /* Prepare scheduler for next period */
-                if (force_interval > 10000) {
-                    force_interval -= 500;
-                }
-                else if (force_interval > 5000) {
-                    force_interval -= 200;
-                }
-                else if (force_interval > 2000) {
-                    force_interval -= 100;
-                }
-                else if (force_interval > 1000) {
-                    force_interval -= 50;
-                }
-                else if (force_interval > 500) {
-                    if (force_interval == 600) {
-                        //pwm_set_100(77);
-                    }
-                    force_interval -= 20;
-                }
-                //else if (force_interval > 300) {
-                //    force_interval -= 10;
-                //}
-                else {
-                    /* Final speed for forced commutation reached */
-                    led_g_on();
-                    //pwm_set_100(100);
-                    //force_flag = 0;         /* disable forced commutation, enable autocommutation */
-                }
+            if(task_cnt_motor == 0) {
+                task_cnt_motor = TASK_PERIOD_MOTOR; /* Prepare scheduler for next period */
+                motor_task();   /* Perform motor task */
             }
             else {
-                task_cnt_comm--;
+                task_cnt_motor--;
             }
 
             /* Task to toggle PWM */
