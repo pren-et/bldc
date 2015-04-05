@@ -79,8 +79,9 @@ void motor_task(void) {
                 else {
                     /* Final speed for forced commutation reached */
                     led_g_on();
-                    //pwm_set_100(100);
-                    //force_flag = 0;         /* disable forced commutation, enable autocommutation */
+                    //pwm_set_100(50);
+                    force_flag = 0;         /* disable forced commutation, enable autocommutation */
+                    status = MOTOR_STATUS_AUTO;
                 }
             }
             break;
