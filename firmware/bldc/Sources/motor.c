@@ -41,10 +41,12 @@ void motor_task(void) {
     switch (mode) {
         case MOTOR_MODE_OFF:
             commutate_state(COMM_STATE_OFF);
+            force_flag      = 1;
             motor_status = MOTOR_STATUS_OFF;
             break;
         case MOTOR_MODE_BRAKE:
             commutate_state(COMM_STATE_BRAKE);
+            force_flag      = 1;
             motor_status = MOTOR_STATUS_BRAKE;
             break;
         case MOTOR_MODE_RUN_FREE:
