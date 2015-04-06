@@ -40,7 +40,7 @@ void init(void)
     hardware_lowlevel_init();
     rtc_init_flag();
     spi_drv_init();
-    //spi_ext_init();
+    spi_ext_init();
     drv8301_init();
     motor_init();
     commutate_init();

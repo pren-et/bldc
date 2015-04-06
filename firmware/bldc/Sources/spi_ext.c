@@ -16,7 +16,7 @@
 #include "hardware.h"
 
 
-void (*spi_ext_irq) (void);
+volatile void (*spi_ext_irq) (void);
 
 void ReceiveCmd(void);
 void receiveRpmHigh(void);
@@ -34,14 +34,17 @@ void sendIamAlive(void);
 
 void spi_ext_init(void)
 {
+    spi_ext_irq = &ReceiveCmd;
     #pragma MESSAGE DISABLE C4002        /* Disable warning C4002 "Result not used" */
     (void)SPI1S;                         /* Read the status register */
     (void)SPI1D16;                       /* Read the data register */
     /* SPI1C2: SPMIE=0,SPIMODE=0,??=0,MODFEN=0,BIDIROE=0,??=0,SPISWAI=0,SPC0=0 */
     SPI1C2 = (uint8_t) 0x00U;           /* Configure the SPI port - control register 2 */
     /* SPI1C1: SPIE=1,SPE=1,SPTIE=1,MSTR=0,CPOL=0,CPHA=1,SSOE=0,LSBFE=1 */
-    SPI1C1 = (uint8_t) 0xE5U;          /*  Configure the SPI port - control register 1 */
-    spi_ext_irq = &ReceiveCmd;
+    SPI1C1 = (uint8_t) 0x85U;          /*  Configure the SPI port - control register 1 */
+
+    SPI1C1_SPE = 1U;                    /* Enable device */
+    SPI1DL = 0x00;
 }
 
 /* main interrupt function */
@@ -109,16 +112,16 @@ void receiveRpmLow(void)
 
 void setVoltage(void)
 {
+    spi_ext_irq = &ReceiveCmd;
     (void) SPI1S;
     setVoltage_to_DRV(SPI1DL);
-    spi_ext_irq = &ReceiveCmd;
 }
 
 void setCurrent(void)
 {
+    spi_ext_irq = &ReceiveCmd;
     (void) SPI1S;
     setCurrent_to_DRV(SPI1DL);
-    spi_ext_irq = &ReceiveCmd;
 }
 
 void sendRunningState(void)
@@ -142,7 +145,7 @@ void sendRpmHigh(void)
     /* return current set speed */
     spi_ext_irq = &sendRpmLow;
     (void) SPI1S;
-    //SPI1DL = getSpeed();
+    SPI1DL = 0xD1;//getSpeed();
 }
 
 void sendRpmLow(void)
@@ -150,7 +153,7 @@ void sendRpmLow(void)
     /* return current set speed */
     spi_ext_irq = &ReceiveCmd;
     (void) SPI1S;
-    //SPI1DL = getSpeed();
+    SPI1DL = 0x73;//getSpeed();
 }
 
 void sendIamAlive(void)
