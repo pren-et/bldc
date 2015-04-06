@@ -16,7 +16,7 @@
 /* LED for load display of interrupt service routines */
 #define LED_LOAD (1)
 
-extern void (*spi_ext_irq) (void);
+extern volatile void (*spi_ext_irq) (void);
 uint16_t force_interval = 5000;
 uint8_t force_flag;
 uint16_t speed_meas_u;
