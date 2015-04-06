@@ -69,12 +69,12 @@ void motor_task(void) {
                 else if (force_interval > 1000) {
                     force_interval -= 50;
                 }
-                else if (force_interval > 500) {
-                    if (force_interval == 600) {
-                        //pwm_set_100(77);
-                    }
-                    force_interval -= 20;
-                }
+                //else if (force_interval > 500) {
+                //    if (force_interval == 600) {
+                //        //pwm_set_100(77);
+                //    }
+                //    force_interval -= 20;
+                //}
                 //else if (force_interval > 300) {
                 //    force_interval -= 10;
                 //}

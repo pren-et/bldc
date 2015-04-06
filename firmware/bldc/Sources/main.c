@@ -96,7 +96,7 @@ void main(void)
                     pwm_set_100(50);
                 }
                 else {
-                    pwm_set_100(50);
+                    pwm_set_100(66);
                 }
             }
             else {

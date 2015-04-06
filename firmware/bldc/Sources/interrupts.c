@@ -211,7 +211,7 @@ interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
         if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_2);
         }
-        TPM1C4SC_ELS4x = 0x01;              /* Prepare interrupt for falling edge on hall U */
+        TPM1C4SC_ELS4x = 0x02;              /* Prepare interrupt for falling edge on hall U */
         TPM1C4SC_CH4IE = 0x01;
         if (TPM1C4SC_CH4F) {
             TPM1C4SC_CH4F = 0;
@@ -222,7 +222,7 @@ interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
         if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_5);
         }
-        TPM1C4SC_ELS4x = 0x02;              /* Prepare interrupt for rising edge on hall U */
+        TPM1C4SC_ELS4x = 0x01;              /* Prepare interrupt for rising edge on hall U */
         TPM1C4SC_CH4IE = 0x01;
         if (TPM1C4SC_CH4F) {
             TPM1C4SC_CH4F = 0;
@@ -259,7 +259,7 @@ interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
         if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_0);
         }
-        TPM1C3SC_ELS3x = 0x01;              /* Prepare interrupt for falling edge on hall W */
+        TPM1C3SC_ELS3x = 0x02;              /* Prepare interrupt for falling edge on hall W */
         TPM1C3SC_CH3IE = 0x01;
         if (TPM1C3SC_CH3F) {
             TPM1C3SC_CH3F = 0;
@@ -270,7 +270,7 @@ interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
         if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_3);
         }
-        TPM1C3SC_ELS3x = 0x02;              /* Prepare interrupt for rising edge on hall W */
+        TPM1C3SC_ELS3x = 0x01;              /* Prepare interrupt for rising edge on hall W */
         TPM1C3SC_CH3IE = 0x01;
         if (TPM1C3SC_CH3F) {
             TPM1C3SC_CH3F = 0;
@@ -307,7 +307,7 @@ interrupt void isr_TPM1CH3(void)    // TPM1 channel 3
         if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_4);
         }
-        TPM1C5SC_ELS5x = 0x01;              /* Prepare interrupt for falling edge on hall V */
+        TPM1C5SC_ELS5x = 0x02;              /* Prepare interrupt for falling edge on hall V */
         TPM1C5SC_CH5IE = 0x01;
         if (TPM1C5SC_CH5F) {
             TPM1C5SC_CH5F = 0;
@@ -318,7 +318,7 @@ interrupt void isr_TPM1CH3(void)    // TPM1 channel 3
         if (!force_flag) {                  /* check if forced commutation disabled */
             commutate_state(COMM_STATE_AUTO_1);
         }
-        TPM1C5SC_ELS5x = 0x02;              /* Prepare interrupt for rising edge on hall V */
+        TPM1C5SC_ELS5x = 0x01;              /* Prepare interrupt for rising edge on hall V */
         TPM1C5SC_CH5IE = 0x01;
         if (TPM1C5SC_CH5F) {
             TPM1C5SC_CH5F = 0;
