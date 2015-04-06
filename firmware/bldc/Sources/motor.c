@@ -15,11 +15,12 @@
 
 motor_mode_t    mode            = MOTOR_MODE_OFF;
 motor_status_t  motor_status    = MOTOR_STATUS_OFF;
-extern uint16_t force_interval;
+uint16_t force_interval;
 
 void motor_init(void) {
     mode            = MOTOR_MODE_OFF;
     motor_status    = MOTOR_STATUS_OFF;
+    force_interval  = 5000;
 }
 
 motor_mode_t motor_get_mode(void) {
@@ -32,6 +33,10 @@ void motor_set_mode(motor_mode_t m) {
 
 motor_status_t motor_get_status(void) {
     return motor_status;
+}
+
+uint16_t motor_get_force_interval(void) {
+    return force_interval;
 }
 
 void motor_task(void) {

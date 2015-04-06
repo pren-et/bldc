@@ -71,6 +71,13 @@ void motor_set_mode(motor_mode_t m);
  */
 motor_status_t motor_get_status(void);
 
+/*! \fn uint16_t motor_get_force_interval(void)
+ *  \brief Get forced commutation interval
+ *
+ *  \return forced commutation interval
+ */
+uint16_t motor_get_force_interval(void);
+
 /*! \fn void motor_task(void)
  *  \brief task for motor control
  *

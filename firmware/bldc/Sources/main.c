@@ -32,8 +32,6 @@
 #define TASK_INIT_PWM       10000   /* Init time for PWM task (10s) */
 #define TASK_PERIOD_PWM     2000    /* Period for PWM task (2s) */
 
-extern uint16_t force_interval;
-
 void init(void)
 {
     hardware_lowlevel_init();
@@ -41,8 +39,8 @@ void init(void)
     spi_drv_init();
     spi_ext_init();
     drv8301_init();
-    motor_init();
     commutate_init();
+    motor_init();
     EnableInterrupts;               // enable Interrupts
 }
 
@@ -58,7 +56,6 @@ void main(void)
     task_cnt_led    = TASK_INIT_LED;
     task_cnt_motor  = TASK_INIT_MOTOR;
     task_cnt_pwm    = TASK_INIT_PWM;
-    force_interval  = 5000;
 
     for(;;)
     {
