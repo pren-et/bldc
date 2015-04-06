@@ -44,7 +44,7 @@ void spi_ext_init(void)
     SPI1C1 = (uint8_t) 0x85U;          /*  Configure the SPI port - control register 1 */
 
     SPI1C1_SPE = 1U;                    /* Enable device */
-    SPI1DL = 0x00;
+    SPI1DL = 0x01;
 }
 
 /* main interrupt function */
