@@ -79,6 +79,7 @@ void ReceiveCmd(void)
         break;
     case 0x71:
     	/* Are you alive received */
+        SPI1DL = 0x55;
         spi_ext_irq = &sendIamAlive;
         break;
     case 0xC0:
@@ -161,5 +162,5 @@ void sendIamAlive(void)
     /* return I am alive */
     spi_ext_irq = &ReceiveCmd;
     (void) SPI1S;
-    SPI1DL = 0x55;
+    SPI1DL = 0x01;
 }
