@@ -16,12 +16,10 @@
 motor_mode_t    mode            = MOTOR_MODE_OFF;
 motor_status_t  motor_status    = MOTOR_STATUS_OFF;
 extern uint16_t force_interval;
-extern uint8_t  force_flag;
 
 void motor_init(void) {
     mode            = MOTOR_MODE_OFF;
     motor_status    = MOTOR_STATUS_OFF;
-    force_flag      = 1;
 }
 
 motor_mode_t motor_get_mode(void) {
@@ -41,12 +39,10 @@ void motor_task(void) {
     switch (mode) {
         case MOTOR_MODE_OFF:
             commutate_state(COMM_STATE_OFF);
-            force_flag      = 1;
             motor_status = MOTOR_STATUS_OFF;
             break;
         case MOTOR_MODE_BRAKE:
             commutate_state(COMM_STATE_BRAKE);
-            force_flag      = 1;
             motor_status = MOTOR_STATUS_BRAKE;
             break;
         case MOTOR_MODE_RUN_FREE:
@@ -82,8 +78,7 @@ void motor_task(void) {
                     /* Final speed for forced commutation reached */
                     led_g_on();
                     //pwm_set_100(50);
-                    force_flag = 0;         /* disable forced commutation, enable autocommutation */
-                    motor_status = MOTOR_STATUS_AUTO;
+                    motor_status = MOTOR_STATUS_AUTO_FREE;
                 }
             }
             break;

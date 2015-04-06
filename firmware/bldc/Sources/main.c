@@ -33,7 +33,6 @@
 #define TASK_PERIOD_PWM     2000    /* Period for PWM task (2s) */
 
 extern uint16_t force_interval;
-extern uint8_t force_flag;
 
 void init(void)
 {

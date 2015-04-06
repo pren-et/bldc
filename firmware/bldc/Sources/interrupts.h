@@ -17,6 +17,7 @@
 #include "hardware.h"
 #include "rtc.h"
 #include "commutate.h"
+#include "motor.h"
 #include "led.h"
 
 interrupt void isr_RTC(void);        // RTC

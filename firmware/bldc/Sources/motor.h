@@ -16,6 +16,7 @@
 #include "platform.h"
 #include "hardware.h"
 #include "led.h"
+#include "pwm.h"
 #include "commutate.h"
 
 /*! \enum motor_mode_t
@@ -36,7 +37,8 @@ typedef enum {
     MOTOR_STATUS_OFF,           /*!< Motor off */
     MOTOR_STATUS_BRAKE,         /*!< Motor braked */
     MOTOR_STATUS_FORCED,        /*!< Motor running with forced commutation */
-    MOTOR_STATUS_AUTO,          /*!< Motor running with auto commutation */
+    MOTOR_STATUS_AUTO_FREE,     /*!< Motor running with auto commutation */
+    MOTOR_STATUS_AUTO_PID,      /*!< Motor running with auto commutation and PID speed control */
     MOTOR_STATUS_SOUND,         /*!< Motor playing sound */
 } motor_status_t;
 
