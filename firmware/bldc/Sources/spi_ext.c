@@ -23,13 +23,12 @@ void receiveRpmHigh(void);
 void receiveRpmLow(void);
 void setVoltage(void);
 void setCurrent(void);
-void sendRunningState(void);
 void sendErrorCode(void);
 void sendRpmHigh(void);
 void sendRpmLow(void);
 void getVoltage(void);
 void getCurrent(void);
-void sendIamAlive(void);
+void DataTransmitted(void);
 
 
 void spi_ext_init(void)
@@ -75,12 +74,13 @@ void ReceiveCmd(void)
         break;
     case 0x64:
         /* return status */
-        spi_ext_irq = &sendRunningState;
+        spi_ext_irq = &sendErrorCode;
+        SPI1DL = (char)motor_get_mode();
         break;
     case 0x71:
     	/* Are you alive received */
         SPI1DL = 0x55;
-        spi_ext_irq = &sendIamAlive;
+        spi_ext_irq = &DataTransmitted;
         break;
     case 0xC0:
     	/* Start measurement with parameter */
@@ -125,14 +125,6 @@ void setCurrent(void)
     setCurrent_to_DRV(SPI1DL);
 }
 
-void sendRunningState(void)
-{
-    /* Dummy byte received, send running state */
-    spi_ext_irq = &sendErrorCode;
-    (void) SPI1S;
-    SPI1DL = (char)motor_get_mode();
-}
-
 void sendErrorCode(void)
 {
     /* Dummy byte received, send running state */
@@ -152,14 +144,13 @@ void sendRpmHigh(void)
 void sendRpmLow(void)
 {
     /* return current set speed */
-    spi_ext_irq = &ReceiveCmd;
+    spi_ext_irq = &DataTransmitted;
     (void) SPI1S;
     SPI1DL = 0x73;//getSpeed();
 }
 
-void sendIamAlive(void)
+void DataTransmitted(void)
 {
-    /* return I am alive */
     spi_ext_irq = &ReceiveCmd;
     (void) SPI1S;
     SPI1DL = 0x01;
