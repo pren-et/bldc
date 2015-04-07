@@ -13,6 +13,7 @@
 #include "spi_ext.h"
 #include "drv8301.h"
 #include "motor.h"
+#include "pid.h"
 #include "hardware.h"
 
 
@@ -55,10 +56,12 @@ void ReceiveCmd(void)
     case 0x10:
         /* Start byte received */
     	motor_set_mode(MOTOR_MODE_RUN_FREE);
+        SPI1DL = 0x01;
         break;
     case 0x20:
         /* Stop byte received */
     	motor_set_mode(MOTOR_MODE_BRAKE);
+        SPI1DL = 0x01;
         break;
     case 0x32:
         /* set RPM */
@@ -79,8 +82,8 @@ void ReceiveCmd(void)
         break;
     case 0x71:
     	/* Are you alive received */
-        SPI1DL = 0x55;
         spi_ext_irq = &DataTransmitted;
+        SPI1DL = 0x55;
         break;
     case 0xC0:
     	/* Start measurement with parameter */
@@ -100,7 +103,7 @@ void receiveRpmHigh(void)
     /* Set new speed */
     spi_ext_irq = &receiveRpmLow;
     (void) SPI1S;
-    //serRpm(SPI1DL);
+    set_prm_high(SPI1DL);
 }
 
 void receiveRpmLow(void)
@@ -108,7 +111,7 @@ void receiveRpmLow(void)
     /* Set new speed */
     spi_ext_irq = &ReceiveCmd;
     (void) SPI1S;
-    //serRpm(SPI1DL);
+    set_prm_low(SPI1DL);
 }
 
 void setVoltage(void)
@@ -138,7 +141,7 @@ void sendRpmHigh(void)
     /* return current set speed */
     spi_ext_irq = &sendRpmLow;
     (void) SPI1S;
-    SPI1DL = 0xD1;//getSpeed();
+    SPI1DL = get_prm_High();
 }
 
 void sendRpmLow(void)
@@ -146,7 +149,7 @@ void sendRpmLow(void)
     /* return current set speed */
     spi_ext_irq = &DataTransmitted;
     (void) SPI1S;
-    SPI1DL = 0x73;//getSpeed();
+    SPI1DL = get_prm_low();
 }
 
 void DataTransmitted(void)

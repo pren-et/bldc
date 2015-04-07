@@ -238,7 +238,6 @@ uint8_t getErrors_form_DRV(void)
 
 void generate_Error_Byte(void)
 {
-	int tewt;
 	drv8301_reg_t reg; 
 	reg = drv8301_read_register(DRV8301_ADDR_STATUS1);
 }

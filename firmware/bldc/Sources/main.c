@@ -21,6 +21,7 @@
 #include "motor.h"      /* motor control */
 #include "led.h"        /* led control */
 #include "pwm.h"        /* pwm control */
+#include "pid.h"        /* pid */
 
 /* LED for load display in main task loop (interrupts not included) */
 #define LED_LOAD (1)
@@ -39,6 +40,7 @@ void init(void)
     spi_drv_init();
     spi_ext_init();
     drv8301_init();
+    init_pid();
     commutate_init();
     motor_init();
     EnableInterrupts;               // enable Interrupts
