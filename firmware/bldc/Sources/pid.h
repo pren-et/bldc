@@ -15,6 +15,15 @@
 #define PID_H_
 
 #include "hardware.h"
+#include "motor.h"
+
+typedef union {
+    struct {
+        uint8_t high;   /*!< High byte */
+        uint8_t low;    /*!< Low byte */
+    } bytefield;        /*!< Nibbles */
+    uint16_t value;     /*!< Byte */
+} speed_t;
 
 void pid_init(void);
 
@@ -24,5 +33,12 @@ void pid_set_rpm(uint16_t sp);
 uint8_t pid_get_rpm_high(void);
 uint8_t pid_get_rpm_low(void);
 uint16_t pid_get_rpm(void);
+
+/* \fn void pid_task(void)
+ * \brief task to perform pid control
+ *
+ * \return void
+ */
+void pid_task(void);
 
 #endif /* PID_H_ */

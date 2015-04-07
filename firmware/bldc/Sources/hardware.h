@@ -21,6 +21,9 @@
 typedef uint8  uint8_t;
 typedef uint16 uint16_t;
 typedef uint32 uint32_t;
+typedef int8   int8_t;
+typedef int16  int16_t;
+typedef int32  int32_t;
 
 /*
 PINS:
