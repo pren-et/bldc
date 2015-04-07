@@ -40,7 +40,7 @@ void init(void)
     spi_drv_init();
     spi_ext_init();
     drv8301_init();
-    init_pid();
+    pid_init();
     commutate_init();
     motor_init();
     EnableInterrupts;               // enable Interrupts

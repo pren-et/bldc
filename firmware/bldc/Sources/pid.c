@@ -1,16 +1,20 @@
-/*
- * pid.c
+/*!
+ *  ____  ____  _____ _   _       _____ _____
+ * |  _ \|  _ \| ____| \ | |     | ____|_   _|
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |
+ * |  __/|  _ <| |___| |\  |_____| |___  | |
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|
  *
- *  Created on: Apr 7, 2015
- *      Author: studer.yves
+ * \file  pid.c
+ * \brief
+ * \author pren-et
+ *
  */
 
 #include "pid.h"
 
-typedef union 
-{
-    struct
-    {
+typedef union {
+    struct {
         uint8_t high;   /*!< High byte */
         uint8_t low;    /*!< Low byte */
     } bytefield;        /*!< Nibbles */
@@ -18,27 +22,30 @@ typedef union
 } speed_t;
 static speed_t speed;
 
-void init_pid(void)
-{
+void pid_init(void) {
 	speed.value = 0xD173;
 }
 
-void set_prm_high(uint8_t sp)
-{
+void pid_set_rpm_high(uint8_t sp) {
 	speed.bytefield.high = sp;
 }
 
-void set_prm_low(uint8_t sp)
-{
+void pid_set_rpm_low(uint8_t sp) {
 	speed.bytefield.low = sp;
 }
 
-uint8_t get_prm_High(void)
-{
+void pid_set_rpm(uint16_t sp) {
+    speed.value = sp;
+}
+
+uint8_t pid_get_rpm_high(void) {
 	return speed.bytefield.high;
 }
 
-uint8_t get_prm_low(void)
-{
+uint8_t pid_get_rpm_low(void) {
 	return speed.bytefield.low;
+}
+
+uint16_t pid_get_rpm(void) {
+    return speed.value;
 }

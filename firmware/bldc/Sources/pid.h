@@ -1,8 +1,14 @@
-/*
- * pid.h
+/*!
+ *  ____  ____  _____ _   _       _____ _____
+ * |  _ \|  _ \| ____| \ | |     | ____|_   _|
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |
+ * |  __/|  _ <| |___| |\  |_____| |___  | |
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|
  *
- *  Created on: Apr 7, 2015
- *      Author: studer.yves
+ * \file  pid.h
+ * \brief
+ * \author pren-et
+ *
  */
 
 #ifndef PID_H_
@@ -10,11 +16,13 @@
 
 #include "hardware.h"
 
-void init_pid(void);
+void pid_init(void);
 
-void set_prm_high(uint8_t sp);
-void set_prm_low(uint8_t sp);
-uint8_t get_prm_High(void);
-uint8_t get_prm_low(void);
+void pid_set_rpm_high(uint8_t sp);
+void pid_set_rpm_low(uint8_t sp);
+void pid_set_rpm(uint16_t sp);
+uint8_t pid_get_rpm_high(void);
+uint8_t pid_get_rpm_low(void);
+uint16_t pid_get_rpm(void);
 
 #endif /* PID_H_ */

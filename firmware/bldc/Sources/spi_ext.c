@@ -107,7 +107,7 @@ void receiveRpmHigh(void)
     /* Set new speed */
     spi_ext_irq = &receiveRpmLow;
     (void) SPI1S;
-    set_prm_high(SPI1DL);
+    pid_set_rpm_high(SPI1DL);
 }
 
 void receiveRpmLow(void)
@@ -115,7 +115,7 @@ void receiveRpmLow(void)
     /* Set new speed */
     spi_ext_irq = &ReceiveCmd;
     (void) SPI1S;
-    set_prm_low(SPI1DL);
+    pid_set_rpm_low(SPI1DL);
 }
 
 void setVoltage(void)
@@ -145,7 +145,7 @@ void sendRpmHigh(void)
     /* return current set speed */
     spi_ext_irq = &sendRpmLow;
     (void) SPI1S;
-    SPI1DL = get_prm_High();
+    SPI1DL = pid_get_rpm_high();
 }
 
 void sendRpmLow(void)
@@ -153,7 +153,7 @@ void sendRpmLow(void)
     /* return current set speed */
     spi_ext_irq = &DataTransmitted;
     (void) SPI1S;
-    SPI1DL = get_prm_low();
+    SPI1DL = pid_get_rpm_low();
 }
 
 void DataTransmitted(void)
