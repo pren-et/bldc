@@ -44,55 +44,59 @@ void spi_ext_init(void)
     SPI1C1 = (uint8_t) 0x85U;          /*  Configure the SPI port - control register 1 */
 
     SPI1C1_SPE = 1U;                    /* Enable device */
-    SPI1DL = 0x01;
+    SPI1DL = CMD_DUMMY;
 }
 
 /* main interrupt function */
 void ReceiveCmd(void)
 {
     (void) SPI1S;
-    switch (SPI1DL & 0xFF)
+    switch (SPI1DL)
     {
-    case 0x10:
+    case CMD_START:
         /* Start byte received */
     	motor_set_mode(MOTOR_MODE_RUN_FREE);
-        SPI1DL = 0x01;
+        SPI1DL = CMD_DUMMY;
         break;
-    case 0x20:
+    case CMD_STOP:
         /* Stop byte received */
     	motor_set_mode(MOTOR_MODE_BRAKE);
-        SPI1DL = 0x01;
+        SPI1DL = CMD_DUMMY;
         break;
-    case 0x32:
+    case CMD_SET_RPM:
         /* set RPM */
         spi_ext_irq = &receiveRpmHigh;
+        SPI1DL = CMD_DUMMY;
         break;
-    case 0x41:
+    case CMD_SET_VOLATGE:
         /* set voltage */
     	spi_ext_irq = &setVoltage;
+        SPI1DL = CMD_DUMMY;
         break;
-    case 0x51:
+    case CMD_SET_CURRENT:
         /* set current */
     	spi_ext_irq = &sendRpmHigh;
+        SPI1DL = CMD_DUMMY;
         break;
-    case 0x64:
+    case CMD_GET_STATUS:
         /* return status */
         spi_ext_irq = &sendErrorCode;
         SPI1DL = (char)motor_get_mode();
         break;
-    case 0x71:
+    case CMD_ARE_YOU_ALIVE:
     	/* Are you alive received */
         spi_ext_irq = &DataTransmitted;
-        SPI1DL = 0x55;
+        SPI1DL = I_AM_ALIVE;
         break;
-    case 0xC0:
+    case CMD_MEASUREMENT_PARAM:
     	/* Start measurement with parameter */
         break;
-    case 0xD0:
+    case CMD_MEASUREMENT:
     	/* Start measurement (step-answer) */
     	motor_set_mode(MOTOR_MODE_RUN_FREE);
+        SPI1DL = CMD_DUMMY;
         break;
-    case 0xE0:
+    case CMD_GET_MEASUREMENT:
     	/* get measurement */
         break;
     }
@@ -156,5 +160,5 @@ void DataTransmitted(void)
 {
     spi_ext_irq = &ReceiveCmd;
     (void) SPI1S;
-    SPI1DL = 0x01;
+    SPI1DL = CMD_DUMMY;
 }

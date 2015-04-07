@@ -7,15 +7,14 @@
 
 #include "pid.h"
 
-
 typedef union 
 {
     struct
     {
         uint8_t high;   /*!< High byte */
         uint8_t low;    /*!< Low byte */
-    } bytefield;         /*!< Nibbles */
-    uint16_t value;       /*!< Byte */
+    } bytefield;        /*!< Nibbles */
+    uint16_t value;     /*!< Byte */
 } speed_t;
 static speed_t speed;
 
