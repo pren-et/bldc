@@ -15,6 +15,7 @@
 #include "motor.h"
 #include "pid.h"
 #include "hardware.h"
+#include "pwm.h"
 
 
 volatile void (*spi_ext_irq) (void);
@@ -29,6 +30,7 @@ void sendRpmHigh(void);
 void sendRpmLow(void);
 void getVoltage(void);
 void getCurrent(void);
+void setPwm(void);
 void DataTransmitted(void);
 
 
@@ -88,6 +90,9 @@ void ReceiveCmd(void)
         spi_ext_irq = &DataTransmitted;
         SPI1DL = I_AM_ALIVE;
         break;
+    case CMD_SET_PWM:
+        spi_ext_irq = &setPwm;
+    	break;
     case CMD_MEASUREMENT_PARAM:
     	/* Start measurement with parameter */
         break;
@@ -154,6 +159,14 @@ void sendRpmLow(void)
     spi_ext_irq = &DataTransmitted;
     while(!SPI1S_SPTEF);
     SPI1DL = pid_get_rpm_low();
+}
+
+void setPwm(void)
+{
+    /* return current set speed */
+    spi_ext_irq = &ReceiveCmd;
+    while(!SPI1S_SPRF);
+   	pwm_set_100(SPI1DL);
 }
 
 void DataTransmitted(void)
