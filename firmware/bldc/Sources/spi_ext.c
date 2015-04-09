@@ -50,7 +50,7 @@ void spi_ext_init(void)
 /* main interrupt function */
 void ReceiveCmd(void)
 {
-    (void) SPI1S;
+    while(!SPI1S_SPRF);                 /* Warten bis ein Byte empfangen wurde */
     switch (SPI1DL)
     {
     case CMD_START:
@@ -106,7 +106,7 @@ void receiveRpmHigh(void)
 {
     /* Set new speed */
     spi_ext_irq = &receiveRpmLow;
-    (void) SPI1S;
+    while(!SPI1S_SPRF);                 /* Warten bis ein Byte empfangen wurde */
     pid_set_rpm_high(SPI1DL);
 }
 
@@ -114,21 +114,21 @@ void receiveRpmLow(void)
 {
     /* Set new speed */
     spi_ext_irq = &ReceiveCmd;
-    (void) SPI1S;
+    while(!SPI1S_SPRF);                 /* Warten bis ein Byte empfangen wurde */
     pid_set_rpm_low(SPI1DL);
 }
 
 void setVoltage(void)
 {
     spi_ext_irq = &ReceiveCmd;
-    (void) SPI1S;
+    while(!SPI1S_SPTEF);
     setVoltage_to_DRV(SPI1DL);
 }
 
 void setCurrent(void)
 {
     spi_ext_irq = &ReceiveCmd;
-    (void) SPI1S;
+    while(!SPI1S_SPTEF);
     setCurrent_to_DRV(SPI1DL);
 }
 
@@ -136,7 +136,7 @@ void sendErrorCode(void)
 {
     /* Dummy byte received, send running state */
     spi_ext_irq = &sendRpmHigh;
-    (void) SPI1S;
+    while(!SPI1S_SPTEF);
     SPI1DL = getErrors_form_DRV();
 }
 
@@ -144,21 +144,21 @@ void sendRpmHigh(void)
 {
     /* return current set speed */
     spi_ext_irq = &sendRpmLow;
-    (void) SPI1S;
-    SPI1DL = pid_get_rpm_high();
+    while(!SPI1S_SPTEF);
+    SPI1DL =pid_get_rpm_high();
 }
 
 void sendRpmLow(void)
 {
     /* return current set speed */
     spi_ext_irq = &DataTransmitted;
-    (void) SPI1S;
+    while(!SPI1S_SPTEF);
     SPI1DL = pid_get_rpm_low();
 }
 
 void DataTransmitted(void)
 {
     spi_ext_irq = &ReceiveCmd;
-    (void) SPI1S;
+    while(!SPI1S_SPTEF);
     SPI1DL = CMD_DUMMY;
 }
