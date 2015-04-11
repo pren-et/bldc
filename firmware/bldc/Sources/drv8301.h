@@ -427,7 +427,8 @@ void handleDrv(void);
  *  \param  address     Address of register to be read
  *  \return register
  */
-void setVoltage_to_DRV(uint8_t voltage);
+void setVoltage_to_DRV_high(uint8_t voltage);
+void setVoltage_to_DRV_low(uint8_t voltage);
 void setCurrent_to_DRV(uint8_t current);
 uint8_t getErrors_form_DRV(void);
 #endif /* DRV8301_H */

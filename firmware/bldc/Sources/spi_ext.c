@@ -18,12 +18,12 @@
 #include "pwm.h"
 
 
-volatile void (*spi_ext_irq) (void);
 
 void ReceiveCmd(void);
 void receiveRpmHigh(void);
 void receiveRpmLow(void);
-void setVoltage(void);
+void setVoltageHigh(void);
+void setVoltageLow(void);
 void setCurrent(void);
 void sendErrorCode(void);
 void sendRpmHigh(void);
@@ -32,6 +32,8 @@ void getVoltage(void);
 void getCurrent(void);
 void setPwm(void);
 void DataTransmitted(void);
+
+volatile void (*spi_ext_irq) (void) = &ReceiveCmd;
 
 
 void spi_ext_init(void)
@@ -42,11 +44,10 @@ void spi_ext_init(void)
     (void)SPI1D16;                       /* Read the data register */
     /* SPI1C2: SPMIE=0,SPIMODE=0,??=0,MODFEN=0,BIDIROE=0,??=0,SPISWAI=0,SPC0=0 */
     SPI1C2 = (uint8_t) 0x00U;           /* Configure the SPI port - control register 2 */
-    /* SPI1C1: SPIE=1,SPE=1,SPTIE=1,MSTR=0,CPOL=0,CPHA=1,SSOE=0,LSBFE=1 */
+    /* SPI1C1: SPIE=1,SPE=0,SPTIE=0,MSTR=0,CPOL=0,CPHA=1,SSOE=0,LSBFE=1 */
     SPI1C1 = (uint8_t) 0x85U;          /*  Configure the SPI port - control register 1 */
-
-    SPI1C1_SPE = 1U;                    /* Enable device */
     SPI1DL = CMD_DUMMY;
+    SPI1C1_SPE = 1U;                    /* Enable device */
 }
 
 /* main interrupt function */
@@ -72,12 +73,12 @@ void ReceiveCmd(void)
         break;
     case CMD_SET_VOLATGE:
         /* set voltage */
-    	spi_ext_irq = &setVoltage;
+    	spi_ext_irq = &setVoltageHigh;
         SPI1DL = CMD_DUMMY;
         break;
     case CMD_SET_CURRENT:
         /* set current */
-    	spi_ext_irq = &sendRpmHigh;
+    	spi_ext_irq = &setCurrent;
         SPI1DL = CMD_DUMMY;
         break;
     case CMD_GET_STATUS:
@@ -87,8 +88,10 @@ void ReceiveCmd(void)
         break;
     case CMD_ARE_YOU_ALIVE:
     	/* Are you alive received */
-        spi_ext_irq = &DataTransmitted;
+        while(!SPI1S_SPTEF);
+        SPI1DH = 0x00;
         SPI1DL = I_AM_ALIVE;
+        spi_ext_irq = &DataTransmitted;
         break;
     case CMD_SET_PWM:
         spi_ext_irq = &setPwm;
@@ -123,11 +126,18 @@ void receiveRpmLow(void)
     pid_set_rpm_low(SPI1DL);
 }
 
-void setVoltage(void)
+void setVoltageHigh(void)
+{
+    spi_ext_irq = &setVoltageLow;
+    while(!SPI1S_SPTEF);
+    setVoltage_to_DRV_high(SPI1DL);
+}
+
+void setVoltageLow(void)
 {
     spi_ext_irq = &ReceiveCmd;
     while(!SPI1S_SPTEF);
-    setVoltage_to_DRV(SPI1DL);
+    setVoltage_to_DRV_low(SPI1DL);
 }
 
 void setCurrent(void)

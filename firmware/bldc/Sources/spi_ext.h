@@ -21,7 +21,7 @@
 #define CMD_START              0x10
 #define CMD_STOP               0x20
 #define CMD_SET_RPM		       0x32
-#define CMD_SET_VOLATGE        0x41
+#define CMD_SET_VOLATGE        0x42
 #define CMD_SET_CURRENT        0x51
 #define CMD_GET_STATUS         0x64
 #define CMD_ARE_YOU_ALIVE      0x71

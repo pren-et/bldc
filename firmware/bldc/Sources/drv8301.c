@@ -14,7 +14,15 @@
 #include "drv8301.h"
 #include "spi_drv.h"
 
-static uint8_t voltage_host;
+typedef union {
+    struct {
+        uint8_t high;   /*!< High byte */
+        uint8_t low;    /*!< Low byte */
+    } bytefield;        /*!< Nibbles */
+    uint16_t value;     /*!< Byte */
+} voltage_t;
+
+static voltage_t voltage_host;
 static uint8_t current_host;
 static uint8_t error_host;
 
@@ -37,7 +45,7 @@ void drv8301_init(void) {
             /* your compiler or in this library! */
         }
     }
-    voltage_host = 0;
+    voltage_host.value = 0;
     current_host = 0;
     error_host = 0xAA;
     PTBD |= EN_GATE;
@@ -221,9 +229,14 @@ void drv8301_set_oc_adj_set(uint16_t voltage_mV) {
     return;
 }
 
-void setVoltage_to_DRV(uint8_t voltage)
+void setVoltage_to_DRV_high(uint8_t voltage)
 {
-	voltage_host = voltage;
+	voltage_host.bytefield.high = voltage;
+}
+
+void setVoltage_to_DRV_low(uint8_t voltage)
+{
+	voltage_host.bytefield.low = voltage;
 }
 
 void setCurrent_to_DRV(uint8_t current)
@@ -244,14 +257,14 @@ void generate_Error_Byte(void)
 
 void handleDrv(void)
 {
-	if( voltage_host != 0)
+	if( voltage_host.value != 0)
 	{
-		drv8301_set_oc_adj_set(voltage_host * 2);
-		voltage_host = 0;
+		drv8301_set_oc_adj_set(voltage_host.value);
+		voltage_host.value = 0;
 	}
 	if( current_host != 0)
 	{
-		drv8301_set_gate_current(current_host * 2);
+		drv8301_set_gate_current((uint16_t)current_host * 10);
 		current_host = 0;
 	}
 }
