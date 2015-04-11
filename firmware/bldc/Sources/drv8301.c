@@ -24,7 +24,7 @@ typedef union {
 
 static voltage_t voltage_host;
 static uint8_t current_host;
-static uint8_t error_host;
+static uint8_t error_drv;
 
 /* Definition of necessary functions provided by a SPI module later */
 /*! \fn uint16_t spi_drv_read_write(uint16_t data)
@@ -47,7 +47,7 @@ void drv8301_init(void) {
     }
     voltage_host.value = 0;
     current_host = 0;
-    error_host = 0xAA;
+    error_drv = 0x00;
     PTBD |= EN_GATE;
     return;
 }
@@ -246,7 +246,45 @@ void setCurrent_to_DRV(uint8_t current)
 
 uint8_t getErrors_form_DRV(void)
 {
-	return error_host;
+	return error_drv;
+}
+
+void update_ErrorCode(void)
+{
+	drv8301_reg_t reg1, reg2;
+	reg1 = drv8301_read_register(DRV8301_ADDR_STATUS1);
+	if( reg1.raw & 0x003F)
+		error_drv |= 0x01;
+	else
+		error_drv &= ~0x01;
+	
+	if( reg1.status1.reg_read.otw )
+		error_drv |= 0x02;
+	else
+		error_drv &= ~0x02;
+	
+	if( reg1.status1.reg_read.otsd )
+		error_drv |= 0x04;
+	else
+		error_drv &= ~0x04;
+	
+	if( reg1.status1.reg_read.pvdd_uv )
+		error_drv |= 0x08;
+	else
+		error_drv &= ~0x08;
+	
+	if( reg1.status1.reg_read.gvdd_uv )
+		error_drv |= 0x10;
+	else
+		error_drv &= ~0x10;
+	
+	reg2 = drv8301_read_register(DRV8301_ADDR_STATUS2);
+	
+	if( reg2.status2.reg_read.gvdd_ov )
+		error_drv |= 0x20;
+	else
+		error_drv &= ~0x20;
+	
 }
 
 void generate_Error_Byte(void)
