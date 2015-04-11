@@ -89,7 +89,6 @@ void ReceiveCmd(void)
     case CMD_ARE_YOU_ALIVE:
     	/* Are you alive received */
         while(!SPI1S_SPTEF);
-        SPI1DH = 0x00;
         SPI1DL = I_AM_ALIVE;
         spi_ext_irq = &DataTransmitted;
         break;
