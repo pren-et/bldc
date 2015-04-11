@@ -21,6 +21,7 @@ void motor_init(void) {
     mode            = MOTOR_MODE_OFF;
     motor_status    = MOTOR_STATUS_OFF;
     force_interval  = 5000;
+    pwm_set_100(75);
 }
 
 motor_mode_t motor_get_mode(void) {
@@ -59,20 +60,20 @@ void motor_task(void) {
             }
             if (motor_status == MOTOR_STATUS_FORCED) {
                 if (force_interval > 10000) {
-                    force_interval -= 500;
-                }
-                else if (force_interval > 5000) {
                     force_interval -= 200;
                 }
-                else if (force_interval > 2000) {
+                else if (force_interval > 5000) {
                     force_interval -= 100;
                 }
-                else if (force_interval > 1000) {
+                else if (force_interval > 2000) {
                     force_interval -= 50;
+                }
+                else if (force_interval > 1000) {
+                    force_interval -= 20;
                 }
                 else if (force_interval > 500) {
                     if (force_interval == 600) {
-                        pwm_set_100(77);
+//                        pwm_set_100(77);
                     }
                     force_interval -= 20;
                 }
