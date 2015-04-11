@@ -32,6 +32,7 @@
 #define TASK_PERIOD_MOTOR   100     /* Period for motor task (100ms) */
 #define TASK_INIT_PWM       10000   /* Init time for PWM task (10s) */
 #define TASK_PERIOD_PWM     2000    /* Period for PWM task (2s) */
+#define TASK_DRV            200    /* Period for PWM task (200ms) */
 
 void init(void)
 {
@@ -54,14 +55,15 @@ void main(void)
     uint16_t task_cnt_led;
     uint16_t task_cnt_motor;
     uint16_t task_cnt_pwm;
+    uint16_t task_drv;
     init();
     task_cnt_led    = TASK_INIT_LED;
     task_cnt_motor  = TASK_INIT_MOTOR;
     task_cnt_pwm    = TASK_INIT_PWM;
+    task_drv	    = TASK_DRV;
 
     for(;;)
     {
-        handleDrv();
         if(rtc_get_clear_flag() != RTC_NONE) {
             /* Switch load measurement LED on */
             //led_y_on();
@@ -76,6 +78,15 @@ void main(void)
             }
             else {
                 task_cnt_led--;
+            }
+            
+            /* Task to handle the DRV-Chip */
+            if(task_drv == 0) {
+            	task_drv = TASK_DRV; /* Prepare scheduler for next period */
+                handleDrv();
+            }
+            else {
+            	task_drv--;
             }
 
             /* Task to control commutation frequency */
