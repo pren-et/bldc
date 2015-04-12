@@ -26,14 +26,11 @@ static voltage_t voltage_host;
 static uint8_t current_host;
 static uint8_t error_drv;
 
-/* Definition of necessary functions provided by a SPI module later */
-/*! \fn uint16_t spi_drv_read_write(uint16_t data)
- *  \todo Define in SPI Module
- */
 
 void drv8301_init(void) {
     /* test orientation of bitfields */
     test_bitfield_t test_bitfield;      /* testvariable */
+    test_bitfield.byte = 0x00;
     test_bitfield.bitfield.low = 0x01;  /* write testvalue to lower nibble */
     if (test_bitfield.byte != 0x01) {   /* test if lower nibble has been written */
         while (1) {                     /* loop to stop executing if wrong order */
@@ -60,6 +57,7 @@ void drv8301_disable(void)
 drv8301_reg_t drv8301_read_register(drv8301_addr_t address) {
     /* local variables */
     drv8301_reg_t reg;                      /* temporary register */
+    reg.raw = 0x00;
     reg.data_write.data = 0x00;             /* empty dummy data */
     reg.data_write.addr = address;          /* address of register */
     reg.data_write.rw   = DRV8301_RW_R;     /* read register */
@@ -87,6 +85,7 @@ void drv8301_write_register(drv8301_reg_t reg) {
 void drv8301_set_gate_current(uint16_t current_mA) {
     /* local variables */
     drv8301_reg_t reg;                              /* temporary register */
+    reg.raw = 0x00;
     reg.data_write.data = 0x00;                     /* empty dummy data */
     reg.data_write.addr = DRV8301_ADDR_CONTROL1;    /* address of status1 register */
     reg.data_write.rw   = DRV8301_RW_R;             /* read register */
@@ -116,6 +115,7 @@ void drv8301_set_gate_current(uint16_t current_mA) {
 void drv8301_set_oc_adj_set(uint16_t voltage_mV) {
     /* local variables */
     drv8301_reg_t reg;                              /* temporary register */
+    reg.raw = 0x00;
     reg.data_write.data = 0x00;                     /* empty dummy data */
     reg.data_write.addr = DRV8301_ADDR_CONTROL1;    /* address of status1 register */
     reg.data_write.rw   = DRV8301_RW_R;             /* read register */
@@ -285,12 +285,6 @@ void update_ErrorCode(void)
 	else
 		error_drv &= ~0x20;
 	
-}
-
-void generate_Error_Byte(void)
-{
-	drv8301_reg_t reg; 
-	reg = drv8301_read_register(DRV8301_ADDR_STATUS1);
 }
 
 void handleDrv(void)

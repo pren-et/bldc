@@ -14,7 +14,7 @@
 #include "pwm.h"
 
 uint8_t pwm_get_8(void) {
-    return (TPM2C0V >> (PWM_WIDTH - 8));
+    return (uint8_t)(TPM2C0V >> (PWM_WIDTH - 8));
 }
 
 uint16_t pwm_get_16(void) {
