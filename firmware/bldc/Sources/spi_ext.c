@@ -111,7 +111,7 @@ void ReceiveCmd(void)
 
 void receiveRpmHigh(void)
 {
-    /* Set new speed */
+    /* Set the received speed-high-Byte */
     spi_ext_irq = &receiveRpmLow;
     while(!SPI1S_SPRF);                 /* Warten bis ein Byte empfangen wurde */
     pid_set_rpm_high(SPI1DL);
@@ -119,7 +119,7 @@ void receiveRpmHigh(void)
 
 void receiveRpmLow(void)
 {
-    /* Set new speed */
+    /* Set the received speed-low-Byte */
     spi_ext_irq = &ReceiveCmd;
     while(!SPI1S_SPRF);                 /* Warten bis ein Byte empfangen wurde */
     pid_set_rpm_low(SPI1DL);
@@ -127,6 +127,7 @@ void receiveRpmLow(void)
 
 void setVoltageHigh(void)
 {
+    /* Set the received voltage-high-Byte to the DRV */
     spi_ext_irq = &setVoltageLow;
     while(!SPI1S_SPTEF);
     setVoltage_to_DRV_high(SPI1DL);
@@ -134,6 +135,7 @@ void setVoltageHigh(void)
 
 void setVoltageLow(void)
 {
+    /* Set the received voltage-low-Byte to the DRV */
     spi_ext_irq = &ReceiveCmd;
     while(!SPI1S_SPTEF);
     setVoltage_to_DRV_low(SPI1DL);
@@ -141,6 +143,7 @@ void setVoltageLow(void)
 
 void setCurrent(void)
 {
+    /* Set the received current to the DRV */
     spi_ext_irq = &ReceiveCmd;
     while(!SPI1S_SPTEF);
     setCurrent_to_DRV(SPI1DL);
@@ -148,7 +151,7 @@ void setCurrent(void)
 
 void sendErrorCode(void)
 {
-    /* Dummy byte received, send running state */
+    /* Send the error-code */
     spi_ext_irq = &sendRpmHigh;
     while(!SPI1S_SPTEF);
     SPI1DL = getErrors_form_DRV();
@@ -156,7 +159,7 @@ void sendErrorCode(void)
 
 void sendRpmHigh(void)
 {
-    /* return current set speed */
+    /* Send the high-byte of the rpm-value */
     spi_ext_irq = &sendRpmLow;
     while(!SPI1S_SPTEF);
     SPI1DL =pid_get_rpm_high();
@@ -164,7 +167,7 @@ void sendRpmHigh(void)
 
 void sendRpmLow(void)
 {
-    /* return current set speed */
+    /* Send the low-byte of the rpm-value */
     spi_ext_irq = &DataTransmitted;
     while(!SPI1S_SPTEF);
     SPI1DL = pid_get_rpm_low();
@@ -172,7 +175,7 @@ void sendRpmLow(void)
 
 void setPwm(void)
 {
-    /* return current set speed */
+    /* Set the received value of pwm */
     spi_ext_irq = &ReceiveCmd;
     while(!SPI1S_SPRF);
    	pwm_set_100(SPI1DL);
@@ -180,6 +183,8 @@ void setPwm(void)
 
 void DataTransmitted(void)
 {
+    /* Dummy-function needed because the host will clock 
+     * again and we doesn't have to send something */
     spi_ext_irq = &ReceiveCmd;
     while(!SPI1S_SPTEF);
     SPI1DL = CMD_DUMMY;
