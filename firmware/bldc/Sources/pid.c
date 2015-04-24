@@ -16,15 +16,21 @@
 #include "pwm.h"
 
 static speed_t current_speed, tmp_speed;
-int32_t Kp = 10000000;
-int32_t Ki = 0;
-int32_t Kd = 0;
+const int32_t Kp = 10000000;
+const int32_t Ki = 0;
+const int32_t Kd = 0;
 const int32_t dt = TASK_PID;
-int32_t Ke = 1000;
+const int32_t Ke = 1000;
+
+/* 
+ *           sec/min          us/s            see BEMF-Timing    avg       Timer-resolution
+ * rmp    =    60     *    1_000_000us    /      (( 2*T       /   3)    *   5.3333333333us) 
+ *  = 16875000 / T
+ */
+#define calc_Const 16875000
 
 void pid_init(void) {
-	current_speed.value = 15000;
-	tmp_speed.value = 0x0000;//1500
+	tmp_speed.value = current_speed.value = 15000;//rpm
 }
 
 void pid_set_rpm_high(uint8_t sp) {
@@ -57,12 +63,11 @@ void pid_task(void) {
     static int32_t eprev = 0;
     int32_t e = 0;
     int32_t s = 0;
-    uint32_t Time_Avg, rpm_meas;
-    Time_Avg = getTime_U();
-    Time_Avg += getTime_V();
-    Time_Avg += getTime_W();
-    Time_Avg = Time_Avg / 3;
-    rpm_meas = 5625000 / Time_Avg;
+    uint32_t Time_sum, rpm_meas;
+    Time_sum  = getTime_U();
+    Time_sum += getTime_V();
+    Time_sum += getTime_W();
+    rpm_meas = calc_Const / Time_sum; // Average on time is calculated into the strange number in the numerator
     e = rpm_meas - ((int32_t) current_speed.value);
     esum = esum + e;
     s = (Kp * e) + (Ki * dt * esum) + (Kd * (e - eprev) / dt);

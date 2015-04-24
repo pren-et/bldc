@@ -168,7 +168,7 @@ D: High drive strength enabled (PTxDS)
 // bus rate clock, prescaler 128
 #define TPM1SC_INIT     (TPM1SC_CLKSA_MASK | TPM1SC_PS2_MASK | TPM1SC_PS1_MASK | TPM1SC_PS0)
 // TPM1 free running
-#define TPM1MOD_INIT    (0)
+#define TPM1MOD_INIT    (0xFFFF)
 
 //--- Initialisation for driving the buzzer with PWM ---
 // bus rate clock, no prescaler
