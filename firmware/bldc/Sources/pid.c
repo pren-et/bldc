@@ -12,52 +12,66 @@
  */
 
 #include "pid.h"
+#include "interrupts.h"
+#include "pwm.h"
 
-static speed_t speed;
-int32_t Kp = 0;
+static speed_t current_speed, tmp_speed;
+int32_t Kp = 10000000;
 int32_t Ki = 0;
 int32_t Kd = 0;
-int32_t dt = 10;
+const int32_t dt = TASK_PID;
 int32_t Ke = 1000;
 
 void pid_init(void) {
-	speed.value = 0xD173;
+	current_speed.value = 15000;
+	tmp_speed.value = 0x0000;//1500
 }
 
 void pid_set_rpm_high(uint8_t sp) {
-	speed.bytefield.high = sp;
+	tmp_speed.bytefield.high = sp;
 }
 
 void pid_set_rpm_low(uint8_t sp) {
-	speed.bytefield.low = sp;
+	tmp_speed.bytefield.low = sp;
+	current_speed.value = tmp_speed.value;
 }
 
 void pid_set_rpm(uint16_t sp) {
-    speed.value = sp;
+	current_speed.value = sp;
 }
 
 uint8_t pid_get_rpm_high(void) {
-	return speed.bytefield.high;
+	return current_speed.bytefield.high;
 }
 
 uint8_t pid_get_rpm_low(void) {
-	return speed.bytefield.low;
+	return current_speed.bytefield.low;
 }
 
 uint16_t pid_get_rpm(void) {
-    return speed.value;
+    return current_speed.value;
 }
 
 void pid_task(void) {
     static int32_t esum = 0;
     static int32_t eprev = 0;
-    int32_t e;
-    int32_t s;
-    e = 0;
-    // e = ((int32_t) motor_get_speed_rpm()) - ((int32_t) speed.value)
+    int32_t e = 0;
+    int32_t s = 0;
+    uint32_t Time_Avg, rpm_meas;
+    Time_Avg = getTime_U();
+    Time_Avg += getTime_V();
+    Time_Avg += getTime_W();
+    Time_Avg = Time_Avg / 3;
+    rpm_meas = 5625000 / Time_Avg;
+    e = rpm_meas - ((int32_t) current_speed.value);
     esum = esum + e;
     s = (Kp * e) + (Ki * dt * esum) + (Kd * (e - eprev) / dt);
     eprev = e;
+    if(motor_get_status() != MOTOR_STATUS_AUTO_FREE)
+	{
+		esum = 0;
+		return;
+	}
     pwm_set_raw((uint16_t) (s / Ke));
     return;
 }

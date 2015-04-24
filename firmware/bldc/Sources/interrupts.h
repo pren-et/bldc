@@ -20,6 +20,12 @@
 #include "motor.h"
 #include "led.h"
 
+uint16_t getTime_U(void);
+
+uint16_t getTime_V(void);
+
+uint16_t getTime_W(void);
+
 interrupt void isr_RTC(void);        // RTC
 interrupt void isr_IIC(void);        // IIC
 interrupt void isr_ACMP(void);       // ACMP

@@ -17,6 +17,7 @@
 #include "hardware.h"
 #include "motor.h"
 
+#define TASK_PID            10    /* Period for PID task */
 typedef union {
     struct {
         uint8_t high;   /*!< High byte */

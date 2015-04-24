@@ -17,9 +17,24 @@
 #define LED_LOAD (1)
 
 extern volatile void (*spi_ext_irq) (void);
-uint16_t speed_meas_u;
-uint16_t speed_meas_v;
-uint16_t speed_meas_w;
+volatile uint16_t speed_meas_u;
+volatile uint16_t speed_meas_v;
+volatile uint16_t speed_meas_w;
+
+uint16_t getTime_U(void)
+{
+	return speed_meas_u;
+}
+
+uint16_t getTime_V(void)
+{
+	return speed_meas_v;
+}
+
+uint16_t getTime_W(void)
+{
+	return speed_meas_w;
+}
 
 interrupt void isr_RTC(void)        // RTC
 {

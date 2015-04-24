@@ -33,6 +33,7 @@
 #define TASK_INIT_PWM       10000   /* Init time for PWM task (10s) */
 #define TASK_PERIOD_PWM     2000    /* Period for PWM task (2s) */
 #define TASK_DRV            200    /* Period for PWM task (200ms) */
+// for TASK_PID see pid.h
 
 void init(void)
 {
@@ -56,11 +57,13 @@ void main(void)
     uint16_t task_cnt_motor;
     uint16_t task_cnt_pwm;
     uint16_t task_drv;
+    uint16_t task_pid;
     init();
     task_cnt_led    = TASK_INIT_LED;
     task_cnt_motor  = TASK_INIT_MOTOR;
     task_cnt_pwm    = TASK_INIT_PWM;
     task_drv	    = TASK_DRV;
+    task_pid	    = TASK_PID;
 
     for(;;)
     {
@@ -88,6 +91,15 @@ void main(void)
             else {
             	task_drv--;
             }
+            
+            /* Task to handle the PID */
+            if(task_pid == 0) {
+            	task_pid = TASK_PID; /* Prepare scheduler for next period */
+            	pid_task();
+            }
+            else {
+            	task_pid--;
+            }
 
             /* Task to control commutation frequency */
             if(task_cnt_motor == 0) {
@@ -102,10 +114,10 @@ void main(void)
             if(task_cnt_pwm == 0) {
                 task_cnt_pwm = TASK_PERIOD_PWM; /* Prepare scheduler for next period */
                 if (pwm_get_100() >= 66) {
-                    pwm_set_100(50);
+//                    pwm_set_100(50);
                 }
                 else {
-                    pwm_set_100(66);
+//                    pwm_set_100(66);
                 }
             }
             else {
