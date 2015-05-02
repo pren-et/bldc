@@ -193,10 +193,6 @@ ParamVariation4=ParameterName=Value|VariantValue=1600uF
 ParamDesignator4=C101
 ParamVariationCount=4
 
-[GeneratedDocument1]
-DocumentPath=Project Outputs for BLDC_Board\Schema.REP
-DItemRevisionGUID=
-
 [Configuration1]
 Name=Default Configuration
 ParameterCount=0
