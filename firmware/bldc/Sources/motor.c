@@ -66,30 +66,30 @@ void motor_task(void) {
                     force_interval -= 100;
                 }
                 else if (force_interval > 2000) {
-                    force_interval -= 50;
+                    force_interval -= 100;
                 }
                 else if (force_interval > 1000) {
-                    force_interval -= 20;
+                    force_interval -= 50;
                 }
-                else if (force_interval > 500) {
-                    if (force_interval == 600) {
-//                        pwm_set_100(77);
-                    }
-                    force_interval -= 20;
-                }
-                else if (force_interval > 300) {
-                    force_interval -= 10;
-                }
+                //else if (force_interval > 500) {
+                //    if (force_interval == 600) {
+//              //          pwm_set_100(77);
+                //    }
+                //    force_interval -= 20;
+                //}
+                //else if (force_interval > 300) {
+                //    force_interval -= 10;
+                //}
                 else {
                     /* Final speed for forced commutation reached */
                     led_g_on();
-                    //pwm_set_100(50);
+                    pwm_set_100(75);
                     motor_status = MOTOR_STATUS_AUTO_FREE;
                 }
             }
             break;
         case MOTOR_MODE_RUN_PID:
-            /* not implemented yet */
+            motor_status = MOTOR_STATUS_AUTO_PID;
             break;
         case MOTOR_MODE_SOUND:
             /* not implemented yet */

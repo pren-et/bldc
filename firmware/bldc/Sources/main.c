@@ -30,8 +30,8 @@
 #define TASK_PERIOD_LED     400    /* Period for LED task (1s) */
 #define TASK_INIT_MOTOR     100     /* Init time for motor task (100ms) */
 #define TASK_PERIOD_MOTOR   100     /* Period for motor task (100ms) */
-#define TASK_INIT_PWM       10000   /* Init time for PWM task (10s) */
-#define TASK_PERIOD_PWM     2000    /* Period for PWM task (2s) */
+#define TASK_INIT_PWM       1000   /* Init time for PWM task (1s) */
+#define TASK_PERIOD_PWM     1000    /* Period for PWM task (1s) */
 #define TASK_DRV            200    /* Period for PWM task (200ms) */
 // for TASK_PID see pid.h
 
@@ -112,13 +112,16 @@ void main(void)
 
             /* Task to toggle PWM */
             if(task_cnt_pwm == 0) {
+            	static uint8_t motor_pid_flag = 0;
                 task_cnt_pwm = TASK_PERIOD_PWM; /* Prepare scheduler for next period */
-                if (pwm_get_100() >= 66) {
-//                    pwm_set_100(50);
+                if (motor_pid_flag) {
+                                	motor_set_mode(MOTOR_MODE_RUN_PID);
+                                	motor_pid_flag = 0;
                 }
-                else {
-//                    pwm_set_100(66);
+                if (motor_get_status() == MOTOR_STATUS_AUTO_FREE) {
+                    motor_pid_flag = 1;
                 }
+                
             }
             else {
                 task_cnt_pwm--;

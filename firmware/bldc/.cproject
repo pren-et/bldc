@@ -58,6 +58,7 @@
 									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/lib/hc08c/device/asm_include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}\Sources&quot;"/>
 								</option>
+								<option id="hc08.toolchain.compiler.base.opt.o0.1796744651" superClass="hc08.toolchain.compiler.base.opt.o0" value="true" valueType="boolean"/>
 								<inputType id="hcs08.toolchain.compiler.base.input.c.542693106" name="HCS08 Compiler C Input" superClass="hcs08.toolchain.compiler.base.input.c"/>
 								<inputType id="hcs08.toolchain.compiler.base.input.cpp.194687426" name="HCS08 Compiler CPP Input" superClass="hcs08.toolchain.compiler.base.input.cpp"/>
 							</tool>
@@ -84,8 +85,10 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.hc08.cdt.toolchain.hcs08.discoveryProfile"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="refreshScope" versionNumber="1">
-		<resource resourceType="PROJECT" workspacePath="/Ueb02_C_1st_steps"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="FLASH">
+			<resource resourceType="PROJECT" workspacePath="/Ueb02_C_1st_steps"/>
+		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
