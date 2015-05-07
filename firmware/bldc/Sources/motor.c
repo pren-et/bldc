@@ -29,6 +29,10 @@ motor_mode_t motor_get_mode(void) {
 }
 
 void motor_set_mode(motor_mode_t m) {
+	if ((m == MOTOR_MODE_RUN_FREE && mode != MOTOR_MODE_RUN_FREE) || 
+			(m == MOTOR_MODE_RUN_PID && mode != MOTOR_MODE_RUN_PID)) {
+		pwm_set_100(75);
+	}
     mode = m;
 }
 
@@ -71,18 +75,18 @@ void motor_task(void) {
                 else if (force_interval > 1000) {
                     force_interval -= 50;
                 }
-                //else if (force_interval > 500) {
-                //    if (force_interval == 600) {
-//              //          pwm_set_100(77);
-                //    }
-                //    force_interval -= 20;
-                //}
+                else if (force_interval > 500) {
+                    if (force_interval == 600) {
+              //          pwm_set_100(77);
+                    }
+                    force_interval -= 25;
+                }
                 //else if (force_interval > 300) {
                 //    force_interval -= 10;
                 //}
                 else {
                     /* Final speed for forced commutation reached */
-                    led_g_on();
+//                    led_g_on();
                     pwm_set_100(75);
                     motor_status = MOTOR_STATUS_AUTO_FREE;
                 }

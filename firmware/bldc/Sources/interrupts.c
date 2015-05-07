@@ -15,11 +15,15 @@
 
 /* LED for load display of interrupt service routines */
 #define LED_LOAD (1)
+#define fir_buf_deep 10
 
 extern volatile void (*spi_ext_irq) (void);
 volatile uint16_t speed_meas_u;
 volatile uint16_t speed_meas_v;
 volatile uint16_t speed_meas_w;
+uint16_t fir_buf_u[fir_buf_deep];
+uint16_t fir_buf_v[fir_buf_deep];
+uint16_t fir_buf_w[fir_buf_deep];
 
 uint16_t getTime_U(void)
 {
@@ -207,6 +211,7 @@ interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
 {
     /* variable for measuring time between commutations */
     static uint16_t capture_v = 0;
+    static uint8_t fir_i = 0;
     motor_status_t mot_status;
     uint8_t auto_comm;
 
@@ -247,8 +252,11 @@ interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
     }
 
     /* measure time between commutations */
-    speed_meas_v = TPM1C5V - capture_v;
-    capture_v = TPM1C5V;
+    capture_v = TPM1C5V; /* just one reeding on this register */
+    speed_meas_v = capture_v - fir_buf_v[fir_i];
+    fir_buf_v[fir_i++] = capture_v;
+    if( fir_i >= fir_buf_deep )
+    	fir_i = 0;
     #if LED_LOAD
         led_load_off();
     #endif
@@ -259,6 +267,7 @@ interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
 {
     /* variable for measuring time between commutations */
     static uint16_t capture_u = 0;
+    static uint8_t fir_i = 0;
     motor_status_t mot_status;
     uint8_t auto_comm;
 
@@ -299,8 +308,12 @@ interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
     }
 
     /* measure time between commutations */
-    speed_meas_u = TPM1C4V - capture_u;
-    capture_u = TPM1C4V;
+    capture_u = TPM1C4V; /* just one reeding on this register */
+    speed_meas_v = capture_u - fir_buf_u[fir_i];
+    fir_buf_u[fir_i++] = capture_u;
+    if( fir_i >= fir_buf_deep )
+    	fir_i = 0;
+    
     #if LED_LOAD
         led_load_off();
     #endif
@@ -311,6 +324,7 @@ interrupt void isr_TPM1CH3(void)    // TPM1 channel 3
 {
     /* variable for measuring time between commutations */
     static uint16_t capture_w = 0;
+    static uint8_t fir_i = 0;
     motor_status_t mot_status;
     uint8_t auto_comm;
 
@@ -351,8 +365,13 @@ interrupt void isr_TPM1CH3(void)    // TPM1 channel 3
     }
 
     /* measure time between commutations */
-    speed_meas_w = TPM1C3V - capture_w;
-    capture_w = TPM1C3V;
+    capture_w = TPM1C3V; /* just one reeding on this register */
+    speed_meas_w = capture_w - fir_buf_w[fir_i];
+    fir_buf_w[fir_i++] = capture_w;
+    if( fir_i >= fir_buf_deep )
+    	fir_i = 0;
+    
+    
     #if LED_LOAD
         led_load_off();
     #endif
