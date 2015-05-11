@@ -28,7 +28,7 @@ PowerPortNamesTakePriority=0
 PushECOToAnnotationFile=1
 DItemRevisionGUID=
 ReportSuppressedErrorsInMessages=0
-OutputPath=Project Outputs for BLDC_Board
+OutputPath=
 LogFolderPath=
 ManagedProjectGUID=
 
@@ -193,6 +193,14 @@ ParamVariation4=ParameterName=Value|VariantValue=1600uF
 ParamDesignator4=C101
 ParamVariationCount=4
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for BLDC_Board\Design Rule Check - BLDC_Board_Layout.html
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=Project Outputs for BLDC_Board\Net Status - BLDC_Board_Layout.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Default Configuration
 ParameterCount=0
@@ -240,7 +248,7 @@ SCH_HasExpandLogicalToPhysicalSheets=-1
 SaveSettingsToOutJob=-1
 
 [Generic_EDE]
-OutputDir=Project Outputs for BLDC_Board
+OutputDir=
 
 [OutputGroup1]
 Name=Netlist Outputs
