@@ -26,9 +26,8 @@
 #define CMD_GET_STATUS         0x64
 #define CMD_ARE_YOU_ALIVE      0x71
 #define CMD_SET_PWM            0x81
-#define CMD_MEASUREMENT_PARAM  0xC3
+#define CMD_MEASUREMENT_PARAM  0xC0
 #define CMD_MEASUREMENT        0xD0
-#define CMD_GET_MEASUREMENT    0xEF
 
 #define I_AM_ALIVE			   0x55
 

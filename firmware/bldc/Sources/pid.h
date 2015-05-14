@@ -31,6 +31,7 @@ void pid_init(void);
 void pid_set_rpm_high(uint8_t sp);
 void pid_set_rpm_low(uint8_t sp);
 void pid_set_rpm(uint16_t sp);
+void pid_start_Measurement(void);
 uint8_t pid_get_rpm_high(void);
 uint8_t pid_get_rpm_low(void);
 uint16_t pid_get_rpm(void);

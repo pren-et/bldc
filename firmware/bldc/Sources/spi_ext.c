@@ -88,7 +88,7 @@ void ReceiveCmd(void)
         break;
     case CMD_ARE_YOU_ALIVE:
     	/* Are you alive received */
-        while(!SPI1S_SPTEF);
+    	while(!SPI1S_SPTEF);
         SPI1DL = I_AM_ALIVE;
         spi_ext_irq = &DataTransmitted;
         break;
@@ -97,14 +97,15 @@ void ReceiveCmd(void)
     	break;
     case CMD_MEASUREMENT_PARAM:
     	/* Start measurement with parameter */
+    	motor_set_mode(MOTOR_MODE_RUN_FREE);
+        SPI1DL = CMD_DUMMY;
         break;
     case CMD_MEASUREMENT:
     	/* Start measurement (step-answer) */
     	motor_set_mode(MOTOR_MODE_RUN_FREE);
+		pid_start_Measurement();
+		pwm_set_100(85);
         SPI1DL = CMD_DUMMY;
-        break;
-    case CMD_GET_MEASUREMENT:
-    	/* get measurement */
         break;
     }
 }

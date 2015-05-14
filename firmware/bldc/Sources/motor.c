@@ -56,11 +56,14 @@ void motor_task(void) {
             motor_status = MOTOR_STATUS_BRAKE;
             break;
         case MOTOR_MODE_RUN_FREE:
-            if (prev_mode != MOTOR_MODE_RUN_FREE) {
+            if ((prev_mode != MOTOR_MODE_RUN_FREE) && (prev_mode != MOTOR_MODE_RUN_PID)) {
                 /* initiate motor startup, if motor not previously running */
                 force_interval = 5000;
                 commutate_state(COMM_STATE_FORCED_0);
                 motor_status = MOTOR_STATUS_FORCED;
+            }
+            if (prev_mode == MOTOR_MODE_RUN_PID) {
+            	motor_status = MOTOR_STATUS_AUTO_FREE;
             }
             if (motor_status == MOTOR_STATUS_FORCED) {
                 if (force_interval > 10000) {

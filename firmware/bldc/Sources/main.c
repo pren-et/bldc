@@ -114,12 +114,14 @@ void main(void)
             if(task_cnt_pwm == 0) {
             	static uint8_t motor_pid_flag = 0;
                 task_cnt_pwm = TASK_PERIOD_PWM; /* Prepare scheduler for next period */
-                if (motor_pid_flag) {
+                if (motor_pid_flag == 1) {
                                 	motor_set_mode(MOTOR_MODE_RUN_PID);
-                                	motor_pid_flag = 0;
+                                	motor_pid_flag = 2;
                 }
-                if (motor_get_status() == MOTOR_STATUS_AUTO_FREE) {
-                    motor_pid_flag = 1;
+                if (motor_pid_flag == 0) {
+                    if (motor_get_status() == MOTOR_STATUS_AUTO_FREE) {
+                        motor_pid_flag = 1;
+                    }
                 }
                 
             }

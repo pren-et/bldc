@@ -15,14 +15,20 @@
 #include "interrupts.h"
 #include "pwm.h"
 #include "drv8301.h"
+#include "led.h"
+
+#define Buffersize 255
+uint32_t dBuffer[Buffersize];
+uint8_t MeasurementInProgress = 0;
+uint8_t buffWrtInx = 0;
 
 static speed_t current_speed, tmp_speed;
 const int32_t Kp = -800;
 const int32_t Ki = -30;
-const int32_t Kd = -10;
+const int32_t Kd = -0;
 const int32_t dt = TASK_PID;
 const int32_t Ke = 10000;
-const int32_t Kf = 0; /*Feed forward controll*/
+const int16_t Kf = 0; /*Feed forward controll*/
 
 /* 
  *           sec/min          us/s            see BEMF-Timing    avg       Timer-resolution
@@ -46,6 +52,13 @@ void pid_set_rpm_low(uint8_t sp) {
 
 void pid_set_rpm(uint16_t sp) {
 	current_speed.value = sp;
+}
+
+void pid_start_Measurement(void)
+{
+	MeasurementInProgress = 1;
+	buffWrtInx = 0;
+	led_g_off();
 }
 
 uint8_t pid_get_rpm_high(void) {
@@ -78,8 +91,19 @@ void pid_task(void) {
     pwmValue = (int16_t)(s / Ke);
     pwmValue += Kf;
     pwmValue = pwmValue > 1020 ? 1020 : pwmValue;
-    
     pwmValue = pwmValue < 0    ? 0    : pwmValue;
+    if ((pwmValue >= 1020) || (pwmValue <=0)) {
+    	led_g_on();
+    }
+    else {
+    	led_g_off();
+    }
+    if ( MeasurementInProgress && (buffWrtInx < Buffersize) )
+    {
+    	dBuffer[buffWrtInx++] = rpm_meas;
+    }
+    if( buffWrtInx >= Buffersize )
+    	led_g_on();
     if(motor_get_status() == MOTOR_STATUS_AUTO_PID)
     {
         pwm_set_raw(pwmValue);        
