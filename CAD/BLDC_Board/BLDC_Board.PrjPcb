@@ -197,10 +197,6 @@ ParamVariationCount=4
 DocumentPath=Project Outputs for BLDC_Board\Design Rule Check - BLDC_Board_Layout.html
 DItemRevisionGUID=
 
-[GeneratedDocument2]
-DocumentPath=Project Outputs for BLDC_Board\Net Status - BLDC_Board_Layout.html
-DItemRevisionGUID=
-
 [Configuration1]
 Name=Default Configuration
 ParameterCount=0
