@@ -114,6 +114,8 @@ void main(void)
             if(task_cnt_pwm == 0) {
             	static uint8_t motor_pid_flag = 0;
                 task_cnt_pwm = TASK_PERIOD_PWM; /* Prepare scheduler for next period */
+                if( (motor_get_status() == MOTOR_MODE_BRAKE) && (motor_get_status() == MOTOR_MODE_OFF))
+                	motor_pid_flag = 0;
                 if (motor_pid_flag == 1) {
                                 	motor_set_mode(MOTOR_MODE_RUN_PID);
                                 	motor_pid_flag = 2;
