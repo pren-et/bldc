@@ -17,6 +17,8 @@
 #include "hardware.h"
 #include "motor.h"
 
+#define PID_PARAM_FOR_TEAM_NR (32)
+
 #define TASK_PID            10    /* Period for PID task */
 typedef union {
     struct {

@@ -23,12 +23,32 @@ uint8_t MeasurementInProgress = 0;
 uint8_t buffWrtInx = 0;
 
 static speed_t current_speed, tmp_speed;
-const int32_t Kp = -800;
-const int32_t Ki = -30;
-const int32_t Kd = -0;
-const int32_t dt = TASK_PID;
-const int32_t Ke = 10000;
-const int16_t Kf = 0; /*Feed forward controll*/
+
+#if PID_PARAM_FOR_TEAM_NR == 32
+	// Values for Team 32 (Yves Studer)
+	const int32_t Kp = -800;
+	const int32_t Ki = -30;
+	const int32_t Kd = -0;
+	const int32_t dt = TASK_PID;
+	const int32_t Ke = 10000;
+	const int16_t Kf = 0; /*Feed forward controll*/
+#elif PID_PARAM_FOR_TEAM_NR == 16
+	// Values for Team 16 (Daniel Winz)
+	const int32_t Kp = -800;
+	const int32_t Ki = -30;
+	const int32_t Kd = -0;
+	const int32_t dt = TASK_PID;
+	const int32_t Ke = 10000;
+	const int16_t Kf = 0; /*Feed forward controll*/
+#else
+	// Default no PID with 75% pwm
+	const int32_t Kp = -0;
+	const int32_t Ki = -0;
+	const int32_t Kd = -0;
+	const int32_t dt = TASK_PID;
+	const int32_t Ke = 1;
+	const int16_t Kf = 767; /*Feed forward controll*/
+#endif
 
 /* 
  *           sec/min          us/s            see BEMF-Timing    avg       Timer-resolution
