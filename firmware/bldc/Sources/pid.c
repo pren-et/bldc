@@ -32,14 +32,16 @@ static speed_t current_speed, tmp_speed;
 	const int32_t dt = TASK_PID;
 	const int32_t Ke = 10000;
 	const int16_t Kf = 0; /*Feed forward controll*/
-#elif PID_PARAM_FOR_TEAM_NR == 16
-	// Values for Team 16 (Daniel Winz)
-	const int32_t Kp = -800;
-	const int32_t Ki = -30;
-	const int32_t Kd = -0;
+    #define DEFAULT_SPEED 5000
+#elif PID_PARAM_FOR_TEAM_NR == 27
+	// Values for Team 27 (Daniel Winz)
+	const int32_t Kp = -10000;
+	const int32_t Ki = -100;
+	const int32_t Kd = -50;
 	const int32_t dt = TASK_PID;
 	const int32_t Ke = 10000;
 	const int16_t Kf = 0; /*Feed forward controll*/
+    #define DEFAULT_SPEED 1400
 #else
 	// Default no PID with 75% pwm
 	const int32_t Kp = -0;
@@ -48,6 +50,7 @@ static speed_t current_speed, tmp_speed;
 	const int32_t dt = TASK_PID;
 	const int32_t Ke = 1;
 	const int16_t Kf = 767; /*Feed forward controll*/
+    #define DEFAULT_SPEED 2000
 #endif
 
 /* 
@@ -58,7 +61,7 @@ static speed_t current_speed, tmp_speed;
 #define calc_Const 16875000
 
 void pid_init(void) {
-	tmp_speed.value = current_speed.value = 5000;//rpm
+	tmp_speed.value = current_speed.value = DEFAULT_SPEED;//rpm
 }
 
 void pid_set_rpm_high(uint8_t sp) {
