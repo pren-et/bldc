@@ -16,6 +16,7 @@
 #include "pwm.h"
 #include "drv8301.h"
 #include "led.h"
+#include "team.h"
 
 #define Buffersize 255
 uint32_t dBuffer[Buffersize];
@@ -24,7 +25,7 @@ uint8_t buffWrtInx = 0;
 
 static speed_t current_speed, tmp_speed;
 
-#if PID_PARAM_FOR_TEAM_NR == 32
+#if TEAM == 32
 	// Values for Team 32 (Yves Studer)
 	const int32_t Kp = -800;
 	const int32_t Ki = -30;
@@ -33,7 +34,7 @@ static speed_t current_speed, tmp_speed;
 	const int32_t Ke = 10000;
 	const int16_t Kf = 0; /*Feed forward controll*/
     #define DEFAULT_SPEED 5000
-#elif PID_PARAM_FOR_TEAM_NR == 27
+#elif TEAM == 27
 	// Values for Team 27 (Daniel Winz)
 	const int32_t Kp = -10000;
 	const int32_t Ki = -100;
@@ -41,7 +42,7 @@ static speed_t current_speed, tmp_speed;
 	const int32_t dt = TASK_PID;
 	const int32_t Ke = 10000;
 	const int16_t Kf = 0; /*Feed forward controll*/
-    #define DEFAULT_SPEED 1400
+    #define DEFAULT_SPEED 1372
 #else
 	// Default no PID with 75% pwm
 	const int32_t Kp = -0;

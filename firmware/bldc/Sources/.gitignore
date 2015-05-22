@@ -1,3 +1,6 @@
 # doxygen output
 html/
 latex/
+
+# team selector
+team.h

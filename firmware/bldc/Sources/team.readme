@@ -1,0 +1,20 @@
+/* Rename this file to team.h and replace (27) with your team number to compile Project */
+/*!
+ *  ____  ____  _____ _   _       _____ _____
+ * |  _ \|  _ \| ____| \ | |     | ____|_   _|
+ * | |_) | |_) |  _| |  \| |_____|  _|   | |
+ * |  __/|  _ <| |___| |\  |_____| |___  | |
+ * |_|   |_| \_\_____|_| \_|     |_____| |_|
+ *
+ * \file  team.h
+ * \brief
+ * \author pren-et
+ *
+ */
+
+#ifndef TEAM_H_
+#define TEAM_H_
+
+#define TEAM (27)
+
+#endif /* TEAM_H_ */
