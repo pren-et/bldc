@@ -63,6 +63,12 @@ void commutate(void) {
         case COMM_STATE_AUTO_5:
             PTADD = COMM_OUT_STATE_AUTO_5;
             break;
+        case COMM_STATE_SOUND_0:
+            PTADD = COMM_OUT_STATE_SOUND_0;
+            break;
+        case COMM_STATE_SOUND_1:
+            PTADD = COMM_OUT_STATE_SOUND_1;
+            break;
         default:
             PTADD = COMM_OUT_STATE_DEFAULT;
             break;
@@ -131,6 +137,14 @@ void commutate_next(void) {
         case COMM_STATE_AUTO_5:
             state = COMM_NEXT_STATE_AUTO_5;
             PTADD = COMM_OUT_STATE_AUTO_5;
+            break;
+        case COMM_STATE_SOUND_0:
+            state = COMM_NEXT_STATE_SOUND_0;
+            PTADD = COMM_OUT_STATE_SOUND_0;
+            break;
+        case COMM_STATE_SOUND_1:
+            state = COMM_NEXT_STATE_SOUND_1;
+            PTADD = COMM_OUT_STATE_SOUND_1;
             break;
         default:
             state = COMM_NEXT_STATE_DEFAULT;

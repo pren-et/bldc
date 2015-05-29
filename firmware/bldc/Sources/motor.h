@@ -18,6 +18,22 @@
 #include "led.h"
 #include "pwm.h"
 #include "commutate.h"
+#include "sound.h"
+#include "team.h"
+
+#if TEAM == 32
+    #define PWM_100_FORCED  75
+    #define PWM_100_RUN     75
+    #define PWM_100_SOUND   50
+#elif TEAM == 27
+    #define PWM_100_FORCED  75
+    #define PWM_100_RUN     75
+    #define PWM_100_SOUND   50
+#else
+    #define PWM_100_FORCED  75
+    #define PWM_100_RUN     25
+    #define PWM_100_SOUND   25
+#endif /* TEAM */
 
 /*! \enum motor_mode_t
  *  \brief Type for controlling the motor operation mode

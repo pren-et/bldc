@@ -21,7 +21,7 @@ void motor_init(void) {
     mode            = MOTOR_MODE_OFF;
     motor_status    = MOTOR_STATUS_OFF;
     force_interval  = 5000;
-    pwm_set_100(75);
+    pwm_set_100(PWM_100_FORCED);
 }
 
 motor_mode_t motor_get_mode(void) {
@@ -31,8 +31,12 @@ motor_mode_t motor_get_mode(void) {
 void motor_set_mode(motor_mode_t m) {
 	if ((m == MOTOR_MODE_RUN_FREE && mode != MOTOR_MODE_RUN_FREE) || 
 			(m == MOTOR_MODE_RUN_PID && mode != MOTOR_MODE_RUN_PID)) {
-		pwm_set_100(75);
+		pwm_set_100(PWM_100_FORCED);
 	}
+    else if (m == MOTOR_MODE_SOUND && mode != MOTOR_MODE_SOUND) {
+        pwm_set_100(PWM_100_SOUND);
+        sound_start();
+    }
     mode = m;
 }
 
@@ -90,7 +94,7 @@ void motor_task(void) {
                 else {
                     /* Final speed for forced commutation reached */
 //                    led_g_on();
-                    pwm_set_100(75);
+                    pwm_set_100(PWM_100_RUN);
                     motor_status = MOTOR_STATUS_AUTO_FREE;
                 }
             }
@@ -99,7 +103,10 @@ void motor_task(void) {
             motor_status = MOTOR_STATUS_AUTO_PID;
             break;
         case MOTOR_MODE_SOUND:
-            /* not implemented yet */
+            if (prev_mode != MOTOR_MODE_SOUND) {
+                commutate_state(COMM_STATE_SOUND_0);
+            }
+            motor_status = MOTOR_STATUS_SOUND;
             break;
         default:
             commutate_state(COMM_STATE_OFF);

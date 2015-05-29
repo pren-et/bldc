@@ -414,9 +414,16 @@ interrupt void isr_TPM1CH0(void)    // TPM1 channel 0
     if (TPM1C0SC_CH0F) {                    /* clear channel interrupt flag */
         TPM1C0SC_CH0F = 0;
     }
-    TPM1C0V += motor_get_force_interval();  /* Prepare next interrupt */
     if (motor_get_status() == MOTOR_STATUS_FORCED){  /* check if forced commutation enabled */
+        TPM1C0V += motor_get_force_interval();  /* Prepare next interrupt */
         commutate_next();                       /* Commutate */
+    }
+    else if (motor_get_status() == MOTOR_STATUS_SOUND) {
+        TPM1C0V += sound_get_interval();  /* Prepare next interrupt */
+        commutate_next();
+    }
+    else {
+        TPM1C0V += motor_get_force_interval();  /* Prepare next interrupt */
     }
     #if LED_LOAD
         led_load_off();

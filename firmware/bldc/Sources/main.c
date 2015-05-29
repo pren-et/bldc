@@ -22,17 +22,20 @@
 #include "led.h"        /* led control */
 #include "pwm.h"        /* pwm control */
 #include "pid.h"        /* pid */
+#include "sound.h"      /* sound */
 
 /* LED for load display in main task loop (interrupts not included) */
 #define LED_LOAD (1)
 
 #define TASK_INIT_LED       1000    /* Init time for LED task (1s) */
-#define TASK_PERIOD_LED     400    /* Period for LED task (1s) */
+#define TASK_PERIOD_LED     400     /* Period for LED task (1s) */
 #define TASK_INIT_MOTOR     100     /* Init time for motor task (100ms) */
 #define TASK_PERIOD_MOTOR   100     /* Period for motor task (100ms) */
-#define TASK_INIT_PWM       1000   /* Init time for PWM task (1s) */
+#define TASK_INIT_PWM       1000    /* Init time for PWM task (1s) */
 #define TASK_PERIOD_PWM     1000    /* Period for PWM task (1s) */
-#define TASK_DRV            200    /* Period for PWM task (200ms) */
+#define TASK_DRV            200     /* Period for PWM task (200ms) */
+#define TASK_INIT_SOUND     100     /* Init time for Sound Task (100ms) */
+#define TASK_PERIOD_SOUND   100     /* Period for Sound task (100ms) */
 // for TASK_PID see pid.h
 
 void init(void)
@@ -58,12 +61,14 @@ void main(void)
     uint16_t task_cnt_pwm;
     uint16_t task_drv;
     uint16_t task_pid;
+    uint16_t task_cnt_sound;
     init();
     task_cnt_led    = TASK_INIT_LED;
     task_cnt_motor  = TASK_INIT_MOTOR;
     task_cnt_pwm    = TASK_INIT_PWM;
     task_drv	    = TASK_DRV;
     task_pid	    = TASK_PID;
+    task_cnt_sound  = TASK_INIT_SOUND;
 
     for(;;)
     {
@@ -125,10 +130,18 @@ void main(void)
                         motor_pid_flag = 1;
                     }
                 }
-                
             }
             else {
                 task_cnt_pwm--;
+            }
+
+            /* Task to generate Sound */
+            if (task_cnt_sound == 0) {
+                sound_task();
+                task_cnt_sound = sound_get_time();
+            }
+            else {
+                task_cnt_sound--;
             }
 
             /* Other tasks come here */

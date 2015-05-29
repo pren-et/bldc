@@ -34,6 +34,8 @@ typedef enum {
     COMM_STATE_AUTO_3,      /*!< Commutation position 3 with auto commutation */
     COMM_STATE_AUTO_4,      /*!< Commutation position 4 with auto commutation */
     COMM_STATE_AUTO_5,      /*!< Commutation position 5 with auto commutation */
+    COMM_STATE_SOUND_0,     /*!< Commutation position 0 for sound */
+    COMM_STATE_SOUND_1,     /*!< Commutation position 0 for sound */
 } comm_state_t;
 
 /*! \name comm_out
@@ -53,6 +55,8 @@ typedef enum {
 #define COMM_OUT_STATE_AUTO_3   (~(FET_L_U | FET_H_V))              /*!< U low , V high, W open */
 #define COMM_OUT_STATE_AUTO_4   (~(FET_L_U | FET_H_W))              /*!< U low , V open, W high */
 #define COMM_OUT_STATE_AUTO_5   (~(FET_L_V | FET_H_W))              /*!< U open, V low , W high */
+#define COMM_OUT_STATE_SOUND_0  (~(FET_L_V | FET_H_U))              /*!< U high, V low , W open */
+#define COMM_OUT_STATE_SOUND_1  (~(FET_L_U | FET_H_V))              /*!< U low , V high, W open */
 #define COMM_OUT_STATE_DEFAULT  (0xFF)                              /*!< Bridge off */
 /*! @} */
 
@@ -73,6 +77,8 @@ typedef enum {
 #define COMM_NEXT_STATE_AUTO_3      COMM_STATE_AUTO_4       /*!< COMM_STATE_STATE_AUTO_3    -> COMM_STATE_AUTO_4    */
 #define COMM_NEXT_STATE_AUTO_4      COMM_STATE_AUTO_5       /*!< COMM_STATE_STATE_AUTO_4    -> COMM_STATE_AUTO_5    */
 #define COMM_NEXT_STATE_AUTO_5      COMM_STATE_AUTO_0       /*!< COMM_STATE_STATE_AUTO_5    -> COMM_STATE_AUTO_0    */
+#define COMM_NEXT_STATE_SOUND_0     COMM_STATE_SOUND_1      /*!< COMM_STATE_STATE_SOUND_0   -> COMM_STATE_SOUND_1   */
+#define COMM_NEXT_STATE_SOUND_1     COMM_STATE_SOUND_0      /*!< COMM_STATE_STATE_SOUND_1   -> COMM_STATE_SOUND_0   */
 #define COMM_NEXT_STATE_DEFAULT     COMM_STATE_OFF          /*!< COMM_STATE_DEFAULT         -> COMM_STATE_OFF       */
 /*! @} */
 
