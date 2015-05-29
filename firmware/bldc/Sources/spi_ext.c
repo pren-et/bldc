@@ -95,6 +95,10 @@ void ReceiveCmd(void)
     case CMD_SET_PWM:
         spi_ext_irq = &setPwm;
     	break;
+    case CMD_PLAY_SOUND:
+    	motor_set_mode(MOTOR_MODE_SOUND);
+        SPI1DL = CMD_DUMMY;
+    	break;
     case CMD_MEASUREMENT_PARAM:
     	/* Start measurement with parameter */
     	motor_set_mode(MOTOR_MODE_RUN_FREE);
