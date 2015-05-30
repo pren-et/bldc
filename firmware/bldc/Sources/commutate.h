@@ -56,7 +56,7 @@ typedef enum {
 #define COMM_OUT_STATE_AUTO_4   (~(FET_L_U | FET_H_W))              /*!< U low , V open, W high */
 #define COMM_OUT_STATE_AUTO_5   (~(FET_L_V | FET_H_W))              /*!< U open, V low , W high */
 #define COMM_OUT_STATE_SOUND_0  (~(FET_L_V | FET_H_U))              /*!< U high, V low , W open */
-#define COMM_OUT_STATE_SOUND_1  (~(FET_L_U | FET_H_V))              /*!< U low , V high, W open */
+#define COMM_OUT_STATE_SOUND_1  (~(FET_L_W | FET_H_U))              /*!< U high, V open, W low  */
 #define COMM_OUT_STATE_DEFAULT  (0xFF)                              /*!< Bridge off */
 /*! @} */
 

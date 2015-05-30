@@ -242,7 +242,6 @@ uint16_t midi2timer(uint8_t midi) {
 
 uint16_t sound_get_time(void) {
     if (tone_cnt < sizeof(melody)/sizeof(sound_t)) {
-        tone_cnt++;
         return melody[tone_cnt].time;
     }
     else {
@@ -272,6 +271,7 @@ void sound_task(void) {
         else {
             sound_interval = 0;
             sound_playing = 0;
+            motor_set_mode(MOTOR_MODE_BRAKE);
         }
     }
     else {
