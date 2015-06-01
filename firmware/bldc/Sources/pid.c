@@ -27,13 +27,13 @@ static speed_t current_speed, tmp_speed;
 
 #if TEAM == 32
 	// Values for Team 32 (Yves Studer)
-	const int32_t Kp = -800;
-	const int32_t Ki = -30;
+	const int32_t Kp = -600;
+	const int32_t Ki = -10;
 	const int32_t Kd = -0;
 	const int32_t dt = TASK_PID;
 	const int32_t Ke = 10000;
 	const int16_t Kf = 0; /*Feed forward controll*/
-    #define DEFAULT_SPEED 3500
+    #define DEFAULT_SPEED 3200
 #elif TEAM == 27
 	// Values for Team 27 (Daniel Winz)
 	const int32_t Kp = -10000;
