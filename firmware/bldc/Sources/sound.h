@@ -18,6 +18,51 @@
 #include "team.h"
 #include "motor.h"
 
+/* Full tones */
+#define SOUND_NOTE_1_F      (1800)
+#define SOUND_NOTE_2_F      (SOUND_NOTE_1_F / 2)
+#define SOUND_NOTE_4_F      (SOUND_NOTE_1_F / 4)
+#define SOUND_NOTE_8_F      (SOUND_NOTE_1_F / 8)
+#define SOUND_NOTE_16_F     (SOUND_NOTE_1_F / 16)
+#define SOUND_NOTE_32_F     (SOUND_NOTE_1_F / 32)
+#define SOUND_NOTE_64_F     (SOUND_NOTE_1_F / 64)
+
+/* Long tones (dotted) */
+#define SOUND_NOTE_1_L      (SOUND_NOTE_1_F * 3 / 2)
+#define SOUND_NOTE_2_L      (SOUND_NOTE_1_L / 2)
+#define SOUND_NOTE_4_L      (SOUND_NOTE_1_L / 4)
+#define SOUND_NOTE_8_L      (SOUND_NOTE_1_L / 8)
+#define SOUND_NOTE_16_L     (SOUND_NOTE_1_L / 16)
+#define SOUND_NOTE_32_L     (SOUND_NOTE_1_L / 32)
+#define SOUND_NOTE_64_L     (SOUND_NOTE_1_L / 64)
+
+/* Very Long tones (double dotted) */
+#define SOUND_NOTE_1_LL     (SOUND_NOTE_1_F * 7 / 4)
+#define SOUND_NOTE_2_LL     (SOUND_NOTE_1_LL / 2)
+#define SOUND_NOTE_4_LL     (SOUND_NOTE_1_LL / 4)
+#define SOUND_NOTE_8_LL     (SOUND_NOTE_1_LL / 8)
+#define SOUND_NOTE_16_LL    (SOUND_NOTE_1_LL / 16)
+#define SOUND_NOTE_32_LL    (SOUND_NOTE_1_LL / 32)
+#define SOUND_NOTE_64_LL    (SOUND_NOTE_1_LL / 64)
+
+/* Short tones */
+#define SOUND_NOTE_1_S      (SOUND_NOTE_1_F * 3 / 4)
+#define SOUND_NOTE_2_S      (SOUND_NOTE_1_S / 2)
+#define SOUND_NOTE_4_S      (SOUND_NOTE_1_S / 4)
+#define SOUND_NOTE_8_S      (SOUND_NOTE_1_S / 8)
+#define SOUND_NOTE_16_S     (SOUND_NOTE_1_S / 16)
+#define SOUND_NOTE_32_S     (SOUND_NOTE_1_S / 32)
+#define SOUND_NOTE_64_S     (SOUND_NOTE_1_S / 64)
+
+/* Rests corresponding to short tones */
+#define SOUND_NOTE_1_R      (SOUND_NOTE_1_F - SOUND_NOTE_1_S)
+#define SOUND_NOTE_2_R      (SOUND_NOTE_1_R / 2)
+#define SOUND_NOTE_4_R      (SOUND_NOTE_1_R / 4)
+#define SOUND_NOTE_8_R      (SOUND_NOTE_1_R / 8)
+#define SOUND_NOTE_16_R     (SOUND_NOTE_1_R / 16)
+#define SOUND_NOTE_32_R     (SOUND_NOTE_1_R / 32)
+#define SOUND_NOTE_64_R     (SOUND_NOTE_1_R / 64)
+
 /*! \struct sound_t
  *  \brief Type for storing sound
  */
