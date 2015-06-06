@@ -419,9 +419,12 @@ interrupt void isr_TPM1CH0(void)    // TPM1 channel 0
         commutate_next();                       /* Commutate */
     }
     else if (motor_get_status() == MOTOR_STATUS_SOUND) {
-        TPM1C0V += sound_get_interval();  /* Prepare next interrupt */
         if (sound_get_interval() != 0){
+            TPM1C0V += sound_get_interval();  /* Prepare next interrupt */
             commutate_next();
+        }
+        else {
+            TPM1C0V += midi2timer(84);
         }
     }
     else {

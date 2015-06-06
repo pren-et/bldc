@@ -13,6 +13,11 @@
 
 #include "sound.h"
 
+#define MEL_SEL_AXEL_F 0
+#define MEL_SEL_TETRIS 1
+
+#define MEL_SEL MEL_SEL_TETRIS
+
 static const uint16_t midi_decode[] = {
     /*
     Cnt_value   MIDI Frequency [Hz] */
@@ -144,79 +149,259 @@ static const uint16_t midi_decode[] = {
 };
 
 static const sound_t melody[] = {
-    /********************************
-    ** Harold Faltermeyer - Axel F **
-    ********************************/
-    /*
-    pitch, time */
-    {  0,  SOUND_NOTE_8_F},
-    //----------------------------------------------------------------------
-    { 65,  SOUND_NOTE_8_F},
-    {  0,  SOUND_NOTE_8_F},
-    { 68,  SOUND_NOTE_8_L},
-    {  0,  SOUND_NOTE_8_R},
-    { 65,  SOUND_NOTE_16_F},
-    //......................................................................
-    { 65,  SOUND_NOTE_16_S},
-    {  0,  SOUND_NOTE_16_R},
-    // probably rest here to separate tones
-    { 65,  SOUND_NOTE_16_S},
-    {  0,  SOUND_NOTE_16_R},
-    { 70,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 65,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 63,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    //----------------------------------------------------------------------
-    { 65,  SOUND_NOTE_8_F},
-    {  0,  SOUND_NOTE_8_F},
-    { 72,  SOUND_NOTE_8_L},
-    {  0,  SOUND_NOTE_8_R},
-    { 65,  SOUND_NOTE_16_F},
-    //......................................................................
-    { 65,  SOUND_NOTE_16_S},
-    {  0,  SOUND_NOTE_16_R},
-    // probably rest here to separate tones
-    { 65,  SOUND_NOTE_16_S},
-    {  0,  SOUND_NOTE_16_R},
-    { 73,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 72,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 68,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    //----------------------------------------------------------------------
-    { 65,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 72,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 77,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 65,  SOUND_NOTE_16_S},
-    {  0,  SOUND_NOTE_16_R},
-    { 63,  SOUND_NOTE_16_F},
-    //......................................................................
-    { 63,  SOUND_NOTE_16_S},
-    {  0,  SOUND_NOTE_16_R},
-    // probably rest here to separate tones
-    { 63,  SOUND_NOTE_16_S},
-    {  0,  SOUND_NOTE_16_R},
-    { 60,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 67,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    { 65,  SOUND_NOTE_8_F},
-    //----------------------------------------------------------------------
-    { 65,  SOUND_NOTE_8_S},
-    {  0,  SOUND_NOTE_8_R},
-    //......................................................................
-    {  0,  SOUND_NOTE_4_F},
-    //......................................................................
-    //======================================================================
-    //......................................................................
-    // End of melody -> do not change!
-    {  0,    0},
+    #if MEL_SEL == MEL_SEL_AXEL_F
+        /********************************
+        ** Harold Faltermeyer - Axel F **
+        ********************************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F},
+        //----------------------------------------------------------------------
+        { 65,  SOUND_NOTE_8_F},
+        {  0,  SOUND_NOTE_8_F},
+        { 68,  SOUND_NOTE_8_L},
+        {  0,  SOUND_NOTE_8_R},
+        { 65,  SOUND_NOTE_16_F},
+        //......................................................................
+        { 65,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        // probably rest here to separate tones
+        { 65,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 70,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 65,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 63,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //----------------------------------------------------------------------
+        { 65,  SOUND_NOTE_8_F},
+        {  0,  SOUND_NOTE_8_F},
+        { 72,  SOUND_NOTE_8_L},
+        {  0,  SOUND_NOTE_8_R},
+        { 65,  SOUND_NOTE_16_F},
+        //......................................................................
+        { 65,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        // probably rest here to separate tones
+        { 65,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 73,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 68,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //----------------------------------------------------------------------
+        { 65,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 77,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 65,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 63,  SOUND_NOTE_16_F},
+        //......................................................................
+        { 63,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        // probably rest here to separate tones
+        { 63,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 60,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 67,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 65,  SOUND_NOTE_8_F},
+        //----------------------------------------------------------------------
+        { 65,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        {  0,  SOUND_NOTE_4_F},
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+    #elif MEL_SEL == MEL_SEL_TETRIS
+        /*****************
+        ** Tetris theme **
+        *****************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F},
+        //----------------------------------------------------------------------
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 74,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        { 69,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 74,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        { 71,  SOUND_NOTE_4_L},
+        {  0,  SOUND_NOTE_8_F},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 74,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        //......................................................................
+        { 72,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_2_S},
+        {  0,  SOUND_NOTE_2_R},
+        //----------------------------------------------------------------------
+        {  0,  SOUND_NOTE_8_F},
+        { 74,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 77,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 81,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 79,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 77,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        { 76,  SOUND_NOTE_4_L},
+        {  0,  SOUND_NOTE_8_F},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 74,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        { 71,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 74,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        //......................................................................
+        { 72,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_2_S},
+        {  0,  SOUND_NOTE_2_R},
+        //----------------------------------------------------------------------
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 74,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        { 69,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 74,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        { 71,  SOUND_NOTE_4_L},
+        {  0,  SOUND_NOTE_8_F},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 74,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        //......................................................................
+        { 72,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_2_S},
+        {  0,  SOUND_NOTE_2_R},
+        //----------------------------------------------------------------------
+        {  0,  SOUND_NOTE_8_F},
+        { 74,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 77,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 81,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 79,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 77,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        { 76,  SOUND_NOTE_4_L},
+        {  0,  SOUND_NOTE_8_F},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 74,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        //......................................................................
+        { 71,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 72,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 74,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 76,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        //......................................................................
+        { 72,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 69,  SOUND_NOTE_2_S},
+        {  0,  SOUND_NOTE_2_R},
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+    #endif
 };
 
 uint16_t sound_interval;
