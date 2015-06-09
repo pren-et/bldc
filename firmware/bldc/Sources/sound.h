@@ -123,4 +123,11 @@ uint8_t sound_finished(void);
  */
 void sound_task(void);
 
+/*! \fn void set_sound(void)
+ *  \brief task to choose a sound track
+ *
+ *  \return void
+ */
+void set_sound(uint8_t sound_track);
+
 #endif /* SOUND_H_ */

@@ -466,3 +466,8 @@ void sound_task(void) {
     }
     return;
 }
+
+void set_sound(uint8_t sound_track)
+{
+	
+}
