@@ -20,7 +20,8 @@
 
 /* Full tones */
 //#define SOUND_NOTE_1_F      (1600) // for Axel F
-#define SOUND_NOTE_1_F      (1100) // for Tetris
+//#define SOUND_NOTE_1_F      (1100) // for Tetris
+#define SOUND_NOTE_1_F      (1300) // for A-Team
 #define SOUND_NOTE_2_F      (SOUND_NOTE_1_F / 2)
 #define SOUND_NOTE_4_F      (SOUND_NOTE_1_F / 4)
 #define SOUND_NOTE_8_F      (SOUND_NOTE_1_F / 8)

@@ -15,8 +15,9 @@
 
 #define MEL_SEL_AXEL_F 0
 #define MEL_SEL_TETRIS 1
+#define MEL_SEL_A_TEAM 2
 
-#define MEL_SEL MEL_SEL_TETRIS
+#define MEL_SEL MEL_SEL_A_TEAM
 
 static const uint16_t midi_decode[] = {
     /*
@@ -395,6 +396,61 @@ static const sound_t melody[] = {
         { 69,  SOUND_NOTE_4_S},
         {  0,  SOUND_NOTE_4_R},
         { 69,  SOUND_NOTE_2_S},
+        {  0,  SOUND_NOTE_2_R},
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+    #elif MEL_SEL == MEL_SEL_A_TEAM
+        /*****************
+        ** A-Team theme **
+        *****************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F},
+        //----------------------------------------------------------------------
+        { 78,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 73,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 78,  SOUND_NOTE_8_F},
+        { 78,  SOUND_NOTE_2_S},
+        { 78,  SOUND_NOTE_2_R},
+        //......................................................................
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 73,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 66,  SOUND_NOTE_8_F},
+        { 66,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        {  0,  SOUND_NOTE_8_F},
+        { 70,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 73,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        //......................................................................
+        { 78,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 73,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 80,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 78,  SOUND_NOTE_8_F},
+        { 78,  SOUND_NOTE_2_S},
+        {  0,  SOUND_NOTE_2_R},
+        //......................................................................
+        { 76,  SOUND_NOTE_8_L},
+        {  0,  SOUND_NOTE_16_F},
+        { 75,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 73,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 71,  SOUND_NOTE_16_F},
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 73,  SOUND_NOTE_2_S},
         {  0,  SOUND_NOTE_2_R},
         //......................................................................
         //======================================================================
