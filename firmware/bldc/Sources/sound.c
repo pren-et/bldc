@@ -13,12 +13,6 @@
 
 #include "sound.h"
 
-#define MEL_SEL_AXEL_F 0
-#define MEL_SEL_TETRIS 1
-#define MEL_SEL_A_TEAM 2
-
-#define MEL_SEL MEL_SEL_A_TEAM
-
 static const uint16_t midi_decode[] = {
     /*
     Cnt_value   MIDI Frequency [Hz] */
@@ -149,8 +143,66 @@ static const uint16_t midi_decode[] = {
        18, /*   124  10548 */
 };
 
-static const sound_t melody[] = {
-    #if MEL_SEL == MEL_SEL_AXEL_F
+static const sound_t *melody_ptr;
+
+static const sound_t melody_a_team[] = {
+        /*****************
+        ** A-Team theme **
+        *****************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F},
+        //----------------------------------------------------------------------
+        { 78,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 73,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 78,  SOUND_NOTE_8_F},
+        { 78,  SOUND_NOTE_2_S},
+        { 78,  SOUND_NOTE_2_R},
+        //......................................................................
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 73,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        { 66,  SOUND_NOTE_8_F},
+        { 66,  SOUND_NOTE_4_S},
+        {  0,  SOUND_NOTE_4_R},
+        {  0,  SOUND_NOTE_8_F},
+        { 70,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 73,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        //......................................................................
+        { 78,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 73,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 80,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 78,  SOUND_NOTE_8_F},
+        { 78,  SOUND_NOTE_2_S},
+        {  0,  SOUND_NOTE_2_R},
+        //......................................................................
+        { 76,  SOUND_NOTE_8_L},
+        {  0,  SOUND_NOTE_16_F},
+        { 75,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 73,  SOUND_NOTE_16_S},
+        {  0,  SOUND_NOTE_16_R},
+        { 71,  SOUND_NOTE_16_F},
+        { 71,  SOUND_NOTE_8_S},
+        {  0,  SOUND_NOTE_8_R},
+        { 73,  SOUND_NOTE_2_S},
+        {  0,  SOUND_NOTE_2_R},
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+};
+
+static const sound_t melody_axel_f[] = {
         /********************************
         ** Harold Faltermeyer - Axel F **
         ********************************/
@@ -224,7 +276,9 @@ static const sound_t melody[] = {
         //......................................................................
         // End of melody -> do not change!
         {  0,    0},
-    #elif MEL_SEL == MEL_SEL_TETRIS
+};
+
+static const sound_t melody_tetris[] = {
         /*****************
         ** Tetris theme **
         *****************/
@@ -402,62 +456,6 @@ static const sound_t melody[] = {
         //......................................................................
         // End of melody -> do not change!
         {  0,    0},
-    #elif MEL_SEL == MEL_SEL_A_TEAM
-        /*****************
-        ** A-Team theme **
-        *****************/
-        /*
-        pitch, time */
-        {  0,  SOUND_NOTE_8_F},
-        //----------------------------------------------------------------------
-        { 78,  SOUND_NOTE_4_S},
-        {  0,  SOUND_NOTE_4_R},
-        { 73,  SOUND_NOTE_8_S},
-        {  0,  SOUND_NOTE_8_R},
-        { 78,  SOUND_NOTE_8_F},
-        { 78,  SOUND_NOTE_2_S},
-        { 78,  SOUND_NOTE_2_R},
-        //......................................................................
-        { 71,  SOUND_NOTE_8_S},
-        {  0,  SOUND_NOTE_8_R},
-        { 73,  SOUND_NOTE_4_S},
-        {  0,  SOUND_NOTE_4_R},
-        { 66,  SOUND_NOTE_8_F},
-        { 66,  SOUND_NOTE_4_S},
-        {  0,  SOUND_NOTE_4_R},
-        {  0,  SOUND_NOTE_8_F},
-        { 70,  SOUND_NOTE_16_S},
-        {  0,  SOUND_NOTE_16_R},
-        { 73,  SOUND_NOTE_16_S},
-        {  0,  SOUND_NOTE_16_R},
-        //......................................................................
-        { 78,  SOUND_NOTE_8_S},
-        {  0,  SOUND_NOTE_8_R},
-        { 73,  SOUND_NOTE_8_S},
-        {  0,  SOUND_NOTE_8_R},
-        { 80,  SOUND_NOTE_8_S},
-        {  0,  SOUND_NOTE_8_R},
-        { 78,  SOUND_NOTE_8_F},
-        { 78,  SOUND_NOTE_2_S},
-        {  0,  SOUND_NOTE_2_R},
-        //......................................................................
-        { 76,  SOUND_NOTE_8_L},
-        {  0,  SOUND_NOTE_16_F},
-        { 75,  SOUND_NOTE_16_S},
-        {  0,  SOUND_NOTE_16_R},
-        { 73,  SOUND_NOTE_16_S},
-        {  0,  SOUND_NOTE_16_R},
-        { 71,  SOUND_NOTE_16_F},
-        { 71,  SOUND_NOTE_8_S},
-        {  0,  SOUND_NOTE_8_R},
-        { 73,  SOUND_NOTE_2_S},
-        {  0,  SOUND_NOTE_2_R},
-        //......................................................................
-        //======================================================================
-        //......................................................................
-        // End of melody -> do not change!
-        {  0,    0},
-    #endif
 };
 
 uint16_t sound_interval;
@@ -465,14 +463,15 @@ uint16_t tone_cnt;
 uint8_t  sound_playing;
 
 void sound_init(void) {
+	set_sound(1);
     tone_cnt        = 0;
-    sound_interval  = midi2timer(melody[tone_cnt].pitch);
+    sound_interval  = midi2timer(melody_ptr[tone_cnt].pitch);
     sound_playing   = 0;
 };
 
 void sound_start(void) {
     tone_cnt        = 0;
-    sound_interval  = midi2timer(melody[tone_cnt].pitch);
+    sound_interval  = midi2timer(melody_ptr[tone_cnt].pitch);
     sound_playing   = 1;
 };
 
@@ -484,8 +483,8 @@ uint16_t midi2timer(uint8_t midi) {
 }
 
 uint16_t sound_get_time(void) {
-    if (tone_cnt < sizeof(melody)/sizeof(sound_t)) {
-        return melody[tone_cnt].time;
+    if (tone_cnt < sizeof(*melody_ptr)/sizeof(sound_t)) {
+        return melody_ptr[tone_cnt].time;
     }
     else {
         return 100;
@@ -507,9 +506,9 @@ uint8_t sound_finished(void) {
 
 void sound_task(void) {
     if (sound_playing) {
-        if (tone_cnt < sizeof(melody)/sizeof(sound_t)) {
+        if (tone_cnt < sizeof(*melody_ptr)/sizeof(sound_t)) {
             tone_cnt++;
-            sound_interval = midi2timer(melody[tone_cnt].pitch);
+            sound_interval = midi2timer(melody_ptr[tone_cnt].pitch);
         }
         else {
             sound_interval = 0;
@@ -525,5 +524,16 @@ void sound_task(void) {
 
 void set_sound(uint8_t sound_track)
 {
-	
+	switch(sound_track)
+	{
+	case 1:
+		melody_ptr = melody_axel_f;
+		break;
+	case 2:
+		melody_ptr = melody_tetris;
+		break;
+	case 3:
+		melody_ptr = melody_a_team;
+		break;
+	}
 }
