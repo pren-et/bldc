@@ -18,52 +18,54 @@
 #include "team.h"
 #include "motor.h"
 
+#define SPD_A_TEAM      (1300) // for A-Team
+#define SPD_AXEL_F      (1600) // for Axel F
+#define SPD_TETRIS      (1100) // for Tetris
+
 /* Full tones */
-//#define SOUND_NOTE_1_F      (1600) // for Axel F
-//#define SOUND_NOTE_1_F      (1100) // for Tetris
-#define SOUND_NOTE_1_F      (1300) // for A-Team
-#define SOUND_NOTE_2_F      (SOUND_NOTE_1_F / 2)
-#define SOUND_NOTE_4_F      (SOUND_NOTE_1_F / 4)
-#define SOUND_NOTE_8_F      (SOUND_NOTE_1_F / 8)
-#define SOUND_NOTE_16_F     (SOUND_NOTE_1_F / 16)
-#define SOUND_NOTE_32_F     (SOUND_NOTE_1_F / 32)
-#define SOUND_NOTE_64_F     (SOUND_NOTE_1_F / 64)
+#define SOUND_NOTE_1_F(speed)      (speed / 1)
+#define SOUND_NOTE_2_F(speed)      (speed / 2)
+#define SOUND_NOTE_4_F(speed)      (speed / 4)
+#define SOUND_NOTE_8_F(speed)      (speed / 8)
+#define SOUND_NOTE_16_F(speed)     (speed / 16)
+#define SOUND_NOTE_32_F(speed)     (speed / 32)
+#define SOUND_NOTE_64_F(speed)     (speed / 64)
 
 /* Long tones (dotted) */
-#define SOUND_NOTE_1_L      (SOUND_NOTE_1_F * 3 / 2)
-#define SOUND_NOTE_2_L      (SOUND_NOTE_1_L / 2)
-#define SOUND_NOTE_4_L      (SOUND_NOTE_1_L / 4)
-#define SOUND_NOTE_8_L      (SOUND_NOTE_1_L / 8)
-#define SOUND_NOTE_16_L     (SOUND_NOTE_1_L / 16)
-#define SOUND_NOTE_32_L     (SOUND_NOTE_1_L / 32)
-#define SOUND_NOTE_64_L     (SOUND_NOTE_1_L / 64)
+#define SOUND_NOTE_1_L(speed)      (speed * 3 / 2 / 1)
+#define SOUND_NOTE_2_L(speed)      (speed * 3 / 2 / 2)
+#define SOUND_NOTE_4_L(speed)      (speed * 3 / 2 / 4)
+#define SOUND_NOTE_8_L(speed)      (speed * 3 / 2 / 8)
+#define SOUND_NOTE_16_L(speed)     (speed * 3 / 2 / 16)
+#define SOUND_NOTE_32_L(speed)     (speed * 3 / 2 / 32)
+#define SOUND_NOTE_64_L(speed)     (speed * 3 / 2 / 64)
 
 /* Very Long tones (double dotted) */
-#define SOUND_NOTE_1_LL     (SOUND_NOTE_1_F * 7 / 4)
-#define SOUND_NOTE_2_LL     (SOUND_NOTE_1_LL / 2)
-#define SOUND_NOTE_4_LL     (SOUND_NOTE_1_LL / 4)
-#define SOUND_NOTE_8_LL     (SOUND_NOTE_1_LL / 8)
-#define SOUND_NOTE_16_LL    (SOUND_NOTE_1_LL / 16)
-#define SOUND_NOTE_32_LL    (SOUND_NOTE_1_LL / 32)
-#define SOUND_NOTE_64_LL    (SOUND_NOTE_1_LL / 64)
+#define SOUND_NOTE_1_LL(speed)     (speed * 7 / 4 / 1)
+#define SOUND_NOTE_2_LL(speed)     (speed * 7 / 4 / 2)
+#define SOUND_NOTE_4_LL(speed)     (speed * 7 / 4 / 4)
+#define SOUND_NOTE_8_LL(speed)     (speed * 7 / 4 / 8)
+#define SOUND_NOTE_16_LL(speed)    (speed * 7 / 4 / 16)
+#define SOUND_NOTE_32_LL(speed)    (speed * 7 / 4 / 32)
+#define SOUND_NOTE_64_LL(speed)    (speed * 7 / 4 / 64)
 
 /* Short tones */
-#define SOUND_NOTE_1_S      (SOUND_NOTE_1_F * 3 / 4)
-#define SOUND_NOTE_2_S      (SOUND_NOTE_1_S / 2)
-#define SOUND_NOTE_4_S      (SOUND_NOTE_1_S / 4)
-#define SOUND_NOTE_8_S      (SOUND_NOTE_1_S / 8)
-#define SOUND_NOTE_16_S     (SOUND_NOTE_1_S / 16)
-#define SOUND_NOTE_32_S     (SOUND_NOTE_1_S / 32)
-#define SOUND_NOTE_64_S     (SOUND_NOTE_1_S / 64)
+#define SOUND_NOTE_1_S(speed)      (speed * 3 / 4 / 1)
+#define SOUND_NOTE_2_S(speed)      (speed * 3 / 4 / 2)
+#define SOUND_NOTE_4_S(speed)      (speed * 3 / 4 / 4)
+#define SOUND_NOTE_8_S(speed)      (speed * 3 / 4 / 8)
+#define SOUND_NOTE_16_S(speed)     (speed * 3 / 4 / 16)
+#define SOUND_NOTE_32_S(speed)     (speed * 3 / 4 / 32)
+#define SOUND_NOTE_64_S(speed)     (speed * 3 / 4 / 64)
 
 /* Rests corresponding to short tones */
-#define SOUND_NOTE_1_R      (SOUND_NOTE_1_F - SOUND_NOTE_1_S)
-#define SOUND_NOTE_2_R      (SOUND_NOTE_1_R / 2)
-#define SOUND_NOTE_4_R      (SOUND_NOTE_1_R / 4)
-#define SOUND_NOTE_8_R      (SOUND_NOTE_1_R / 8)
-#define SOUND_NOTE_16_R     (SOUND_NOTE_1_R / 16)
-#define SOUND_NOTE_32_R     (SOUND_NOTE_1_R / 32)
-#define SOUND_NOTE_64_R     (SOUND_NOTE_1_R / 64)
+#define SOUND_NOTE_1_R(speed)      (speed * 1 / 4 / 1)
+#define SOUND_NOTE_2_R(speed)      (speed * 1 / 4 / 2)
+#define SOUND_NOTE_4_R(speed)      (speed * 1 / 4 / 4)
+#define SOUND_NOTE_8_R(speed)      (speed * 1 / 4 / 8)
+#define SOUND_NOTE_16_R(speed)     (speed * 1 / 4 / 16)
+#define SOUND_NOTE_32_R(speed)     (speed * 1 / 4 / 32)
+#define SOUND_NOTE_64_R(speed)     (speed * 1 / 4 / 64)
 
 /*! \struct sound_t
  *  \brief Type for storing sound
