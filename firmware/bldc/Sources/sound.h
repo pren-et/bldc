@@ -18,9 +18,10 @@
 #include "team.h"
 #include "motor.h"
 
-#define SPD_A_TEAM      (1300) // for A-Team
+#define SPD_DEFAULT     (1300) // for default
 #define SPD_AXEL_F      (1600) // for Axel F
 #define SPD_TETRIS      (1100) // for Tetris
+#define SPD_A_TEAM      (1300) // for A-Team
 
 /* Full tones */
 #define SOUND_NOTE_1_F(speed)      (speed / 1)
@@ -74,6 +75,25 @@ typedef struct {
     uint8_t     pitch;
     uint16_t    time;
 } sound_t;
+
+/*! \struct mel_sel_list_t
+ *  \brief Type for selecting melody
+ */
+typedef struct {
+    const sound_t*  melody_ptr;
+    const uint16_t  length;
+} mel_sel_list_t;
+
+/*! \enum mel_sel_t
+ *  \brief Type for selecting melody
+ */
+typedef enum {
+    MEL_SEL_DEFAULT,
+    MEL_SEL_AXEL_F,
+    MEL_SEL_TETRIS,
+    MEL_SEL_A_TEAM,
+    MEL_SEL_END,
+} mel_sel_t;
 
 /*! \fn void sound_init(void)
  *  \brief initializes sound module

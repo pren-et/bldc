@@ -143,7 +143,27 @@ static const uint16_t midi_decode[] = {
        18, /*   124  10548 */
 };
 
-static const sound_t *melody_ptr;
+static const sound_t melody_default[] = {
+        /*******************
+        ** Default melody **
+        *******************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F(SPD_DEFAULT)},
+        //----------------------------------------------------------------------
+        { 78,  SOUND_NOTE_4_S(SPD_DEFAULT)},
+        {  0,  SOUND_NOTE_4_R(SPD_DEFAULT)},
+        { 73,  SOUND_NOTE_8_S(SPD_DEFAULT)},
+        {  0,  SOUND_NOTE_8_R(SPD_DEFAULT)},
+        { 78,  SOUND_NOTE_8_F(SPD_DEFAULT)},
+        { 78,  SOUND_NOTE_2_S(SPD_DEFAULT)},
+        {  0,  SOUND_NOTE_2_R(SPD_DEFAULT)},
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+};
 
 static const sound_t melody_a_team[] = {
         /*****************
@@ -539,20 +559,28 @@ static const sound_t melody_tetris[] = {
         {  0,    0},
 };
 
-uint16_t sound_interval;
+static const mel_sel_list_t mel_sel_list[MEL_SEL_END] = {
+    {melody_default,   sizeof(melody_default)/sizeof(sound_t)},
+    {melody_axel_f,    sizeof(melody_axel_f) /sizeof(sound_t)},
+    {melody_tetris,    sizeof(melody_tetris) /sizeof(sound_t)},
+    {melody_a_team,    sizeof(melody_a_team) /sizeof(sound_t)},
+};;
+
+mel_sel_t mel_sel;
 uint16_t tone_cnt;
+uint16_t sound_interval;
 uint8_t  sound_playing;
 
 void sound_init(void) {
 	set_sound(1);
     tone_cnt        = 0;
-    sound_interval  = midi2timer(melody_ptr[tone_cnt].pitch);
+    sound_interval  = midi2timer(mel_sel_list[mel_sel].melody_ptr[tone_cnt].pitch);
     sound_playing   = 0;
 };
 
 void sound_start(void) {
     tone_cnt        = 0;
-    sound_interval  = midi2timer(melody_ptr[tone_cnt].pitch);
+    sound_interval  = midi2timer(mel_sel_list[mel_sel].melody_ptr[tone_cnt].pitch);
     sound_playing   = 1;
 };
 
@@ -564,8 +592,8 @@ uint16_t midi2timer(uint8_t midi) {
 }
 
 uint16_t sound_get_time(void) {
-    if (tone_cnt < sizeof(*melody_ptr)/sizeof(sound_t)) {
-        return melody_ptr[tone_cnt].time;
+    if (tone_cnt < mel_sel_list[mel_sel].length) {
+        return mel_sel_list[mel_sel].melody_ptr[tone_cnt].time;
     }
     else {
         return 100;
@@ -587,9 +615,9 @@ uint8_t sound_finished(void) {
 
 void sound_task(void) {
     if (sound_playing) {
-        if (tone_cnt < sizeof(*melody_ptr)/sizeof(sound_t)) {
+        if (tone_cnt < mel_sel_list[mel_sel].length) {
             tone_cnt++;
-            sound_interval = midi2timer(melody_ptr[tone_cnt].pitch);
+            sound_interval = midi2timer(mel_sel_list[mel_sel].melody_ptr[tone_cnt].pitch);
         }
         else {
             sound_interval = 0;
@@ -605,16 +633,7 @@ void sound_task(void) {
 
 void set_sound(uint8_t sound_track)
 {
-	switch(sound_track)
-	{
-	case 1:
-		melody_ptr = melody_axel_f;
-		break;
-	case 2:
-		melody_ptr = melody_tetris;
-		break;
-	case 3:
-		melody_ptr = melody_a_team;
-		break;
-	}
+    if (sound_track < MEL_SEL_END) {
+        mel_sel = sound_track;
+    }
 }
