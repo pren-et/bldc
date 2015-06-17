@@ -560,9 +560,9 @@ static const sound_t melody_tetris[] = {
 };
 
 static const sound_t melody_insomnia[] = {
-        /*****************
-        ** Tetris theme **
-        *****************/
+        /*************************
+        ** Faithless - Insomnia **
+        *************************/
         /*
         pitch, time */
         {  0,  SOUND_NOTE_8_F(SPD_INSOMNIA)},
@@ -593,12 +593,59 @@ static const sound_t melody_insomnia[] = {
         {  0,    0},
 };
 
+static const sound_t melody_popcorn[] = {
+        /*************************
+        ** Hot Butter - Popcorn **
+        *************************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F(SPD_POPCORN)},
+        //----------------------------------------------------------------------
+        { 83,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 81,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 83,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 78,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 74,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 78,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 71,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_F(SPD_POPCORN)},
+        //......................................................................
+        { 83,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 81,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 83,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 78,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 74,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 78,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        { 71,  SOUND_NOTE_8_S(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_R(SPD_POPCORN)},
+        {  0,  SOUND_NOTE_8_F(SPD_POPCORN)},
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+};
+
 static const mel_sel_list_t mel_sel_list[MEL_SEL_END] = {
     {melody_default,   sizeof(melody_default)   /sizeof(sound_t)},
     {melody_axel_f,    sizeof(melody_axel_f)    /sizeof(sound_t)},
     {melody_tetris,    sizeof(melody_tetris)    /sizeof(sound_t)},
     {melody_a_team,    sizeof(melody_a_team)    /sizeof(sound_t)},
     {melody_insomnia,  sizeof(melody_insomnia)  /sizeof(sound_t)},
+    {melody_popcorn,   sizeof(melody_popcorn)   /sizeof(sound_t)},
 };;
 
 mel_sel_t mel_sel;

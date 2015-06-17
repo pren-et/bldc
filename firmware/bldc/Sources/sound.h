@@ -22,6 +22,8 @@
 #define SPD_AXEL_F      (1600) // for Axel F
 #define SPD_TETRIS      (1100) // for Tetris
 #define SPD_A_TEAM      (1300) // for A-Team
+#define SPD_INSOMNIA    (1300) // for Insomnia
+#define SPD_POPCORN     (1300) // for Popcorn
 
 /* Full tones */
 #define SOUND_NOTE_1_F(speed)      (speed / 1)
@@ -93,6 +95,7 @@ typedef enum {
     MEL_SEL_TETRIS,
     MEL_SEL_A_TEAM,
     MEL_SEL_INSOMNIA,
+    MEL_SEL_POPCORN,
     MEL_SEL_END,
 } mel_sel_t;
 
