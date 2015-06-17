@@ -28,7 +28,7 @@
 #elif TEAM == 27
     #define PWM_100_FORCED  75
     #define PWM_100_RUN     75
-    #define PWM_100_SOUND   60
+    #define PWM_100_SOUND   50
 #else
     #define PWM_100_FORCED  75
     #define PWM_100_RUN     25
