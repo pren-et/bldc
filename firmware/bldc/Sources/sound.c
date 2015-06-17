@@ -815,5 +815,6 @@ void set_sound(uint8_t sound_track)
 {
     if (sound_track < MEL_SEL_END) {
         mel_sel = sound_track;
+        tone_cnt = 0;
     }
 }
