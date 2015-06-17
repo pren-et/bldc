@@ -92,6 +92,7 @@ typedef enum {
     MEL_SEL_AXEL_F,
     MEL_SEL_TETRIS,
     MEL_SEL_A_TEAM,
+    MEL_SEL_INSOMNIA,
     MEL_SEL_END,
 } mel_sel_t;
 

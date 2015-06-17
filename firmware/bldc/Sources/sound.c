@@ -559,11 +559,46 @@ static const sound_t melody_tetris[] = {
         {  0,    0},
 };
 
+static const sound_t melody_insomnia[] = {
+        /*****************
+        ** Tetris theme **
+        *****************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F(SPD_INSOMNIA)},
+        //----------------------------------------------------------------------
+        { 76,  SOUND_NOTE_8_S(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_8_R(SPD_INSOMNIA)},
+        { 76,  SOUND_NOTE_8_S(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_8_R(SPD_INSOMNIA)},
+        { 71,  SOUND_NOTE_16_S(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_16_R(SPD_INSOMNIA)},
+        { 74,  SOUND_NOTE_8_S(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_8_R(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_16_F(SPD_INSOMNIA)},
+        //......................................................................
+        { 74,  SOUND_NOTE_8_S(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_8_R(SPD_INSOMNIA)},
+        { 74,  SOUND_NOTE_8_S(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_8_R(SPD_INSOMNIA)},
+        { 71,  SOUND_NOTE_16_S(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_16_R(SPD_INSOMNIA)},
+        { 73,  SOUND_NOTE_8_S(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_8_R(SPD_INSOMNIA)},
+        {  0,  SOUND_NOTE_16_F(SPD_INSOMNIA)},
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+};
+
 static const mel_sel_list_t mel_sel_list[MEL_SEL_END] = {
-    {melody_default,   sizeof(melody_default)/sizeof(sound_t)},
-    {melody_axel_f,    sizeof(melody_axel_f) /sizeof(sound_t)},
-    {melody_tetris,    sizeof(melody_tetris) /sizeof(sound_t)},
-    {melody_a_team,    sizeof(melody_a_team) /sizeof(sound_t)},
+    {melody_default,   sizeof(melody_default)   /sizeof(sound_t)},
+    {melody_axel_f,    sizeof(melody_axel_f)    /sizeof(sound_t)},
+    {melody_tetris,    sizeof(melody_tetris)    /sizeof(sound_t)},
+    {melody_a_team,    sizeof(melody_a_team)    /sizeof(sound_t)},
+    {melody_insomnia,  sizeof(melody_insomnia)  /sizeof(sound_t)},
 };;
 
 mel_sel_t mel_sel;
