@@ -165,144 +165,6 @@ static const sound_t melody_default[] = {
         {  0,    0},
 };
 
-static const sound_t melody_a_team[] = {
-        /*****************
-        ** A-Team theme **
-        *****************/
-        /*
-        pitch, time */
-        {  0,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        //----------------------------------------------------------------------
-        { 78,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_2_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
-        //......................................................................
-        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        { 66,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 66,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 70,  SOUND_NOTE_16_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_16_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
-        //......................................................................
-        { 78,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 80,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_2_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
-        //......................................................................
-        { 76,  SOUND_NOTE_8_L(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
-        { 75,  SOUND_NOTE_16_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_16_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
-        { 71,  SOUND_NOTE_16_F(SPD_A_TEAM)},
-        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_2_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
-        //----------------------------------------------------------------------
-        { 78,  SOUND_NOTE_8_L(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_16_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_2_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
-        //......................................................................
-        { 70,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_L(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_16_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
-        { 66,  SOUND_NOTE_2_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
-        //......................................................................
-        { 69,  SOUND_NOTE_8_L(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
-        { 71,  SOUND_NOTE_16_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
-        { 74,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 76,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 76,  SOUND_NOTE_2_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
-        //......................................................................
-        {  0,  SOUND_NOTE_4_F(SPD_A_TEAM)},
-        { 76,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 75,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 76,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        //----------------------------------------------------------------------
-        { 75,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        { 70,  SOUND_NOTE_8_L(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
-        { 71,  SOUND_NOTE_16_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 78,  SOUND_NOTE_4_F(SPD_A_TEAM)},
-        //......................................................................
-        { 78,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_F(SPD_A_TEAM)},
-        { 66,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 73,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        //......................................................................
-        { 71,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 70,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 66,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 65,  SOUND_NOTE_8_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
-        { 66,  SOUND_NOTE_4_F(SPD_A_TEAM)},
-        //......................................................................
-        { 66,  SOUND_NOTE_4_S(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_4_F(SPD_A_TEAM)},
-        {  0,  SOUND_NOTE_2_F(SPD_A_TEAM)},
-        //......................................................................
-        //======================================================================
-        //......................................................................
-        // End of melody -> do not change!
-        {  0,    0},
-};
-
 static const sound_t melody_axel_f[] = {
         /********************************
         ** Harold Faltermeyer - Axel F **
@@ -552,6 +414,143 @@ static const sound_t melody_tetris[] = {
         {  0,  SOUND_NOTE_4_R(SPD_TETRIS)},
         { 69,  SOUND_NOTE_2_S(SPD_TETRIS)},
         {  0,  SOUND_NOTE_2_R(SPD_TETRIS)},
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+};
+
+static const sound_t melody_a_team[] = {
+        /*****************
+        ** A-Team theme **
+        *****************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        //----------------------------------------------------------------------
+        { 78,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_2_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
+        //......................................................................
+        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        { 66,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 66,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 70,  SOUND_NOTE_16_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_16_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
+        //......................................................................
+        { 78,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 80,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_2_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
+        //......................................................................
+        { 76,  SOUND_NOTE_8_L(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
+        { 75,  SOUND_NOTE_16_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_16_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
+        { 71,  SOUND_NOTE_16_F(SPD_A_TEAM)},
+        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_2_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
+        //----------------------------------------------------------------------
+        { 78,  SOUND_NOTE_8_L(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_16_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_2_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
+        //......................................................................
+        { 70,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 71,  SOUND_NOTE_8_LL(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_16_F(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
+        { 66,  SOUND_NOTE_2_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
+        //......................................................................
+        { 69,  SOUND_NOTE_8_L(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
+        { 71,  SOUND_NOTE_16_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
+        { 74,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 76,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 76,  SOUND_NOTE_2_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_2_R(SPD_A_TEAM)},
+        //......................................................................
+        {  0,  SOUND_NOTE_4_F(SPD_A_TEAM)},
+        { 76,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 75,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 76,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        //----------------------------------------------------------------------
+        { 75,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        { 70,  SOUND_NOTE_8_L(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_F(SPD_A_TEAM)},
+        { 71,  SOUND_NOTE_16_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_16_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 78,  SOUND_NOTE_4_F(SPD_A_TEAM)},
+        //......................................................................
+        { 78,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_F(SPD_A_TEAM)},
+        { 66,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 73,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        //......................................................................
+        { 71,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        { 71,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 70,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 66,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 65,  SOUND_NOTE_8_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_8_R(SPD_A_TEAM)},
+        { 66,  SOUND_NOTE_4_F(SPD_A_TEAM)},
+        //......................................................................
+        { 66,  SOUND_NOTE_4_S(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_R(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_4_F(SPD_A_TEAM)},
+        {  0,  SOUND_NOTE_2_F(SPD_A_TEAM)},
         //......................................................................
         //======================================================================
         //......................................................................
