@@ -38,6 +38,7 @@ void motor_set_mode(motor_mode_t m) {
         sound_start();
     }
     mode = m;
+    motor_task();
 }
 
 motor_status_t motor_get_status(void) {
