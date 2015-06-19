@@ -1315,6 +1315,74 @@ static const sound_t melody_airwolf[] = {
         {  0,    0},
 };
 
+static const sound_t melody_imperial[] = {
+        /*******************
+        ** Default melody **
+        *******************/
+        /*
+        pitch, time */
+        {  0,  SOUND_NOTE_8_F(SPD_IMPERIAL)},
+        //----------------------------------------------------------------------
+        { 67,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 67,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 67,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 64,  SOUND_NOTE_8_F(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_F(SPD_IMPERIAL)},
+        { 70,  SOUND_NOTE_16_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_R(SPD_IMPERIAL)},
+        //......................................................................
+        { 67,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 64,  SOUND_NOTE_8_F(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_F(SPD_IMPERIAL)},
+        { 70,  SOUND_NOTE_16_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_R(SPD_IMPERIAL)},
+        { 67,  SOUND_NOTE_2_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_2_R(SPD_IMPERIAL)},
+        //......................................................................
+        { 74,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 74,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 74,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 75,  SOUND_NOTE_8_F(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_F(SPD_IMPERIAL)},
+        { 70,  SOUND_NOTE_16_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_R(SPD_IMPERIAL)},
+        //......................................................................
+        { 66,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 64,  SOUND_NOTE_8_F(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_F(SPD_IMPERIAL)},
+        { 70,  SOUND_NOTE_16_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_R(SPD_IMPERIAL)},
+        { 61,  SOUND_NOTE_2_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_2_R(SPD_IMPERIAL)},
+        //----------------------------------------------------------------------
+        { 79,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 67,  SOUND_NOTE_8_F(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_F(SPD_IMPERIAL)},
+        { 67,  SOUND_NOTE_16_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_R(SPD_IMPERIAL)},
+        { 79,  SOUND_NOTE_4_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_4_R(SPD_IMPERIAL)},
+        { 78,  SOUND_NOTE_8_F(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_F(SPD_IMPERIAL)},
+        { 77,  SOUND_NOTE_16_S(SPD_IMPERIAL)},
+        {  0,  SOUND_NOTE_16_R(SPD_IMPERIAL)},
+        //......................................................................
+        //......................................................................
+        //======================================================================
+        //......................................................................
+        // End of melody -> do not change!
+        {  0,    0},
+};
+
 static const mel_sel_list_t mel_sel_list[MEL_SEL_END] = {
     {melody_default,   sizeof(melody_default)   /sizeof(sound_t)},
     {melody_axel_f,    sizeof(melody_axel_f)    /sizeof(sound_t)},
@@ -1324,6 +1392,7 @@ static const mel_sel_list_t mel_sel_list[MEL_SEL_END] = {
     {melody_popcorn,   sizeof(melody_popcorn)   /sizeof(sound_t)},
     {melody_sandstorm, sizeof(melody_sandstorm) /sizeof(sound_t)},
     {melody_airwolf,   sizeof(melody_airwolf)   /sizeof(sound_t)},
+    {melody_imperial,  sizeof(melody_imperial)  /sizeof(sound_t)},
 };;
 
 mel_sel_t mel_sel;
