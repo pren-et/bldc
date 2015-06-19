@@ -24,7 +24,8 @@
 #define SPD_A_TEAM      (1300) // for A-Team
 #define SPD_INSOMNIA    (1300) // for Insomnia
 #define SPD_POPCORN     (1300) // for Popcorn
-#define SPD_SANDSTORM   (1300) // for Popcorn
+#define SPD_SANDSTORM   (1300) // for Sandstorm
+#define SPD_AIRWOLF     (1300) // for Airwolf
 
 /* Full tones */
 #define SOUND_NOTE_1_F(speed)      (speed / 1)
@@ -98,6 +99,7 @@ typedef enum {
     MEL_SEL_INSOMNIA,
     MEL_SEL_POPCORN,
     MEL_SEL_SANDSTORM,
+    MEL_SEL_AIRWOLF,
     MEL_SEL_END,
 } mel_sel_t;
 
