@@ -21,6 +21,9 @@
 #include "sound.h"
 #include "team.h"
 
+#define TIMEOUT_THRESHOLD 20
+#define RESTART_THRESHOLD 3
+
 #if TEAM == 32
     #define PWM_100_FORCED  75
     #define PWM_100_RUN     75
@@ -28,7 +31,7 @@
 #elif TEAM == 27
     #define PWM_100_FORCED  75
     #define PWM_100_RUN     75
-    #define PWM_100_SOUND   50
+    #define PWM_100_SOUND   60
 #else
     #define PWM_100_FORCED  75
     #define PWM_100_RUN     25
@@ -100,5 +103,19 @@ uint16_t motor_get_force_interval(void);
  *  \return void
  */
 void motor_task(void);
+
+/*! \fn void motor_timeout_reset(void)
+ *  \brief reset timeout counter
+ *
+ *  \return void
+ */
+void motor_timeout_reset(void);
+
+/*! \fn void motor_task_timeout(void)
+ *  \brief task to control timeout for protecting motor windings from overheating
+ *
+ *  \return void
+ */
+void motor_task_timeout(void);
 
 #endif /* MOTOR_H_ */

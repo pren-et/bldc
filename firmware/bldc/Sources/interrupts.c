@@ -257,6 +257,7 @@ interrupt void isr_TPM1CH5(void)    // TPM1 channel 5
     fir_buf_v[fir_i++] = capture_v;
     if( fir_i >= fir_buf_deep )
     	fir_i = 0;
+
     #if LED_LOAD
         led_load_off();
     #endif
@@ -313,7 +314,7 @@ interrupt void isr_TPM1CH4(void)    // TPM1 channel 4
     fir_buf_u[fir_i++] = capture_u;
     if( fir_i >= fir_buf_deep )
     	fir_i = 0;
-    
+
     #if LED_LOAD
         led_load_off();
     #endif
@@ -370,8 +371,7 @@ interrupt void isr_TPM1CH3(void)    // TPM1 channel 3
     fir_buf_w[fir_i++] = capture_w;
     if( fir_i >= fir_buf_deep )
     	fir_i = 0;
-    
-    
+
     #if LED_LOAD
         led_load_off();
     #endif
@@ -420,8 +420,8 @@ interrupt void isr_TPM1CH0(void)    // TPM1 channel 0
     }
     else if (motor_get_status() == MOTOR_STATUS_SOUND) {
         if (sound_get_interval() != 0){
-            TPM1C0V += sound_get_interval();  /* Prepare next interrupt */
-            commutate_next();
+            TPM1C0V += sound_get_interval();    /* Prepare next interrupt */
+            commutate_next();                   /* Commutate */
         }
         else {
             TPM1C0V += midi2timer(84);

@@ -73,6 +73,7 @@ void commutate(void) {
             PTADD = COMM_OUT_STATE_DEFAULT;
             break;
     }
+    motor_timeout_reset();
 }
 
 void commutate_state(comm_state_t n_state) {
@@ -151,4 +152,5 @@ void commutate_next(void) {
             PTADD = COMM_OUT_STATE_DEFAULT;
             break;
     }
+    motor_timeout_reset();
 }

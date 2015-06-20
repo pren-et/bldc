@@ -36,6 +36,8 @@
 #define TASK_DRV            200     /* Period for PWM task (200ms) */
 #define TASK_INIT_SOUND     100     /* Init time for Sound Task (100ms) */
 #define TASK_PERIOD_SOUND   100     /* Period for Sound task (100ms) */
+#define TASK_INIT_TIMEOUT   15      /* Init time for motor task (10ms) */
+#define TASK_PERIOD_TIMEOUT 10      /* Period for motor task (10ms) */
 // for TASK_PID see pid.h
 
 void init(void)
@@ -60,15 +62,17 @@ void main(void)
     uint16_t task_cnt_motor;
     uint16_t task_cnt_pwm;
     uint16_t task_drv;
+    uint16_t task_cnt_timeout;
     uint16_t task_pid;
     uint16_t task_cnt_sound;
     init();
-    task_cnt_led    = TASK_INIT_LED;
-    task_cnt_motor  = TASK_INIT_MOTOR;
-    task_cnt_pwm    = TASK_INIT_PWM;
-    task_drv	    = TASK_DRV;
-    task_pid	    = TASK_PID;
-    task_cnt_sound  = TASK_INIT_SOUND;
+    task_cnt_led        = TASK_INIT_LED;
+    task_cnt_motor      = TASK_INIT_MOTOR;
+    task_cnt_pwm        = TASK_INIT_PWM;
+    task_drv            = TASK_DRV;
+    task_cnt_timeout    = TASK_INIT_TIMEOUT;
+    task_pid            = TASK_PID;
+    task_cnt_sound      = TASK_INIT_SOUND;
 
     for(;;)
     {
@@ -90,20 +94,20 @@ void main(void)
             
             /* Task to handle the DRV-Chip */
             if(task_drv == 0) {
-            	task_drv = TASK_DRV; /* Prepare scheduler for next period */
+                task_drv = TASK_DRV; /* Prepare scheduler for next period */
                 handleDrv();
             }
             else {
-            	task_drv--;
+                task_drv--;
             }
             
             /* Task to handle the PID */
             if(task_pid == 0) {
-            	task_pid = TASK_PID; /* Prepare scheduler for next period */
-            	pid_task();
+                task_pid = TASK_PID; /* Prepare scheduler for next period */
+                pid_task();
             }
             else {
-            	task_pid--;
+                task_pid--;
             }
 
             /* Task to control commutation frequency */
@@ -115,15 +119,24 @@ void main(void)
                 task_cnt_motor--;
             }
 
+            /* Task to control timeout for protecting motor windings from overheating */
+            if(task_cnt_timeout == 0) {
+                task_cnt_timeout = TASK_PERIOD_TIMEOUT; /* Prepare scheduler for next period */
+                motor_task_timeout();
+            }
+            else {
+                task_cnt_timeout--;
+            }
+
             /* Task to toggle PWM */
             if(task_cnt_pwm == 0) {
-            	static uint8_t motor_pid_flag = 0;
+                static uint8_t motor_pid_flag = 0;
                 task_cnt_pwm = TASK_PERIOD_PWM; /* Prepare scheduler for next period */
                 if( (motor_get_status() == MOTOR_MODE_BRAKE) || (motor_get_status() == MOTOR_MODE_OFF))
-                	motor_pid_flag = 0;
+                    motor_pid_flag = 0;
                 if (motor_pid_flag == 1) {
-                                	motor_set_mode(MOTOR_MODE_RUN_PID);
-                                	motor_pid_flag = 2;
+                                    motor_set_mode(MOTOR_MODE_RUN_PID);
+                                    motor_pid_flag = 2;
                 }
                 if (motor_pid_flag == 0) {
                     if (motor_get_status() == MOTOR_STATUS_AUTO_FREE) {

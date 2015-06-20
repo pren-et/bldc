@@ -15,6 +15,7 @@
 
 #include "platform.h"
 #include "hardware.h"
+#include "motor.h"
 
 /*! \typedef comm_state_t
  *  \brief Type for commutation state machine

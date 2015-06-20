@@ -16,11 +16,14 @@
 motor_mode_t    mode            = MOTOR_MODE_OFF;
 motor_status_t  motor_status    = MOTOR_STATUS_OFF;
 uint16_t force_interval;
+uint8_t motor_timeout;
+uint8_t restart_cnt;
 
 void motor_init(void) {
     mode            = MOTOR_MODE_OFF;
     motor_status    = MOTOR_STATUS_OFF;
     force_interval  = 5000;
+    motor_timeout   = 0;
     pwm_set_100(PWM_100_FORCED);
 }
 
@@ -65,7 +68,10 @@ void motor_task(void) {
                 /* initiate motor startup, if motor not previously running */
                 force_interval = 5000;
                 commutate_state(COMM_STATE_FORCED_0);
+                pwm_set_100(PWM_100_FORCED);
                 motor_status = MOTOR_STATUS_FORCED;
+                motor_timeout = 0;
+                restart_cnt = 0;
             }
             if (prev_mode == MOTOR_MODE_RUN_PID) {
             	motor_status = MOTOR_STATUS_AUTO_FREE;
@@ -97,6 +103,7 @@ void motor_task(void) {
 //                    led_g_on();
                     pwm_set_100(PWM_100_RUN);
                     motor_status = MOTOR_STATUS_AUTO_FREE;
+                    motor_timeout = 0;
                 }
             }
             break;
@@ -114,4 +121,28 @@ void motor_task(void) {
             break;
     }
     prev_mode = mode;
+}
+
+void motor_timeout_reset(void) {
+    motor_timeout = 0;
+}
+
+void motor_task_timeout(void) {
+    if ((mode == MOTOR_MODE_RUN_FREE) || (mode == MOTOR_MODE_RUN_PID)) {
+        if (motor_timeout >= TIMEOUT_THRESHOLD) {
+            if (restart_cnt < RESTART_THRESHOLD) {
+                /* initiate motor startup */
+                motor_set_mode(MOTOR_MODE_BRAKE);
+                motor_set_mode(MOTOR_MODE_RUN_FREE);
+                motor_timeout = 0;
+                restart_cnt++;
+            }
+            else {
+                motor_set_mode(MOTOR_MODE_BRAKE);
+            }
+        }
+        else {
+            motor_timeout++;
+        }
+    }
 }
