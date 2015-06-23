@@ -25,7 +25,8 @@
 #define SPD_INSOMNIA    (1300) // for Insomnia
 #define SPD_POPCORN     (1300) // for Popcorn
 #define SPD_SANDSTORM   (1300) // for Sandstorm
-#define SPD_AIRWOLF     (1000)  // for Airwolf
+#define SPD_AIRWOLF     (1200) // for Airwolf
+#define SPD_AIRWOLF_3   (SPD_AIRWOLF * 2 / 3) // for Airwolf
 #define SPD_IMPERIAL    (2000) // for Imperial March
 
 /* Full tones */
